@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Yoga 4 Change - Practice";
+}
+<style>
+    input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+    div #form {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    div #formText {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+
+<div>
+    <h1>Learn More About Practicing Yoga With Us!</h1>
+    <br />
+    <br />
+
+    <div id="form">
+        <form asp-controller="DecisionTree" asp-action="NextStep" method="post">
+            <div id="formText">
+                <strong>
+                    Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
+                    the below form to completion to find out where you can make the biggest difference.
+                </strong>
+            </div>
+            <br />
+            <br />
+
+            <strong>If you practice, where at:</strong>
+            <input type="text" />
+
+            <strong>Would you be interested in practicing at Yoga 4 Change:</strong><br />
+            <input type="radio" name="practiceInterest" value="no" /> No<br />
+            <input type="radio" name="practiceInterest" value="yes" /> Yes<br />
+
+            <strong>Do you practice at a commercial facility or within a community group:</strong><br />
+            <input type="radio" name="practiceLocal" value="facility" /> Facility<br />
+            <input type="radio" name="practiceLocal" value="community" /> Community<br />
+
+
+            <input type="hidden" name="page" value="practice" />
+            <input type="submit" value="Next Step" />
+        </form>
+    </div>
+</div>
