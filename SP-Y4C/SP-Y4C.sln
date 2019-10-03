@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP-Y4C", "SP-Y4C\SP-Y4C.csproj", "{DBC988AF-9F28-4D9C-888A-B9CC75EE0F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SP-Y4C", "SP-Y4C\SP-Y4C.csproj", "{DBC988AF-9F28-4D9C-888A-B9CC75EE0F0D}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "QuestionsDatabase", "QuestionsDatabase\QuestionsDatabase.sqlproj", "{AC388BBC-628A-487F-B199-9D435960D7F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{DBC988AF-9F28-4D9C-888A-B9CC75EE0F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBC988AF-9F28-4D9C-888A-B9CC75EE0F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBC988AF-9F28-4D9C-888A-B9CC75EE0F0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC388BBC-628A-487F-B199-9D435960D7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC388BBC-628A-487F-B199-9D435960D7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC388BBC-628A-487F-B199-9D435960D7F2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AC388BBC-628A-487F-B199-9D435960D7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC388BBC-628A-487F-B199-9D435960D7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC388BBC-628A-487F-B199-9D435960D7F2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

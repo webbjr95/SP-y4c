@@ -12,13 +12,13 @@ namespace SP_Y4C.Models
     public class QuestionsTable 
     {
         [Required]
-        [DataType(DataType.Text)]
+        [Key]
         [Display(Name = "Question Text")]
-        public string QuestionText { get; set; }
-        public string QuestionID { get; set; }
-        public string QuestionTitle { get; set; }
-        public string QuestionDescription { get; set; }
-        public string QuestionCreationDateTime { get; set; }
-        public string QuestionStatus { get; set; }
+        public int QuestionID { get; set; }
+        public string Text { get; set; }
+        //public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime CreationDateTime { get; set; }
+        public Boolean Status { get; set; }
     }
 }
