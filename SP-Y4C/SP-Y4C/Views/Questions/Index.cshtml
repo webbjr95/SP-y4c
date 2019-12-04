@@ -4,11 +4,14 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-
+<a asp-controller="Questions" asp-action="Create" class="btn btn-primary">Create</a>
+<br />
+<br />
 <table class="table table-responsive" style="width:100%">
     <tr>
-        <th>Number</th>
+        <th>Question Number</th>
         <th>Question</th>
+        <th>Question Type</th>
         <th>Retired?</th>
         <th>Actions</th>
     </tr>
@@ -18,10 +21,11 @@
         <tr>
             <td>@question.QuestionNumber</td>
             <td>@question.Text</td>
+            <td>@question.QuestionType</td>
             <td>@(question.IsRetired ? "Yes" : "No")</td>
             <td>
-                <a class="btn btn-primary" id="edit-question-@question.Id">Edit</a>
-                <a asp-controller="Questions" asp-action="edit" asp-id="@question.Id" class="btn btn-primary">Delete</a>
+                <a asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Id" class="btn btn-warning">Edit</a>
+                <a asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     }
