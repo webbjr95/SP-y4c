@@ -43,7 +43,7 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
             return View();
         }
