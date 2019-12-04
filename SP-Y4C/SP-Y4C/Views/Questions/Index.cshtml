@@ -1,0 +1,49 @@
+﻿@model QuestionsViewModel
+@{
+    ViewData["Title"] = "Questions";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-responsive" style="width:100%">
+    <tr>
+        <th>Number</th>
+        <th>Question</th>
+        <th>Retired?</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var question in Model.Questions)
+    {
+        <tr>
+            <td>@question.QuestionNumber</td>
+            <td>@question.Text</td>
+            <td>@(question.IsRetired ? "Yes" : "No")</td>
+            <td>
+                <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="handleEditOnClick(this)">Edit</button>
+                <button class="btn btn-primary" id="delete-question-@question.Id" type="button" onclick="handleDeleteOnClick(this)">Delete</button>
+            </td>
+        </tr>
+    }
+</table>
+
+@foreach (var question in Model.Questions)
+{
+    <vc:question-modal id="edit-question-modal-@question.Id" title="Edit Question" primary-button-text="Save" secondary-button-text="Close" question="@question"></vc:question-modal>
+    <vc:question-modal id="delete-question-modal-@question.Id" title="Delete Question" primary-button-text="Delete" secondary-button-text="Close" question="@question"></vc:question-modal>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () => {
+            function handleEditOnClick() {
+                console.log(`Show edit question modal for: #${e.target.id}`);
+            }
+
+            function handleDeleteOnClick(e) {
+                console.log(`Show delete question modal for: #${e.target.id}`);
+            }
+        });
+    </script>
+}
