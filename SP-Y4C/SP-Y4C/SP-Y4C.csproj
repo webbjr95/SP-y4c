@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-SP_Y4C-4E0E97C3-DC07-4B2B-8168-9BD640853CA2</UserSecretsId>
+    <RootNamespace>SP_Y4C</RootNamespace>
   </PropertyGroup>
 
 
