@@ -1,0 +1,79 @@
+﻿@model IEnumerable<QuestionsTable>
+@{
+    //ViewData["Title"] = "Admin Console";
+}
+<h2>Questions Panel</h2>
+<body>
+        <form align="right">
+        <select name="Sort Options">
+            <option value="IDAsc">ID Ascending</option>
+            <option value="IDDesc">ID Descending</option>
+            <option value="activeOnly">Active Only</option>
+            <option value="inactive">Inactive Only</option>
+            <option value="radio">Radio Buttons</option>
+            <option value="text">Short Answers</option>
+            <option value="yn">Yes or No</option>
+        </select>
+        <button><a asp-action="submit">Sort</a></button>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.questionID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.parentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.childIDs)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.questionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestionID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                    <td>
+                        <button><a asp-action="Edit" asp-route-id="@item.QuestionID">Edit</a></button>
+                        <button><a asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a></button>
+                    </td>
+                </tr>
+                }*@
+        </tbody>
+    </table>
+    <button><a asp-action="Edit">Edit</a></button>
+    <button><a asp-action="Delete">Delete</a></button>
+    <button><a asp-action="Add">Add a question to the database</a></button>
+
+    <p align="right">
+    <button><a asp-action="Console">Console</a></button>
+    <button><a asp-action="Reports">Reports</a></button>
+    </p>
+
+</body>
