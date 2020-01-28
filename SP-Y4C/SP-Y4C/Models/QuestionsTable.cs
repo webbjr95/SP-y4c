@@ -5,12 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SP_Y4C.Models
 {
     public class QuestionsTable 
     {
+
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Question Text")]
@@ -20,5 +19,9 @@ namespace SP_Y4C.Models
         public string QuestionDescription { get; set; }
         public string QuestionCreationDateTime { get; set; }
         public string QuestionStatus { get; set; }
+        public string DemographicAge { get; set; }
+        public string DemographicRace { get; set; }
+        public string DemographicIncomeRange { get; set; }
+        public string DemographicSex { get; set; }
     }
 }
