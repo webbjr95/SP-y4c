@@ -3,14 +3,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Models;
+using SP_Y4C.Models.Enums;
+using SP_Y4C.Data;
 
 namespace SP_Y4C.Controllers
 {
     public class QuestionsController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly QuestionsDbContext _dbContext;
 
-        public QuestionsController(ApplicationDbContext dbContext)
+        public QuestionsController(QuestionsDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -18,13 +20,19 @@ namespace SP_Y4C.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var questions = await _dbContext.Questions.Where(q => !q.IsRetired).ToListAsync();
-            var viewModel = new QuestionsViewModel
-            {
-                Questions = questions
-            };
+            return View(await _dbContext.SurveyQuestions.Where(q => q.ActiveStatus.Equals(QuestionActiveStatus.Active)).ToListAsync());
+        }
 
-            return View(viewModel);
+        [HttpGet]
+        public async Task<IActionResult> Inactive()
+        {
+            return View(await _dbContext.SurveyQuestions.Where(q => q.ActiveStatus.Equals(QuestionActiveStatus.Inactive)).ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Archived()
+        {
+            return View(await _dbContext.SurveyQuestions.Where(q => q.ActiveStatus.Equals(QuestionActiveStatus.Archived)).ToListAsync());
         }
 
         [HttpGet]
@@ -34,7 +42,7 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Question question)
+        public async Task<IActionResult> Create(SurveyQuestion question)
         {
             await _dbContext.AddAsync(question);
             await _dbContext.SaveChangesAsync();
@@ -49,7 +57,13 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Question question)
+        public async Task<IActionResult> Edit(SurveyQuestion question)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Archive(SurveyQuestion question)
         {
             return View();
         }

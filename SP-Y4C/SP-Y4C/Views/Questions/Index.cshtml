@@ -1,47 +1,28 @@
-﻿@model QuestionsViewModel
+﻿@model IEnumerable<SurveyQuestion>
 @{
-    ViewData["Title"] = "Questions";
+    ViewData["Title"] = "Engagement Survey - Active Questions";
 }
+<body>
+    <h2>@ViewData["Title"]</h2>
+        <table class="table table-responsive" style="width:100%">
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
 
-<h2>@ViewData["Title"]</h2>
-
-<table class="table table-responsive" style="width:100%">
-    <tr>
-        <th>Number</th>
-        <th>Question</th>
-        <th>Retired?</th>
-        <th>Actions</th>
-    </tr>
-
-    @foreach (var question in Model.Questions)
-    {
-        <tr>
-            <td>@question.QuestionNumber</td>
-            <td>@question.Text</td>
-            <td>@(question.IsRetired ? "Yes" : "No")</td>
-            <td>
-                <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="handleEditOnClick(@question.Id)">Edit</button>
-                <button class="btn btn-primary" id="delete-question-@question.Id" type="button" onclick="handleDeleteOnClick(@question.Id)">Delete</button>
-            </td>
-        </tr>
-    }
-</table>
-
-@foreach (var question in Model.Questions)
-{
-    <vc:question-modal id="edit-question-modal-@question.Id" title="Edit Question" primary-button-text="Save" secondary-button-text="Close" question="@question"></vc:question-modal>
-    <vc:question-modal id="delete-question-modal-@question.Id" title="Delete Question" primary-button-text="Delete" secondary-button-text="Close" question="@question"></vc:question-modal>
-}
-
-@section Scripts
-{
-    <script type="text/javascript">
-        function handleEditOnClick(id) {
-            console.log(`Show edit question modal for: #${id}`);
-        }
-
-        function handleDeleteOnClick(id) {
-            console.log(`Show delete question modal for: #${id}`);
-        }
-    </script>
-}
+            @foreach (var q in Model)
+            {
+                <tr>
+                    <td>@q.QuestionId</td>
+                    <td width="50%">@q.Description</td>
+                    <td>@q.ActiveStatus</td>
+                    <td>
+                        <button class="btn btn-primary" id="edit-question-@q.QuestionId" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @q.QuestionId })'">Edit</button>
+                        <button class="btn btn-primary" id="archive-question-@q.QuestionId" type="button" onclick="location.href='@Url.Action("Archived", "Questions", new { id = @q.QuestionId })'">Archive</button>
+                    </td>
+                </tr>
+            }
+        </table>
+</body>
