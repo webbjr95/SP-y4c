@@ -6,13 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Models;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SP_Y4C.Data
 {
-    public class QuestionsDbContext : DbContext 
+    public class Y4CDbContext : DbContext 
     {
-        public QuestionsDbContext(DbContextOptions<QuestionsDbContext> options)
+        public Y4CDbContext(DbContextOptions<Y4CDbContext> options)
             : base(options)
         {
             
@@ -24,5 +22,6 @@ namespace SP_Y4C.Data
         }
 
         public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+        public DbSet<SurveyAnswers> SurveyAnswers { get; set; }
     }
 }

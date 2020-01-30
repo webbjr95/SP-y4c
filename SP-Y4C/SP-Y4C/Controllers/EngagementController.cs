@@ -9,7 +9,7 @@ namespace SP_Y4C.Controllers
 {
     public class EngagementController : Controller
     {
-        public IActionResult FirstPage()
+        public IActionResult Index()
         {
             return View();
         }
@@ -27,7 +27,7 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpPost]
-        public IActionResult NotSure()
+        public IActionResult Other()
         {
             return View();
         }
@@ -45,8 +45,10 @@ namespace SP_Y4C.Controllers
             {
                 case "teach":
                     if (form["teachInterest"].Equals("yes")){
-                        return Redirect("https://www.y4c.org/teacher-page");
-                    }else{
+                        return RedirectToAction("Survey", "Feedback");
+                        //return Redirect("https://www.y4c.org/teacher-page");
+                    }
+                    else{
                         return Redirect("https://www.y4c.org/donate");
                     }
                 case "practice":
@@ -55,9 +57,10 @@ namespace SP_Y4C.Controllers
                     }else{
                         return Redirect("https://www.y4c.org/donate");
                     }
-                case "notSure": 
+                case "other": 
                     if (form["gettingInvolved"].Equals("yes")){
-                        return Redirect("https://www.y4c.org/volunteer-1");
+                        return RedirectToAction("Survey", "Feedback");
+                        //return Redirect("https://www.y4c.org/volunteer-1");
                     }else{
                         return Redirect("https://www.y4c.org/donate");
                     }

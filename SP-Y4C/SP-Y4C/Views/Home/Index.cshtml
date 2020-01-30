@@ -2366,7 +2366,7 @@ Wanna see more of something specific on YouTube?  Let us know. We will be offeri
 
             </div>
         </div>
-        
+
         <footer class="Footer" role="contentinfo" data-controller="FooterBreakpoints">
 
             <div class="Footer-inner clear">
@@ -2538,12 +2538,13 @@ Wanna see more of something specific on YouTube?  Let us know. We will be offeri
                     </div>
                     <div class="modal-body">
                         <p>
-                            Would you like to know more about how you can assist in spreading yoga 's healing over the state of Florida?
-                            Click @Html.ActionLink("HERE", "FirstPage", "DecisionTree") to find out how!
+                            Would you like to know more about how you can assist in spreading yoga 's healing and empowerment over the state of Florida?
                         </p>
+                        <img style="object-fit: scale-down; max-width: 100%;"  src="~/images/yogaHealing.jpg" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "Engagement")'">Start</button>
                     </div>
                 </div>
 

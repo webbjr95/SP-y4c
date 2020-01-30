@@ -10,9 +10,9 @@ namespace SP_Y4C.Controllers
 {
     public class QuestionsController : Controller
     {
-        private readonly QuestionsDbContext _dbContext;
+        private readonly Y4CDbContext _dbContext;
 
-        public QuestionsController(QuestionsDbContext dbContext)
+        public QuestionsController(Y4CDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -51,13 +51,23 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var questions = await _dbContext.SurveyQuestions.SingleOrDefaultAsync(m => m.QuestionId == id);
+            if (questions == null)
+            {
+                return NotFound();
+            }
+            return View(questions);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SurveyQuestion question)
+        public IActionResult Edit(SurveyQuestion question)
         {
             return View();
         }

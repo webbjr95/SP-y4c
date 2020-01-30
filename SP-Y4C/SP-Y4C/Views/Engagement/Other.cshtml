@@ -47,7 +47,7 @@
     <br />
 
     <div id="form">
-        <form asp-controller="DecisionTree" asp-action="NextStep" method="post">
+        <form asp-controller="Engagement" asp-action="NextStep" method="post">
             <div id="formText">
                 <strong>
                     Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
@@ -57,10 +57,14 @@
             <br />
             <br />
 
+            <strong>Would you like to volunteer?</strong><br />
+            <input type="radio" name="gettingInvolved" value="no" /> No<br />
+            <input type="radio" name="gettingInvolved" value="yes" /> Yes<br />
+
             <strong>Where did you hear about us:</strong>
             <input type="text" />
 
-            <input type="hidden" name="page" value="notsure" />
+            <input type="hidden" name="page" value="other" />
             <input type="submit" value="Next Step" />
         </form>
     </div>
