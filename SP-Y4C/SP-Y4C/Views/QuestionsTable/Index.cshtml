@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuestionsTable>
+﻿@*@model IEnumerable<QuestionsTable>
 @{
     //ViewData["Title"] = "Admin Console";
 }
@@ -40,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var item in Model)
+            @foreach (var item in Model)
                 {
                 <tr>
                     <td>
@@ -64,7 +64,7 @@
                         <button><a asp-action="Delete" asp-route-id="@item.QuestionID">Delete</a></button>
                     </td>
                 </tr>
-                }*@
+                }
         </tbody>
     </table>
     <button><a asp-action="Edit">Edit</a></button>
@@ -76,4 +76,4 @@
     <button><a asp-action="Reports">Reports</a></button>
     </p>
 
-</body>
+</body>*@
