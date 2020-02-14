@@ -1,8 +1,50 @@
-﻿@model IEnumerable<SurveyAnswers>
+﻿<table>
+    <tr>
+        <th>
+            What information would you like to include in your report?
+            <br>
+            <br>
+            Filters:
+            <br>
+            <br>
+            @Html.CheckBox("Income") Income
+            <br>
+            @Html.CheckBox("Race") Race
+            <br>
+            @Html.CheckBox("Sex") Sex
+            <br>
+            @Html.CheckBox("Age") Age
+            <br>
+            <br>
+        </th>
+        <th>
+            <br><br>
+            Type to be included:
+            <br>
+            <br>
+            @Html.CheckBox("All") All
+            <br>
+            @Html.CheckBox("Teacher") Teacher
+            <br>
+            @Html.CheckBox("Alumni") Alumni
+            <br>
+            @Html.CheckBox("Donor") Donor
+            <br>
+            @Html.CheckBox("Volunteer") Volunteer
+            <br>
+        </th>
+    </tr>
+</table>
+
+<br><br>
+<input type="button" name="button" class="button1" value="Generate Report" />
+<br><br>
+
+@model IEnumerable<SurveyAnswers>
 @{
     ViewData["Title"] = "Reports";
 }
-<body> 
+<body>
     <h2>@ViewData["Title"]</h2>
     <div>
         <table class="table table-responsive" style="width:100%">
