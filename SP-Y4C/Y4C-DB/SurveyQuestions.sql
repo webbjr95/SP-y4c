@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[SurveyQuestions]
 (
-	[QuestionId] VARCHAR(255) NOT NULL PRIMARY KEY, 
+	[QuestionId] VARCHAR(50) NOT NULL PRIMARY KEY, 
     [Title] VARCHAR(50) NOT NULL, 
     [Description] VARCHAR(MAX) NOT NULL, 
     [Type] INT NOT NULL, 

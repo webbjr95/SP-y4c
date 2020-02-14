@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[SurveyAnswers]
 (
-	[AnswerID] VARCHAR(255) NOT NULL PRIMARY KEY, 
-    [UserID] VARCHAR(MAX) NOT NULL, 
-    [QuestionID] VARCHAR(255) NOT NULL, 
+	[AnswerId] VARCHAR(50) NOT NULL PRIMARY KEY, 
+    [UserId] VARCHAR(50) NOT NULL, 
+    [QuestionId] VARCHAR(50) NOT NULL, 
     [SubmissionDate] DATETIME NOT NULL, 
     [Answer] VARCHAR(MAX) NOT NULL, 
     [UserType] INT NOT NULL, 
-    CONSTRAINT [FK_SurveyAnswers_ToTable] FOREIGN KEY ([QuestionID]) REFERENCES [SurveyQuestions]([QuestionID])
+    CONSTRAINT [FK_SurveyAnswers_ToTable] FOREIGN KEY ([QuestionId]) REFERENCES [SurveyQuestions]([QuestionID])
 )
