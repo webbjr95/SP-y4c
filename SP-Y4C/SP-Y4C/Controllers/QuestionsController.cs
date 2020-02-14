@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SP_Y4C.Models;
-using SP_Y4C.Models.Enums;
 using SP_Y4C.Data;
+using SP_Y4C.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace SP_Y4C.Controllers
 {
@@ -20,19 +19,17 @@ namespace SP_Y4C.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _dbContext.SurveyQuestions.Where(q => q.ActiveStatus.Equals(QuestionActiveStatus.Active)).ToListAsync());
-        }
+            var questions = await _dbContext.SurveyQuestions.ToListAsync();
 
-        [HttpGet]
-        public async Task<IActionResult> Inactive()
-        {
-            return View(await _dbContext.SurveyQuestions.Where(q => q.ActiveStatus.Equals(QuestionActiveStatus.Inactive)).ToListAsync());
+            return View(questions);
         }
 
         [HttpGet]
         public async Task<IActionResult> Archived()
         {
-            return View(await _dbContext.SurveyQuestions.Where(q => q.ActiveStatus.Equals(QuestionActiveStatus.Archived)).ToListAsync());
+            var questions = await _dbContext.ArchivedSurveyQuestions.ToListAsync();
+
+            return View(questions);
         }
 
         [HttpGet]
@@ -44,38 +41,79 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SurveyQuestion question)
         {
-            await _dbContext.AddAsync(question);
+            if (!ModelState.IsValid)
+            {
+                return View(question);
+            }
+
+            await _dbContext.SurveyQuestions.AddAsync(question);
             await _dbContext.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            var question = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
+            
+            if (question == null)
+            {
+                return NotFound();
+            }
+            
+            return View(question);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(SurveyQuestion question)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(question);
+            }
+
+            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == question.Id);
+
+            existingQuestion.Text = question.Text;
+            existingQuestion.QuestionNumber = question.QuestionNumber;
+            existingQuestion.QuestionType = question.QuestionType;
+            existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
+
+            _dbContext.SurveyQuestions.Update(existingQuestion);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Archive(int id)
+        {
+            var question = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
+
+            if (question == null)
             {
                 return NotFound();
             }
 
-            var questions = await _dbContext.SurveyQuestions.SingleOrDefaultAsync(m => m.QuestionId == id);
-            if (questions == null)
+            using (var transaction = _dbContext.Database.BeginTransaction())
             {
-                return NotFound();
+                var archivedQuestion = new ArchivedSurveyQuestion
+                {
+                    QuestionNumber = question.QuestionNumber,
+                    QuestionType = question.QuestionType,
+                    Text = question.Text
+                };
+
+                await _dbContext.ArchivedSurveyQuestions.AddAsync(archivedQuestion);
+                await _dbContext.SaveChangesAsync();
+
+                _dbContext.SurveyQuestions.Remove(question);
+                await _dbContext.SaveChangesAsync();
+
+                transaction.Commit();
             }
-            return View(questions);
-        }
 
-        [HttpPost]
-        public IActionResult Edit(SurveyQuestion question)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Archive(SurveyQuestion question)
-        {
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace SP_Y4C.Models
+namespace SP_Y4C.ViewModels
 {
     public class ErrorViewModel
     {
