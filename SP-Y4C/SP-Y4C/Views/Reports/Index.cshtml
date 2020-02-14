@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SurveyAnswers>
+@{
+    ViewData["Title"] = "Reports";
+}
+<body> 
+    <h2>@ViewData["Title"]</h2>
+    <div>
+        <table class="table table-responsive" style="width:100%">
+            <tr>
+                <th>Answer ID</th>
+                <th>Question ID</th>
+                <th>User ID</th>
+                <th>User Category</th>
+                <th>Submitted</th>
+            </tr>
+
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.AnswerId</td>
+                    <td>@a.QuestionId</td>
+                    <td>@a.UserId</td>
+                    <td>@a.UserType</td>
+                    <td>@a.SubmissionDate</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
