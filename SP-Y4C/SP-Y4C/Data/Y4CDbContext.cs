@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Models;
 
 namespace SP_Y4C.Data
@@ -22,7 +17,8 @@ namespace SP_Y4C.Data
         }
 
         public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
-        public DbSet<SurveyAnswers> SurveyAnswers { get; set; }
+        public DbSet<SurveyAnswer> SurveyAnswers { get; set; }
         public DbSet<SurveyFeedback> SurveyFeedback { get; set; }
+        public DbSet<ArchivedSurveyQuestion> ArchivedSurveyQuestions { get; set; }
     }
 }

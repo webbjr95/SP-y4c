@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using SP_Y4C.ViewModels;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using SP_Y4C.Models;
 
 namespace SP_Y4C.Controllers
 {

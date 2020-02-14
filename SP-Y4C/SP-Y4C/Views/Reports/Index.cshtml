@@ -1,3 +1,7 @@
+@model IEnumerable<SurveyAnswer>
+@{
+    ViewData["Title"] = "Reports";
+}
 ﻿<table>
     <tr>
         <th>
@@ -36,34 +40,32 @@
     </tr>
 </table>
 
-<br><br>
+<br>
+<br>
 <input type="button" name="button" class="button1" value="Generate Report" />
-<br><br>
+<br>
+<br>
 
-@model IEnumerable<SurveyAnswers>
-@{
-    ViewData["Title"] = "Reports";
-}
 <body>
     <h2>@ViewData["Title"]</h2>
     <div>
         <table class="table table-responsive" style="width:100%">
             <tr>
-                <th>Answer ID</th>
                 <th>Question ID</th>
+                <th>Answer ID</th>
                 <th>User ID</th>
-                <th>User Category</th>
-                <th>Submitted</th>
+                <th>User Type</th>
+                <th>Submitted At</th>
             </tr>
 
-            @foreach (var a in Model)
+            @foreach (var answer in Model)
             {
                 <tr>
-                    <td>@a.AnswerId</td>
-                    <td>@a.QuestionId</td>
-                    <td>@a.UserId</td>
-                    <td>@a.UserType</td>
-                    <td>@a.SubmissionDate</td>
+                    <td>@answer.QuestionId</td>
+                    <td>@answer.Id</td>
+                    <td>@answer.UserId</td>
+                    <td>@answer.UserType</td>
+                    <td>@answer.SubmittedAtUtc.LocalDateTime</td>
                 </tr>
             }
         </table>

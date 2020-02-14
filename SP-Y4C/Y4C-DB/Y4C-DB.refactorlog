@@ -41,5 +41,11 @@
     <Property Name="ParentElementName" Value="[dbo].[SurveyFeedback]" />
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Rating" />
+  <!--<Operation Name="Rename Refactor" Key="3d05999b-ac5c-403f-8590-652876277c15" ChangeDateTime="02/14/2020 01:21:24">
+    <Property Name="ElementName" Value="[dbo].[SurveyAnswers].[UserType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyAnswers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserTypeId" />-->
   </Operation>
 </Operations>

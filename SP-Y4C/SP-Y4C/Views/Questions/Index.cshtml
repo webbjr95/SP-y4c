@@ -6,26 +6,34 @@
         <h2>@ViewData["Title"]</h2>
 
         <h2><strong>Question Flow</strong></h2>
-        <img width="95%" src="~/images/questionFlow.png" />
+        <img style="width:95%" src="~/images/questionFlow.png" />
 
         <h2><strong>Question Bank</strong></h2>
+        <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Questions")'">Create</button>
+        <br />
         <table class="table table-responsive" style="width:100%">
             <tr>
-                <th>ID</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().QuestionNumber"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().QuestionType"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().CreatedAtUtc"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().LastModifiedAtUtc"></label></th>
                 <th>Actions</th>
             </tr>
 
-            @foreach (var q in Model)
+            @foreach (var question in Model)
             {
                 <tr>
-                    <td>@q.QuestionId</td>
-                    <td width="50%">@q.Description</td>
-                    <td>@q.ActiveStatus</td>
+                    <td>@question.Id</td>
+                    <td>@question.QuestionNumber</td>
+                    <td>@question.QuestionType.ToString()</td>
+                    <td width="50%">@question.Text</td>
+                    <td>@question.CreatedAtUtc.LocalDateTime</td>
+                    <td>@question.LastModifiedAtUtc.LocalDateTime</td>
                     <td>
-                        <button class="btn btn-primary" id="edit-question-@q.QuestionId" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @q.QuestionId })'">Edit</button>
-                        <button class="btn btn-primary" id="archive-question-@q.QuestionId" type="button" onclick="location.href='@Url.Action("Archived", "Questions", new { id = @q.QuestionId })'">Archive</button>
+                        <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
+                        <button class="btn btn-primary" id="archive-question-@question.Id" type="button" onclick="location.href='@Url.Action("Archive", "Questions", new { id = @question.Id })'">Archive</button>
                     </td>
                 </tr>
             }
