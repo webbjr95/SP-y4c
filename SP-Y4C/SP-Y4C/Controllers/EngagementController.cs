@@ -4,14 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SP_Y4C.Data;
 
 namespace SP_Y4C.Controllers
 {
     public class EngagementController : Controller
     {
+        private readonly Y4CDbContext _dbContext;
+
+        public EngagementController(Y4CDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public IActionResult Index()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Test()
+        {
+            var questions = await _dbContext.SurveyQuestions.ToListAsync();
+            var choices = await _dbContext.SurveyChoices.ToListAsync();
+
+            var qandC = from choice in choices
+                        join question in questions on choice.QuestionId equals question.Id
+                        select new { questions, choices };
+            return View(qandC);
         }
 
         [HttpPost]

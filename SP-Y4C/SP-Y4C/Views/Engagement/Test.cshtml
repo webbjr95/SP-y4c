@@ -1,0 +1,17 @@
+﻿@model IEnumerable<SurveyQuestion>
+@{
+    ViewData["Title"] = "Test";
+}
+
+<h2>Test</h2>
+@{ 
+    foreach(var q in Model)
+    {
+    <label for=@q.Id>
+        <label>@q.Text</label>
+        <label>@q.TypeId</label>
+        <input type=@q.TypeId />
+    </label>
+        <br>
+    }
+}

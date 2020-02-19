@@ -11,7 +11,18 @@
 		('eef07c54-4329-48c4-88fa-fc7c7cf36da0', 'Would you be interested in practicing at a Yoga 4 Change facility?', '2019-02-10 21:49:07', 6, 3, 1, 1),
 
 		('26ed365f-f10c-4cfa-9d38-7499cdad8d9e', 'Would you like to volunteer?', '2019-04-11 21:58:48', 7, 3, 1, 1),
-		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3edf', 'Where did you hear about us?', '2019-11-22 01:46:52', 8, 1, 1, 0);
+		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3edf', 'Where did you hear about us?', '2019-11-22 01:46:52', 8, 1, 1, 0),
+		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3ed1', 'test checkbox?', '2019-11-22 01:46:52', 8, 2, 1, 0);
+
+	INSERT INTO [dbo].[SurveyChoices] ([Id], [QuestionId], [Text], [CreatedAtUtc]) 
+	VALUES 
+		('ff1804f5-566c-4c22-aa1c-b7e1f4fd6771', 'ff8cea86-6915-4eef-8a1e-de976525b149', '0 - 1 Years', '2019-10-29 17:58:39'),
+		('cb7b6c9f-3e12-4f6f-848a-1dff5c8cfedc', 'ff8cea86-6915-4eef-8a1e-de976525b149', '2 - 5 Years', '2019-11-26 06:40:20'),
+		('470d0c6b-4e75-4cf9-ad66-5d6da11f48c7', 'ff8cea86-6915-4eef-8a1e-de976525b149', '5 - 10 Years', '2019-04-09 11:52:41'),
+		('470d0c6b-4e75-4cf9-ad66-5d6da11f48c1', 'ff8cea86-6915-4eef-8a1e-de976525b149', '10+ Years', '2019-04-09 11:52:41'),
+
+		('88e455ac-29b3-4469-8a08-143c2a07caa8', '931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'Yes', '2019-11-02 01:56:30'),
+		('1fd5793b-0dc7-40c2-bd37-f3a9441f3da9', '931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'No', '2019-05-20 01:33:33');
 
 	INSERT INTO [dbo].[SurveyAnswers] ([Id], [UserId], [QuestionId], [SubmittedAtUtc], [Answer], [UserTypeId]) 
 	VALUES 

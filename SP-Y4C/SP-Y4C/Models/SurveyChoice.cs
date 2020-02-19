@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SP_Y4C.Models
 {
-    public class SurveyQuestion 
+    public class SurveyChoice 
     {
-        public SurveyQuestion()
+        public SurveyChoice()
         {
             CreatedAtUtc = DateTime.UtcNow;
             LastModifiedAtUtc = DateTime.UtcNow;
@@ -17,12 +17,8 @@ namespace SP_Y4C.Models
         public Guid Id { get; set; }
 
         [Required]
-        [Display(Name = "Question Number")]
-        public int QuestionNumber { get; set; }
-
-        [Required]
-        [Display(Name ="Question Type")]
-        public QuestionType TypeId { get; set; }
+        [Display(Name ="Question ID")]
+        public Guid QuestionId { get; set; }
 
         [Required]
         [MaxLength(500)]
@@ -33,12 +29,5 @@ namespace SP_Y4C.Models
 
         [Display(Name = "Last Modified At")]
         public DateTimeOffset LastModifiedAtUtc { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
-        public int ActiveStatus { get; set; }
-
-        [Required]
-        public int Weight { get; set; }
     }
 }
