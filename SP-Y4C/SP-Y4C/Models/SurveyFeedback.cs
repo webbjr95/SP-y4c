@@ -8,12 +8,12 @@ namespace SP_Y4C.Models
     {
         public SurveyFeedback()
         {
-            SubmissionDate = DateTime.UtcNow;
+            SubmittedAtUtc = DateTime.UtcNow;
         }
 
         [Key]
         [Display(Name = "ID")]
-        public string FeedbackId { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "URL")]
@@ -24,10 +24,10 @@ namespace SP_Y4C.Models
         public int Rating { get; set; }
 
         [Required]
-        [Display(Name = "User Type")]
-        public UserType UserType { get; set; }
+        [Display(Name = "User ID")]
+        public Guid UserId { get; set; }
 
         [Display(Name = "Submission Date")]
-        public DateTime SubmissionDate { get; set; }
+        public DateTime SubmittedAtUtc { get; set; }
     }
 }

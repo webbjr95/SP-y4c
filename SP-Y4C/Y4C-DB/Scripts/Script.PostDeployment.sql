@@ -10,4 +10,4 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r .\PostDeployment\SeedSurveyQuestions.sql
+:r ./PostDeployment/SeedSurveyQuestions.sql

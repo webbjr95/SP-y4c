@@ -53,7 +53,7 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var question = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
             
@@ -77,7 +77,7 @@ namespace SP_Y4C.Controllers
 
             existingQuestion.Text = question.Text;
             existingQuestion.QuestionNumber = question.QuestionNumber;
-            existingQuestion.QuestionType = question.QuestionType;
+            existingQuestion.TypeId = question.TypeId;
             existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
 
             _dbContext.SurveyQuestions.Update(existingQuestion);
@@ -86,7 +86,7 @@ namespace SP_Y4C.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Archive(int id)
+        public async Task<IActionResult> Archive(Guid id)
         {
             var question = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
 
@@ -99,9 +99,15 @@ namespace SP_Y4C.Controllers
             {
                 var archivedQuestion = new ArchivedSurveyQuestion
                 {
+                    Id = question.Id,
                     QuestionNumber = question.QuestionNumber,
-                    QuestionType = question.QuestionType,
-                    Text = question.Text
+                    TypeId = question.TypeId,
+                    Text = question.Text,
+                    UserArchivedBy = Guid.NewGuid(),
+                    //TODO: Add this back in once we have the login portion incorporated. Need to get the user ID.
+                    //UserArchivedBy = User.Identity.Name,
+                    ArchivedAtUtc = DateTime.UtcNow,
+                    ActiveStatus = question.ActiveStatus
                 };
 
                 await _dbContext.ArchivedSurveyQuestions.AddAsync(archivedQuestion);

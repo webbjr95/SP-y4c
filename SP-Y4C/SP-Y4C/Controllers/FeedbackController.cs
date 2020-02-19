@@ -26,11 +26,11 @@ namespace SP_Y4C.Controllers
         {
             var feedback = new SurveyFeedback
             {
-                FeedbackId = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 Url = form["currentUrl"],
                 Rating = int.Parse(form["rating"]),
-                UserType = Models.Enums.UserType.Alumni,
-                SubmissionDate = DateTime.UtcNow
+                UserId = Guid.NewGuid(),
+                SubmittedAtUtc = DateTime.UtcNow
             };
 
             await _dbContext.AddAsync(feedback);

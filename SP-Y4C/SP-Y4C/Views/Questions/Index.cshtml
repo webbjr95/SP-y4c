@@ -15,7 +15,7 @@
             <tr>
                 <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().QuestionNumber"></label></th>
-                <th><label asp-for="@Model.FirstOrDefault().QuestionType"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().TypeId"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().CreatedAtUtc"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().LastModifiedAtUtc"></label></th>
@@ -27,7 +27,7 @@
                 <tr>
                     <td>@question.Id</td>
                     <td>@question.QuestionNumber</td>
-                    <td>@question.QuestionType.ToString()</td>
+                    <td>@question.TypeId.ToString()</td>
                     <td width="50%">@question.Text</td>
                     <td>@question.CreatedAtUtc.LocalDateTime</td>
                     <td>@question.LastModifiedAtUtc.LocalDateTime</td>

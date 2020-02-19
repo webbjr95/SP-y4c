@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[SurveyFeedback]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL , 
+    [SubmittedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(), 
+    [Rating] INT NOT NULL, 
+    [UserId] UNIQUEIDENTIFIER NOT NULL, 
+    [Url] VARCHAR(MAX) NOT NULL,
+
+    CONSTRAINT [PK_SurveyFeedback_Id] PRIMARY KEY ([Id])
+)

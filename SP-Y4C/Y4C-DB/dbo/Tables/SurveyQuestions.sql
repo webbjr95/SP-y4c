@@ -1,11 +1,13 @@
 ﻿CREATE TABLE [dbo].[SurveyQuestions]
 (
-	[Id] INT NOT NULL IDENTITY(1,1),
+	[Id] UNIQUEIDENTIFIER NOT NULL,
     [QuestionNumber] INT NOT NULL,
-    [QuestionTypeId] INT NOT NULL DEFAULT 1, -- Text by default
+    [TypeId] INT NOT NULL DEFAULT 1, -- Text by default
     [Text] VARCHAR(500) NOT NULL,
     [CreatedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(),
     [LastModifiedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(),
+    [ActiveStatus] INT NOT NULL, 
+    [Weight] INT NOT NULL DEFAULT 1, 
 
     CONSTRAINT [PK_SurveyQuestions_Id] PRIMARY KEY ([Id])
 )
