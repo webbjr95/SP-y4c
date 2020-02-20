@@ -28,6 +28,9 @@ namespace SP_Y4C.Models
         public DateTimeOffset CreatedAtUtc { get; set; }
 
         [Display(Name = "Last Modified At")]
-        public DateTimeOffset LastModifiedAtUtc { get; set; }
+        public DateTimeOffset LastModifiedAtUtc { get; set; } 
+        
+        [Display(Name = "Order Within Question")]
+        public int OrderInQuestion { get; set; }
     }
 }

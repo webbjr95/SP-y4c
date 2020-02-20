@@ -8,21 +8,19 @@
     foreach (var q in Model.Question)
     {
         <label for=@q.Id>
-            <label>@q.Text</label>
+            <label>@q.Text</label><br>
 
         @{ foreach (var c in Model.Choice)
             {
                 if (q.Id == c.QuestionId)
                 {
                 <label for=@c.Id>
-                    <label>@c.Text</label>
-                    <label>@q.TypeId</label>
                     <input type=@q.TypeId />
-                </label>
-
+                    <label>@c.Text</label>
+                </label><br>
                     }
                 }
             }
-            </label>
+         </label><br>
     }
 }

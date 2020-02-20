@@ -25,20 +25,14 @@ namespace SP_Y4C.Controllers
 
         public async Task<IActionResult> Test()
         {
-            var questions = await _dbContext.SurveyQuestions.ToListAsync();
-            var choices = await _dbContext.SurveyChoices.ToListAsync();
+            var questions = await _dbContext.SurveyQuestions.OrderBy(q => q.QuestionNumber).ToListAsync();
+            var choices = await _dbContext.SurveyChoices.OrderBy(c => c.QuestionId).OrderBy(c => c.OrderInQuestion).ToListAsync();
             var qcVm = new SurveyEngagementViewModel
             {
                 Question = questions,
                 Choice = choices
             };
 
-            //using (var test = _dbContext)
-            //{
-            //    var t = test.SurveyChoices
-            //                   .Include(c => c.QuestionId)
-            //                   .ToList();
-            //}
             return View(qcVm);
         }
 

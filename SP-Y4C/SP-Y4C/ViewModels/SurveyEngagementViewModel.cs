@@ -8,7 +8,7 @@ namespace SP_Y4C.ViewModels
 {
     public class SurveyEngagementViewModel
     {
-        public List<SurveyQuestion> Question { get; set; }
-        public List<SurveyChoice> Choice { get; set; }
+        public IEnumerable<SurveyQuestion> Question { get; set; }
+        public IEnumerable<SurveyChoice> Choice { get; set; }
     }
 }
