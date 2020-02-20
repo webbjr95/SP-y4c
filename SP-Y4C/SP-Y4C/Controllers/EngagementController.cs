@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
+using SP_Y4C.ViewModels;
 
 namespace SP_Y4C.Controllers
 {
@@ -26,11 +27,19 @@ namespace SP_Y4C.Controllers
         {
             var questions = await _dbContext.SurveyQuestions.ToListAsync();
             var choices = await _dbContext.SurveyChoices.ToListAsync();
+            var qcVm = new SurveyEngagementViewModel
+            {
+                Question = questions,
+                Choice = choices
+            };
 
-            var qandC = from choice in choices
-                        join question in questions on choice.QuestionId equals question.Id
-                        select new { questions, choices };
-            return View(qandC);
+            //using (var test = _dbContext)
+            //{
+            //    var t = test.SurveyChoices
+            //                   .Include(c => c.QuestionId)
+            //                   .ToList();
+            //}
+            return View(qcVm);
         }
 
         [HttpPost]
