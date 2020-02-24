@@ -18,45 +18,51 @@ namespace SP_Y4C.Controllers
         {
             _dbContext = dbContext;
         }
+
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> Test()
+        public IActionResult TestCollect()
         {
-            var questions = await _dbContext.SurveyQuestions.OrderBy(q => q.QuestionNumber).ToListAsync();
-            var choices = await _dbContext.SurveyChoices.OrderBy(c => c.QuestionId).OrderBy(c => c.OrderInQuestion).ToListAsync();
-            var qcVm = new SurveyEngagementViewModel
-            {
-                Question = questions,
-                Choice = choices
-            };
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
 
-            return View(qcVm);
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult Teach()
         {
-            return View();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult Practice()
         {
-            return View();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult Other()
         {
-            return View();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult NextStep(IFormCollection form)
         {
+            //Perform the calculation to see what the visitor should be placed as.
+
+
+
             //Need it to follow the below coding logic
             //Choose a starting page from three options
             //teach, practice, and volunteering

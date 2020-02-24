@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.SqlServer.Types;
+using System.Collections.Generic;
 
 namespace SP_Y4C.Models
 {
@@ -42,7 +43,10 @@ namespace SP_Y4C.Models
         [Required]
         public int Weight { get; set; }
 
-        //[Required]
-        //public SqlHierarchyId HierarchyId { get; set; }
+
+        [Required]
+        public string Category { get; set; }
+
+        public ICollection<SurveyChoice> Choices { get; set; }
     }
 }

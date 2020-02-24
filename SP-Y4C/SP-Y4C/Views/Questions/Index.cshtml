@@ -6,7 +6,58 @@
         <h2>@ViewData["Title"]</h2>
 
         <h2><strong>Question Flow</strong></h2>
-        <img style="width:95%" src="~/images/questionFlow.png" />
+        @{
+            <label>Teach</label>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals("teach"))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        <li>@question.Category</li>
+                    </ul>
+                }
+            }
+
+            <label>Practice</label>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals("practice"))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        <li>@question.Category</li>
+                    </ul>
+                }
+            }
+
+            <label>Other</label>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals("other"))
+                {
+
+                    <ul>
+                        <li>@question.Text</li>
+                        <li>@question.Category</li>
+                    </ul>
+                }
+            }
+
+            <label>None</label>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals("none"))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        <li>@question.Category</li>
+                    </ul>
+                }
+            }
+        }
+
+
 
         <h2><strong>Question Bank</strong></h2>
         <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Questions")'">Create</button>

@@ -1,18 +1,20 @@
 ﻿BEGIN
-	INSERT INTO [dbo].[SurveyQuestions] ([Id], [Text], [CreatedAtUtc], [QuestionNumber], [TypeId], [ActiveStatus], [Weight]) 
+	INSERT INTO [dbo].[SurveyQuestions] ([Id], [Text], [CreatedAtUtc], [Category], [QuestionNumber], [TypeId], [ActiveStatus], [Weight]) 
 	VALUES 
 		--First is for teaching, second is for practice, third is other, and lastly the socio-economic questions.
-		('736f41a8-5f74-4be7-9956-c1250639f768', 'If you teach, where at?', '2019-10-29 17:58:39', 1, 1, 1, 0),
-		('ff8cea86-6915-4eef-8a1e-de976525b149', 'How long have you been teaching yoga?', '2019-11-26 06:40:20', 2, 3, 1, 0),
-		('931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'Would you be interested in becoming a teacher for Yoga 4 Change?', '2019-04-09 11:52:41', 3, 3, 1, 1),
+		('736f41a8-5f74-4be7-9956-c1250639f768', 'If you teach, where at?', '2019-10-29 17:58:39', 'teach', 1, 1, 1, 0),
+		('ff8cea86-6915-4eef-8a1e-de976525b149', 'How long have you been teaching yoga?', '2019-11-26 06:40:20', 'teach', 2, 3, 1, 0),
+		('931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'Would you be interested in becoming a teacher for Yoga 4 Change?', '2019-04-09 11:52:41', 'teach', 3, 3, 1, 1),
 
-		('d4104646-e91a-434a-985b-b1c5ca10b05d', 'If you practice, where at?', '2019-11-02 01:56:30', 4, 1, 1, 0),
-		('f36a4cb2-8497-48e9-a279-d7ae3d19a6dc', 'Do you practice at a commercial facility or within a community group?', '2019-05-20 01:33:33', 5, 3, 1, 0),
-		('eef07c54-4329-48c4-88fa-fc7c7cf36da0', 'Would you be interested in practicing at a Yoga 4 Change facility?', '2019-02-10 21:49:07', 6, 3, 1, 1),
+		('d4104646-e91a-434a-985b-b1c5ca10b05d', 'If you practice, where at?', '2019-11-02 01:56:30', 'practice', 4, 1, 1, 0),
+		('f36a4cb2-8497-48e9-a279-d7ae3d19a6dc', 'Do you practice at a commercial facility or within a community group?', '2019-05-20 01:33:33', 'practice', 5, 3, 1, 0),
+		('eef07c54-4329-48c4-88fa-fc7c7cf36da0', 'Would you be interested in practicing at a Yoga 4 Change facility?', '2019-02-10 21:49:07', 'practice', 6, 3, 1, 1),
 
-		('26ed365f-f10c-4cfa-9d38-7499cdad8d9e', 'Would you like to volunteer?', '2019-04-11 21:58:48', 7, 3, 1, 1),
-		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3edf', 'Where did you hear about us?', '2019-11-22 01:46:52', 8, 1, 1, 0),
-		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3ed1', 'test checkbox?', '2019-11-22 01:46:52', 8, 2, 1, 0);
+		('26ed365f-f10c-4cfa-9d38-7499cdad8d9e', 'Would you like to volunteer?', '2019-04-11 21:58:48', 'other', 7, 3, 1, 1),
+		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3edf', 'Where did you hear about us?', '2019-11-22 01:46:52', 'other', 8, 1, 1, 0),
+
+
+		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3ed1', 'test checkbox?', '2019-11-22 01:46:52','none', 8, 2, 1, 0);
 
 	INSERT INTO [dbo].[SurveyChoices] ([Id], [QuestionId], [Text], [CreatedAtUtc], [OrderInQuestion]) 
 	VALUES 

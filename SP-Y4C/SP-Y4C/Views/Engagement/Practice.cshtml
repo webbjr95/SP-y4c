@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Yoga 4 Change - Practice";
+﻿@model IQueryable<SurveyQuestion>
+@{
+    ViewData["Title"] = "Test";
 }
+
 <style>
     input[type=text], select {
         width: 100%;
@@ -44,35 +46,56 @@
     }
 </style>
 
-<div>
-    <h1>Learn More About Practicing Yoga With Us!</h1>
-    <br />
-    <br />
+<div id="form">
+    <form asp-controller="Engagement" asp-action="NextStep" method="post">
+        <div id="formText">
+            <strong>
+                Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
+                the below form to completion to find out where you can make the biggest difference.
+            </strong>
+        </div>
+        <br>
+        <br>
 
-    <div id="form">
-        <form asp-controller="Engagement" asp-action="NextStep" method="post">
-            <div id="formText">
-                <strong>
-                    Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
-                    the below form to completion to find out where you can make the biggest difference.
-                </strong>
-            </div>
-            <br />
-            <br />
+        @{
+            foreach (var q in Model)
+            {
+                if (q.Category.Equals("practice"))
+                {
+                    <label for=@q.Id>
+                        <label>@q.Text</label><br>
+                        <input type="hidden" name="weight" value="@q.Weight" />
 
-            <strong>If you practice, where at:</strong>
-            <input type="text" />
 
-            <strong>Do you practice at a commercial facility or within a community group:</strong><br />
-            <input type="radio" name="practiceLocal" value="facility" /> Facility<br />
-            <input type="radio" name="practiceLocal" value="community" /> Community<br />
+                        @{
+                            if (q.Choices.Count == 0)
+                            {
+                                if (q.TypeId == QuestionType.Text)
+                                {
+                                    <input type="@q.TypeId" required />
+                                }
+                            }
+                            else
+                            {
+                                foreach (var c in q.Choices)
+                                {
+                                    if (q.Id == c.QuestionId)
+                                    {
+                                        <label for=@c.Id>
+                                            <input name="@c.QuestionId" type="@q.TypeId" required />
+                                            <label>@c.Text</label>
+                                        </label><br>
+                                    }
+                                }
+                            }
+                        }
+                    </label><br>
+                }
+            }
+        }
 
-            <strong>Would you be interested in practicing at Yoga 4 Change:</strong><br />
-            <input type="radio" name="practiceInterest" value="no" /> No<br />
-            <input type="radio" name="practiceInterest" value="yes" /> Yes<br />
-
-            <input type="hidden" name="page" value="practice" />
-            <input type="submit" value="Next Step" />
-        </form>
-    </div>
+        @* Need to change the below interest *@
+        <input type="hidden" name="page" value="practice" />
+        <input type="submit" value="Next Step" />
+    </form>
 </div>

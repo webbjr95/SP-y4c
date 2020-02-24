@@ -32,5 +32,10 @@ namespace SP_Y4C.Models
         
         [Display(Name = "Order Within Question")]
         public int OrderInQuestion { get; set; }
+        
+        
+        public SurveyQuestion Question { get; set; }
+
+
     }
 }
