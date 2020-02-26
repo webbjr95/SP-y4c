@@ -1,11 +1,21 @@
-﻿@{
+﻿<br>
+<br>
+
+<div class="adminConsole">
+    <button class="btn btn-default1" type="button" onclick="location.href='@Url.Action("Index", "Questions")'">Edit Questions</button>
+    &nbsp;
+    <button class="btn btn-default1" type="button" onclick="location.href='@Url.Action("Index", "Reports")'">Generate Reports</button>
+</div>
+<br>
+<br>
+@{
     ViewData["Title"] = "Admin Console";
 }
 
 <body>
     <div>
         @*<div alt="Reporting">Reporting</div>
-        <div alt="SurveyManagement">Survey Management</div>*@
+            <div alt="SurveyManagement">Survey Management</div>*@
 
         <img src="~/images/adminConsole.jpg" />
     </div>
