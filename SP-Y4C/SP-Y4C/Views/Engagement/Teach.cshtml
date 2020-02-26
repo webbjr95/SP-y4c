@@ -25,14 +25,16 @@
         cursor: pointer;
     }
 
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
 
     div #form {
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
+        width: 75%;
+        margin: auto;
     }
 
     div #formText {
@@ -57,13 +59,46 @@
         <div id="formText">
             First, we would like to get a better understanding of who you are so we make sure this survey's placement is effective!
             </br></br></br>
-            <mark>***All question in bold are required***</mark>
         </div>
+
+        @*<lablel id="formQuestion"><strong>What gender do you identify with:</strong></lablel><br />
+        <input type="radio" name="gender" value="no" />  Male<br />
+        <input type="radio" name="gender" value="no" />  Female<br />
+        <input type="radio" name="gender" value="yes" /> Prefer not to say<br />
+        <input type="radio" name="gender" value="yes" /> Other<br /><br />
+
+        <lablel id="formQuestion"><strong>What ethnicity do you identify with:</strong></lablel><br />
+        <input type="radio" name="ethnicity" value="no" />  White<br />
+        <input type="radio" name="ethnicity" value="no" />  African American<br />
+        <input type="radio" name="ethnicity" value="no" />  American Indian or Alaska Native<br />
+        <input type="radio" name="ethnicity" value="no" />  Native Hawaiian or Other Pacific Islander<br />
+        <input type="radio" name="ethnicity" value="no" />  Asian<br />
+        <input type="radio" name="ethnicity" value="no" />  Hispanic, Latino, or Spanish<br />
+        <input type="radio" name="ethnicity" value="yes" /> Prefer not to say<br />
+        <input type="radio" name="ethnicity" value="yes" /> Other<br /><br />
+
+        <lablel id="formQuestion"><strong>What's the highest degree you have earned:</strong></lablel><br />
+        <input type="radio" name="education" value="no" /> High school diploma or equivalency (GED)<br />
+        <input type="radio" name="education" value="no" />  Associate degree (junior college)<br />
+        <input type="radio" name="education" value="yes" /> Bachelor's degree<br />
+        <input type="radio" name="education" value="yes" /> Master's degree<br />
+        <input type="radio" name="education" value="yes" /> Doctorate<br />
+        <input type="radio" name="education" value="yes" /> Professional (MD, JD, DDS, etc.)<br />
+        <input type="radio" name="education" value="yes" /> Prefer not to say<br /><br />
+
+
+        <lablel id="formQuestion"><strong>How much do you make in a calendar year:</strong></lablel><br />
+        <input type="radio" name="salary" value="no" />  $0 - $19,999<br />
+        <input type="radio" name="salary" value="no" />  $20,000 - $49,999<br />
+        <input type="radio" name="salary" value="yes" /> $50,000 - $99,999<br />
+        <input type="radio" name="salary" value="yes" /> $100,000+<br />
+        <input type="radio" name="salary" value="yes" /> Prefer not to say<br /><br />*@
+
 
         @{
             foreach (var q in Model)
             {
-                if (q.Category.Equals("teach"))
+                if (q.Category.Equals(QuestionCategory.Teach) || q.Category.Equals(QuestionCategory.Default))
                 {
                     <label for=@q.Id>
                         <label>@q.Text</label><br>
@@ -97,8 +132,14 @@
             }
         }
 
-        @* Need to change the below interest *@
+
         <input type="hidden" name="page" value="teach" />
-        <input type="submit" value="Next Step" />
+        <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;">
+            Submit
+        </button>
     </form>
 </div>

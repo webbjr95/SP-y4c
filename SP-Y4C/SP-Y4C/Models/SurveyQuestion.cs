@@ -38,14 +38,13 @@ namespace SP_Y4C.Models
 
         [Required]
         [Display(Name = "Status")]
-        public int ActiveStatus { get; set; }
+        public QuestionActiveStatus ActiveStatus { get; set; }
 
         [Required]
-        public int Weight { get; set; }
-
+        public QuestionWeight Weight { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public QuestionCategory Category { get; set; }
 
         public ICollection<SurveyChoice> Choices { get; set; }
     }

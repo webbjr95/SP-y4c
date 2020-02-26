@@ -35,7 +35,7 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public IActionResult Teach()
         {
-            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices).OrderBy(q => q.QuestionNumber);
 
             return View(questions);
         }

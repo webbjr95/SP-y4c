@@ -60,7 +60,7 @@
         @{
             foreach (var q in Model)
             {
-                if (q.Category.Equals("practice"))
+                if (q.Category.Equals(QuestionCategory.Practice) || q.Category.Equals(QuestionCategory.Default))
                 {
                     <label for=@q.Id>
                         <label>@q.Text</label><br>

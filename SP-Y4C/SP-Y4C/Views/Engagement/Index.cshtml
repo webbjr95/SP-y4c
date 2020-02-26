@@ -20,14 +20,16 @@
         cursor: pointer;
     }
 
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
 
     div #form {
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
+        width: 75%;
+        margin: auto;
     }
 
     div #formText {
@@ -54,12 +56,27 @@
 
     <strong>Regarding yoga I...</strong>
     <form asp-controller="Engagement" asp-action="Teach" method="post">
-        <input type="submit" value="Teach" />
+        @*<input type="submit" value="Teach" class="btn btn-primary" />*@
+        <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;">Teach</button>
     </form>
     <form asp-controller="Engagement" asp-action="Practice" method="post">
-        <input type="submit" value="Practice" />
+        @*<input type="submit" value="Practice" />*@
+        <button type="submit" value="Practice" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;">Practice</button>
     </form>
     <form asp-controller="Engagement" asp-action="Other" method="post">
-        <input type="submit" value="Other" />
+        @*<input type="submit" value="Other" />*@
+        <button type="submit" value="Other" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;">Other</button>
     </form>
 </div>

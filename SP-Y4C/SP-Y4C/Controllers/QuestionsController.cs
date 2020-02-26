@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
+using SP_Y4C.Models.Enums;
 using System;
 using System.Threading.Tasks;
 
@@ -17,9 +18,9 @@ namespace SP_Y4C.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var questions = await _dbContext.SurveyQuestions.ToListAsync();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
 
             return View(questions);
         }
@@ -41,6 +42,8 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SurveyQuestion question)
         {
+            question.Id = Guid.NewGuid();
+            question.ActiveStatus = QuestionActiveStatus.Inactive;
             if (!ModelState.IsValid)
             {
                 return View(question);

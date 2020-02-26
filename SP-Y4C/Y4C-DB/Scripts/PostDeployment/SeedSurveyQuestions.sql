@@ -1,20 +1,26 @@
 ﻿BEGIN
-	INSERT INTO [dbo].[SurveyQuestions] ([Id], [Text], [CreatedAtUtc], [Category], [QuestionNumber], [TypeId], [ActiveStatus], [Weight]) 
+	INSERT INTO [dbo].[SurveyQuestions] ([Id], [Text], [CreatedAtUtc], [QuestionNumber], [TypeId], [ActiveStatus], [Weight], [Category]) 
 	VALUES 
-		--First is for teaching, second is for practice, third is other, and lastly the socio-economic questions.
-		('736f41a8-5f74-4be7-9956-c1250639f768', 'If you teach, where at?', '2019-10-29 17:58:39', 'teach', 1, 1, 1, 0),
-		('ff8cea86-6915-4eef-8a1e-de976525b149', 'How long have you been teaching yoga?', '2019-11-26 06:40:20', 'teach', 2, 3, 1, 0),
-		('931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'Would you be interested in becoming a teacher for Yoga 4 Change?', '2019-04-09 11:52:41', 'teach', 3, 3, 1, 1),
+		--First is for teaching, second is for practice, third is other, and lastly the socio-economic questions. Last section is the default questions.
+		('736f41a8-5f74-4be7-9956-c1250639f768', 'If you teach, where at?', '2019-10-29 17:58:39', 1, 1, 1, 0, 1),
+		('ff8cea86-6915-4eef-8a1e-de976525b149', 'How long have you been teaching yoga?', '2019-11-26 06:40:20',  2, 3, 1, 0, 1),
+		('931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'Would you be interested in becoming a teacher for Yoga 4 Change?', '2019-04-09 11:52:41', 3, 3, 1, 1, 1),
 
-		('d4104646-e91a-434a-985b-b1c5ca10b05d', 'If you practice, where at?', '2019-11-02 01:56:30', 'practice', 4, 1, 1, 0),
-		('f36a4cb2-8497-48e9-a279-d7ae3d19a6dc', 'Do you practice at a commercial facility or within a community group?', '2019-05-20 01:33:33', 'practice', 5, 3, 1, 0),
-		('eef07c54-4329-48c4-88fa-fc7c7cf36da0', 'Would you be interested in practicing at a Yoga 4 Change facility?', '2019-02-10 21:49:07', 'practice', 6, 3, 1, 1),
+		('d4104646-e91a-434a-985b-b1c5ca10b05d', 'If you practice, where at?', '2019-11-02 01:56:30', 4, 1, 1, 0, 2),
+		('f36a4cb2-8497-48e9-a279-d7ae3d19a6dc', 'Do you practice at a commercial facility or within a community group?', '2019-05-20 01:33:33', 5, 3, 1, 0, 2),
+		('eef07c54-4329-48c4-88fa-fc7c7cf36da0', 'Would you be interested in practicing at a Yoga 4 Change facility?', '2019-02-10 21:49:07', 6, 3, 1, 1, 2),
 
-		('26ed365f-f10c-4cfa-9d38-7499cdad8d9e', 'Would you like to volunteer?', '2019-04-11 21:58:48', 'other', 7, 3, 1, 1),
-		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3edf', 'Where did you hear about us?', '2019-11-22 01:46:52', 'other', 8, 1, 1, 0),
+		('26ed365f-f10c-4cfa-9d38-7499cdad8d9e', 'Would you like to volunteer?', '2019-04-11 21:58:48', 7, 3, 1, 1, 3),
+		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3edf', 'Where did you hear about us?', '2019-11-22 01:46:52', 8, 1, 1, 0, 3),
 
 
-		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3ed1', 'test checkbox?', '2019-11-22 01:46:52','none', 8, 2, 1, 0);
+		('69ee15ec-02e9-4d0e-b3cb-a0038f1b3ed1', 'test checkbox?', '2019-11-22 01:46:52', 8, 2, 1, 0, 0),
+
+
+		('C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'What gender do you identify with?', '2019-11-22 01:46:52', -4, 3, 1, 0, 4),
+		('54E8941B-4901-469B-950F-DD1D97620BDA', 'What ethnicity do you identify with?', '2019-11-22 01:46:52', -3, 3, 1, 0, 4),
+		('DED673D6-960C-4C59-A906-02CB7253D0EA', 'What is the highest degree you have earned?', '2019-11-22 01:46:52', -2, 3, 1, 0, 4),
+		('77f88764-d894-4d84-8c1e-08f01012d030', 'How much do you make in a calendar year?', '2019-11-22 01:46:52', -1, 3, 1, 0, 4);
 
 	INSERT INTO [dbo].[SurveyChoices] ([Id], [QuestionId], [Text], [CreatedAtUtc], [OrderInQuestion]) 
 	VALUES 
@@ -24,7 +30,39 @@
 		('470d0c6b-4e75-4cf9-ad66-5d6da11f48c1', 'ff8cea86-6915-4eef-8a1e-de976525b149', '10+ Years', '2019-04-09 11:52:41', 4),
 
 		('88e455ac-29b3-4469-8a08-143c2a07caa8', '931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'Yes', '2019-11-02 01:56:30', 1),
-		('1fd5793b-0dc7-40c2-bd37-f3a9441f3da9', '931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'No', '2019-05-20 01:33:33', 2);
+		('1fd5793b-0dc7-40c2-bd37-f3a9441f3da9', '931e7eb4-dc93-4b7b-8d9f-c030856cff03', 'No', '2019-05-20 01:33:33', 2),		
+		
+		
+		--For the default questions: Gender, ethnicity, degree, salary
+		('edb2b15e-fff6-4acb-ab50-dcf9a1e410e1', 'C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'Male', '2019-10-29 17:58:39', 1),
+		('b6efb993-6b28-402a-8d3d-4e4b639e2f78', 'C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'Female', '2019-11-26 06:40:20', 2),
+		('d2c0f60b-7a88-4338-a749-e3ef7870e2be', 'C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'Prefer not to say', '2019-04-09 11:52:41', 3),
+		('4b32367a-e0fb-476c-92f1-9532e4c9a230', 'C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'Other', '2019-04-09 11:52:41', 4),
+
+		('06155832-e831-402e-80eb-f7c630142815', '54E8941B-4901-469B-950F-DD1D97620BDA', 'White', '2019-10-29 17:58:39', 1),
+		('b6efb993-6b28-402a-8d3d-4e4b939e2f78', '54E8941B-4901-469B-950F-DD1D97620BDA', 'African American', '2019-11-26 06:40:20', 2),
+		('112b6762-1224-4f87-a14d-8d90df8a859c', '54E8941B-4901-469B-950F-DD1D97620BDA', 'American Indian or Alaska Native', '2019-04-09 11:52:41', 3),
+		('79f04d71-7140-4601-a56c-0161d724d564', '54E8941B-4901-469B-950F-DD1D97620BDA', 'Native Hawaiian or Other Pacific Islander', '2019-04-09 11:52:41', 4),
+		('a6e6ec93-d86e-4e26-b063-3215a17e470e', '54E8941B-4901-469B-950F-DD1D97620BDA', 'Hispanic, Latino, or Spanish', '2019-10-29 17:58:39', 5),
+		('6d440321-a8ad-41ec-8f8d-d4c59378e2f3', '54E8941B-4901-469B-950F-DD1D97620BDA', 'Prefer not to say', '2019-04-09 11:52:41', 6),
+		('facccfa2-6215-4edb-a021-9b9f52f03e20', '54E8941B-4901-469B-950F-DD1D97620BDA', 'Other', '2019-04-09 11:52:41', 7),
+
+		('e9c42fcb-2871-4956-85a8-dbe6be4e7325', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'High school diploma or equivalency (GED)', '2019-10-29 17:58:39', 1),
+		('1c49ba67-7c63-4d34-bf57-339e1d12851b', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'Associate degree (junior college)', '2019-11-26 06:40:20', 2),
+		('11f1453e-642a-4a3d-a461-cea2732134f9', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'Bachelors degree', '2019-04-09 11:52:41', 3),
+		('439a2d3a-7762-4e8e-b8e9-a5d28525ffe3', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'Masters degree', '2019-04-09 11:52:41', 4),
+		('0b853daa-c9f0-4fb2-ab66-c56a0a8ec0fe', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'Doctorate', '2019-10-29 17:58:39', 5),
+		('b47d9d6c-aa99-4480-9423-9f17b62c5a30', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'Professional (MD, JD, DDS, etc.)', '2019-04-09 11:52:41', 6),
+		('6cd0a039-25ea-4431-a864-c94c32562e35', 'DED673D6-960C-4C59-A906-02CB7253D0EA', 'Prefer not to say', '2019-04-09 11:52:41', 7),
+
+
+		('35cd2d4f-88c9-49a0-a90d-1533083ddaee', '77f88764-d894-4d84-8c1e-08f01012d030', '$0 - $19,999', '2019-04-09 11:52:41', 1),
+		('04d02831-80f3-465e-a082-3e1bb2c0ac23', '77f88764-d894-4d84-8c1e-08f01012d030', '$20,000 - $49,999', '2019-04-09 11:52:41', 2),
+		('d16c99e2-3af3-423e-bf7f-f58a28975f4e', '77f88764-d894-4d84-8c1e-08f01012d030', '$50,000 - $99,999', '2019-10-29 17:58:39', 3),
+		('da434114-b1fc-4c0b-956e-381e28ed777b', '77f88764-d894-4d84-8c1e-08f01012d030', '$100,000+', '2019-04-09 11:52:41', 4),
+		('7b77a5f0-72d3-4a62-bb43-fafdf65244a0', '77f88764-d894-4d84-8c1e-08f01012d030', 'Prefer not to say', '2019-04-09 11:52:41', 5);
+ 
+
 
 	INSERT INTO [dbo].[SurveyAnswers] ([Id], [UserId], [QuestionId], [SubmittedAtUtc], [Answer], [UserTypeId]) 
 	VALUES 

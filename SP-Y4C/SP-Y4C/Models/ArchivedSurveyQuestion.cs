@@ -33,7 +33,7 @@ namespace SP_Y4C.Models
 
         [Required]
         [Display(Name = "Status")]
-        public int ActiveStatus { get; set; }
+        public QuestionActiveStatus ActiveStatus { get; set; }
 
         [Required]
         [Display(Name = "User Archived By")]

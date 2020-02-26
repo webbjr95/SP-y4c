@@ -6,9 +6,9 @@
     [Text] VARCHAR(500) NOT NULL,
     [CreatedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(),
     [LastModifiedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(),
-    [ActiveStatus] INT NOT NULL, 
+    [ActiveStatus] INT NOT NULL DEFAULT 0, 
     [Weight] INT NOT NULL DEFAULT 1, 
-    [Category] VARCHAR(50) NOT NULL DEFAULT 'none', 
+    [Category] INT NOT NULL DEFAULT 0, 
     --[Node] HierarchyId NOT NULL, 
 
     CONSTRAINT [PK_SurveyQuestions_Id] PRIMARY KEY ([Id])
