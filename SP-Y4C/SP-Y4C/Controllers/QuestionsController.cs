@@ -25,6 +25,13 @@ namespace SP_Y4C.Controllers
             return View(questions);
         }
 
+        public IActionResult TL()
+        {
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Archived()
         {
