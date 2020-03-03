@@ -2,8 +2,12 @@
 @{
     ViewData["Title"] = "Reports";
 }
-
-
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css"rel="stylesheet"/> 
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js" type="text/javascript"></script>
 <body>
     <h2>@ViewData["Title"]</h2>
     ﻿<table>
@@ -53,26 +57,46 @@
     <br>
 
     <div>
-        <table class="table table-responsive" style="width:100%">
-            <tr>
-                <th>Question ID</th>
-                <th>Answer ID</th>
-                <th>User ID</th>
-                <th>User Type</th>
-                <th>Submitted At</th>
-            </tr>
-
-            @foreach (var answer in Model)
-            {
+        <table id="reportTable" class="table table-responsive" style="width:100%">
+            <thead>
                 <tr>
-                    <td>@answer.QuestionId</td>
-                    <td>@answer.Id</td>
-                    <td>@answer.UserId</td>
-                    <td>@answer.UserType</td>
-                    <td>@answer.SubmittedAtUtc.LocalDateTime</td>
+                    <th>Question ID</th>
+                    <th>Answer ID</th>
+                    <th>User ID</th>
+                    <th>User Type</th>
+                    <th>Submitted At</th>
                 </tr>
-            }
+            </thead>
+
+            <tbody>
+                @foreach (var answer in Model)
+                {
+                    <tr>
+                        <td>@answer.QuestionId</td>
+                        <td>@answer.Id</td>
+                        <td>@answer.UserId</td>
+                        <td>@answer.UserType</td>
+                        <td>@answer.SubmittedAtUtc.LocalDateTime</td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 
 </body>
+<script>
+$(document).ready(function() {
+    $('#reportTable').DataTable(
+    "dom": '<"top"i>rt<"bottom"flpB><"clear">');
+} );
+
+ </script>
+
+<div class="top">
+    INFO
+    </div>
+TABLE
+<div class="bottom">
+    FILTER  LENGTH  PAGINATION  BUTTONS
+</div>
+<div class="clear"></div>
