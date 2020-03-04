@@ -7,9 +7,16 @@
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+@*<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />*@
 <script src="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js "></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js "></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js "></script>
+<script src="~/js/jszip.js"></script>
+@*<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>*@
 
 
 @*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
@@ -55,6 +62,25 @@
             }
         </tbody>
     </table>
+
+
+
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th><label asp-for="@Model.FirstOrDefault().ActiveStatus"></label></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model)
+            {
+                <tr>
+                    <td>@question.ActiveStatus</td>
+                    </tr>
+                    }
+            </tbody>
+    </table>
 </body>
 
 <script>
@@ -62,14 +88,33 @@
 
     $(document).ready(function () {
         $("#example").DataTable({
+            renderer: "bootstrap",
             "processing": true, // for show progress bar
             "serverSide": false, // for process server side
             "filter": true, // this is for disable filter (search box)
+            "pageLength": 50,
             "columnDefs":
                 [{
                     "targets": [0],
                     "searchable": false
-                }]
+                }],
+            dom: 'Bfrtip',
+           buttons: [
+                'excelHtml5',
+               'print',
+                'colVis'
+            ]            
         });
+    });
+
+
+    $(document).ready(function () {
+                $('#myTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'csvHtml5',
+            'print'
+        ]
+    } );
     });
 </script> 
