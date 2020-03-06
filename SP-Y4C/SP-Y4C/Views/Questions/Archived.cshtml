@@ -3,14 +3,15 @@
     ViewData["Title"] = "Engagement Survey - Archived Questions";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1><strong>@ViewData["Title"]</strong></h1>
 <br />
 <table class="table table-responsive" style="width:100%">
     <tr>
         <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
         <th><label asp-for="@Model.FirstOrDefault().QuestionNumber"></label></th>
-        <th><label asp-for="@Model.FirstOrDefault().QuestionType"></label></th>
+        <th><label asp-for="@Model.FirstOrDefault().TypeId"></label></th>
         <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
+        <th><label asp-for="@Model.FirstOrDefault().UserArchivedBy"></label></th>
         <th><label asp-for="@Model.FirstOrDefault().ArchivedAtUtc"></label></th>
     </tr>
 
@@ -19,8 +20,9 @@
         <tr>
             <td>@question.Id</td>
             <td>@question.QuestionNumber</td>
-            <td>@question.QuestionType.ToString()</td>
+            <td>@question.TypeId.ToString()</td>
             <td width="50%">@question.Text</td>
+            <td>@question.UserArchivedBy</td>
             <td>@question.ArchivedAtUtc.LocalDateTime</td>
         </tr>
     }

@@ -1,24 +1,128 @@
-﻿@model IEnumerable<SurveyQuestion>
+﻿@model IQueryable<SurveyQuestion>
 @{
     ViewData["Title"] = "Engagement Survey - Active Questions";
 }
     <body>
-        <h2>@ViewData["Title"]</h2>
+        <h1><strong>@ViewData["Title"]</strong></h1>
 
         <h2><strong>Question Flow</strong></h2>
-        <img style="width:95%" src="~/images/questionFlow.png" />
+        @{
+            <h4><strong>Teach</strong></h4>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals(QuestionCategory.Teach))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        @{
+                            foreach (var c in question.Choices)
+                            {
+                                <ul>
+                                    <li>@c.Text</li>
+                                </ul>
+                            }
+                        }
+
+                    </ul>
+                }
+            }
+
+            <h4><strong>Practice</strong></h4>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals(QuestionCategory.Practice))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        @{
+                            foreach (var c in question.Choices)
+                            {
+                                <ul>
+                                    <li>@c.Text</li>
+                                </ul>
+                            }
+                        }
+
+                    </ul>
+                }
+            }
+
+            <h4><strong>Other</strong></h4>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals(QuestionCategory.Other))
+                {
+
+                    <ul>
+                        <li>@question.Text</li>
+                        @{
+                            foreach (var c in question.Choices)
+                            {
+                                <ul>
+                                    <li>@c.Text</li>
+                                </ul>
+                            }
+                        }
+
+                    </ul>
+                }
+            }
+
+            <h4><strong>None</strong></h4>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals(QuestionCategory.None))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        @{
+                            foreach (var c in question.Choices)
+                            {
+                                <ul>
+                                    <li>@c.Text</li>
+                                </ul>
+                            }
+                        }
+
+                    </ul>
+                }
+            }
+
+            <h4><strong>Default</strong></h4>
+            foreach (var question in Model)
+            {
+                if (question.Category.Equals(QuestionCategory.Default))
+                {
+                    <ul>
+                        <li>@question.Text</li>
+                        @{
+                            foreach (var c in question.Choices)
+                            {
+                                <ul>
+                                    <li>@c.Text</li>
+                                </ul>
+                            }
+                        }
+
+                    </ul>
+                }
+            }
+        }
+
+
 
         <h2><strong>Question Bank</strong></h2>
         <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Questions")'">Create</button>
         <br />
+        <br />
         <table class="table table-responsive" style="width:100%">
             <tr>
-                <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().ActiveStatus"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().QuestionNumber"></label></th>
-                <th><label asp-for="@Model.FirstOrDefault().QuestionType"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().TypeId"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().CreatedAtUtc"></label></th>
-                <th><label asp-for="@Model.FirstOrDefault().LastModifiedAtUtc"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Weight"></label></th>
                 <th>Actions</th>
             </tr>
 
@@ -26,12 +130,12 @@
             {
                 var modalId = $"modal-{question.Id}";
                 <tr>
-                    <td>@question.Id</td>
+                    <td>@question.ActiveStatus</td>
                     <td>@question.QuestionNumber</td>
-                    <td>@question.QuestionType.ToString()</td>
+                    <td>@question.TypeId.ToString()</td>
                     <td width="50%">@question.Text</td>
                     <td>@question.CreatedAtUtc.LocalDateTime</td>
-                    <td>@question.LastModifiedAtUtc.LocalDateTime</td>
+                    <td>@question.Weight</td>
                     <td>
                         <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
 

@@ -4,37 +4,65 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SP_Y4C.Data;
+using SP_Y4C.ViewModels;
 
 namespace SP_Y4C.Controllers
 {
     public class EngagementController : Controller
     {
+        private readonly Y4CDbContext _dbContext;
+
+        public EngagementController(Y4CDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+
         public IActionResult Index()
         {
             return View();
         }
 
+        public IActionResult TestCollect()
+        {
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
+        }
+
         [HttpPost]
         public IActionResult Teach()
         {
-            return View();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices).OrderBy(q => q.QuestionNumber);
+
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult Practice()
         {
-            return View();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult Other()
         {
-            return View();
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+
+            return View(questions);
         }
 
         [HttpPost]
         public IActionResult NextStep(IFormCollection form)
         {
+            //Perform the calculation to see what the visitor should be placed as.
+
+
+
             //Need it to follow the below coding logic
             //Choose a starting page from three options
             //teach, practice, and volunteering

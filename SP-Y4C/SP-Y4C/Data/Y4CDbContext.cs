@@ -17,9 +17,9 @@ namespace SP_Y4C.Data
         }
 
         public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
-
+        public DbSet<SurveyChoice> SurveyChoices { get; set; }
         public DbSet<SurveyAnswer> SurveyAnswers { get; set; }
-
+        public DbSet<SurveyFeedback> SurveyFeedback { get; set; }
         public DbSet<ArchivedSurveyQuestion> ArchivedSurveyQuestions { get; set; }
     }
 }
