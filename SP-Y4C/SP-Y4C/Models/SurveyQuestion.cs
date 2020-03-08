@@ -47,5 +47,6 @@ namespace SP_Y4C.Models
         public QuestionCategory Category { get; set; }
 
         public ICollection<SurveyChoice> Choices { get; set; }
+        public ICollection<SurveyAnswer> Answer { get; set; }
     }
 }

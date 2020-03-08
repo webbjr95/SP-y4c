@@ -30,5 +30,7 @@ namespace SP_Y4C.Models
 
         [Display(Name = "Submitted At")]
         public DateTimeOffset SubmittedAtUtc { get; set; }
+
+        public SurveyQuestion Question { get; set; }
     }
 }
