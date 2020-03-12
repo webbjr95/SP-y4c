@@ -1,7 +1,6 @@
 ﻿using SP_Y4C.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.SqlServer.Types;
 using System.Collections.Generic;
 
 namespace SP_Y4C.Models

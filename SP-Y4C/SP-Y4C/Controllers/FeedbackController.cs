@@ -28,6 +28,7 @@ namespace SP_Y4C.Controllers
             {
                 Id = Guid.NewGuid(),
                 Url = form["currentUrl"],
+                Text = form["text"],
                 Rating = int.Parse(form["rating"]),
                 UserId = Guid.NewGuid(),
                 SubmittedAtUtc = DateTime.UtcNow

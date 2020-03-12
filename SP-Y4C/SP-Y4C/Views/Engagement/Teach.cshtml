@@ -49,7 +49,7 @@
 </style>
 
 <div id="form">
-    <form asp-controller="Engagement" asp-action="NextStep" method="post">
+    <form asp-controller="Engagement" asp-action="Submit" method="post">
         <div id="formText">
             Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
             the below form to completion to find out where you can make the biggest difference.
@@ -58,7 +58,9 @@
 
         <div id="formText">
             First, we would like to get a better understanding of who you are so we make sure this survey's placement is effective!
-            </br></br></br>
+            <br />
+            <br />
+            <br />
         </div>
 
 
@@ -67,7 +69,7 @@
             {
                 if (q.Category.Equals(QuestionCategory.Teach) || q.Category.Equals(QuestionCategory.Default))
                 {
-                    <label for=@q.Id>
+                    <label for="question" name="@q.Id">
                         <label>@q.Text</label><br>
                         <input type="hidden" name="weight" value="@q.Weight" />
 
@@ -77,7 +79,7 @@
                             {
                                 if (q.TypeId == QuestionType.Text)
                                 {
-                                    <input type="@q.TypeId" required />
+                                    <input type="@q.TypeId" />
                                 }
                             }
                             else
@@ -86,8 +88,8 @@
                                 {
                                     if (q.Id == c.QuestionId)
                                     {
-                                        <label for=@c.Id>
-                                            <input name="@c.QuestionId" type="@q.TypeId" required />
+                                        <label for="choice" name="@c.Id">
+                                            <input name="@c.QuestionId" type="@q.TypeId" value="@c.Id" required />
                                             <label>@c.Text</label>
                                         </label><br>
                                     }

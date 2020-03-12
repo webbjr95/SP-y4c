@@ -23,5 +23,10 @@ namespace SP_Y4C.Controllers
             var answers = _dbContext.SurveyAnswers.Include(q => q.Question);
             return View(answers);
         }
+        public ActionResult Feedback()
+        {
+            var feedback = _dbContext.SurveyFeedback;
+            return View(feedback);
+        }
     }
 }

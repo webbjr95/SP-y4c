@@ -4,6 +4,7 @@ using SP_Y4C.Data;
 using SP_Y4C.Models;
 using SP_Y4C.Models.Enums;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SP_Y4C.Controllers
@@ -20,19 +21,11 @@ namespace SP_Y4C.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
+            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices).OrderBy(q => q.QuestionNumber);
 
             return View(questions);
         }
 
-        public IActionResult TL()
-        {
-            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
-
-            return View(questions);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Archived()
         {
             var questions = await _dbContext.ArchivedSurveyQuestions.ToListAsync();
@@ -40,7 +33,6 @@ namespace SP_Y4C.Controllers
             return View(questions);
         }
 
-        [HttpGet]
         public IActionResult Create()
         {
             return View();

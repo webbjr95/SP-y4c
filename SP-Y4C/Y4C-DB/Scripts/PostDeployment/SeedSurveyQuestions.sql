@@ -74,16 +74,16 @@
 	('61a22368-e23a-4a78-9c83-9cae203320dd', '5700af35-76d1-4fc4-9584-74de887c6c17', 'eef07c54-4329-48c4-88fa-fc7c7cf36da0', '2019-08-15 02:37:22', 'Nunc nisl.', 2),
 	('787c2975-a63c-4dba-97cb-cbee842edc50', 'c0fb2480-9e6b-48da-ad59-6a0dbce3e13c', '26ed365f-f10c-4cfa-9d38-7499cdad8d9e', '2019-12-04 02:45:37', 'Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', 2);
 
-	INSERT INTO [dbo].[SurveyFeedback] ([Id], [SubmittedAtUtc], [Rating], [UserId], [Url]) 
+	INSERT INTO [dbo].[SurveyFeedback] ([Id], [Text], [SubmittedAtUtc], [Rating], [UserId], [Url]) 
 	VALUES 
-		('c0d1be73-3436-4ffe-9ac7-10bcd78f63ea', '2019-08-08 04:20:53', 4, '9fe7c798-e66b-45e3-8f66-dbedc046fdd8', 'https://www.y4c.org/new-page-4'),
-		('17532e67-9f11-49f2-baa2-4a4307f23171', '2018-12-23 08:04:47', 4, '5ae0c99d-aaf7-4a59-9eeb-240747d6f9a5', 'https://www.y4c.org/new-page-4'),
-		('8e756611-1a61-4c88-b15f-0f9a04ea0a76', '2018-12-23 22:47:58', 1, 'ea2e9c87-0e00-45ae-9945-ddb84b944a64', 'https://www.y4c.org/new-page-4'),
-		('35453836-236b-457e-b0c4-903296fd4bd2', '2018-10-06 12:09:05', 4, 'f96f8aea-ff73-4075-81a7-97236a68566c', 'https://www.y4c.org/new-page-4'),
-		('e7545d9f-f4ab-4495-a21f-3a0ec92ea714', '2019-07-24 23:32:11', 3, '84f7d8be-7c9b-4f93-ade3-9066c87da9ee', 'https://www.y4c.org/teacher-page'),
-		('f251dedd-5417-4938-922a-6bbe56b4c961', '2018-12-19 03:27:40', 2, '3bf227f0-66b8-42a0-9875-3a33797bbf31', 'https://www.y4c.org/teacher-page'),
-		('94863ec6-c97d-4339-ac9f-b2ec4a435701', '2018-09-24 01:33:54', 1, '70439970-b973-42e6-8775-1f37941b06f2', 'https://www.y4c.org/new-page-4'),
-		('7c4dcd97-5b74-4fa8-9c40-e0d0cf4a89a7', '2019-12-17 21:14:17', 5, 'c019906e-9c3c-4fd3-b033-5c7a748ae0a3', 'https://www.y4c.org/volunteer-1'),
-		('0e35f1b5-12f2-4f55-8451-500fb69b44b9', '2018-10-09 07:08:07', 5, '464deb3b-cd25-4757-8e13-7f070c04e43a', 'https://www.y4c.org/volunteer-1'),
-		('89cf82f1-5cdc-445d-ab95-8d5b279f3e8a', '2020-01-10 01:08:55', 5, '20ccd95b-9bfc-413c-9b08-829bfab7be7b', 'https://www.y4c.org/teacher-page')
+		('c0d1be73-3436-4ffe-9ac7-10bcd78f63ea', 'This page needs more pictures!', '2019-08-08 04:20:53', 4, '9fe7c798-e66b-45e3-8f66-dbedc046fdd8', 'https://www.y4c.org/new-page-4'),
+		('17532e67-9f11-49f2-baa2-4a4307f23171', 'None', '2018-12-23 08:04:47', 4, '5ae0c99d-aaf7-4a59-9eeb-240747d6f9a5', 'https://www.y4c.org/new-page-4'),
+		('8e756611-1a61-4c88-b15f-0f9a04ea0a76', 'I would like to learn more about the opportunities available', '2018-12-23 22:47:58', 1, 'ea2e9c87-0e00-45ae-9945-ddb84b944a64', 'https://www.y4c.org/new-page-4'),
+		('35453836-236b-457e-b0c4-903296fd4bd2', 'Nothing to add. Great read!', '2018-10-06 12:09:05', 4, 'f96f8aea-ff73-4075-81a7-97236a68566c', 'https://www.y4c.org/new-page-4'),
+		('e7545d9f-f4ab-4495-a21f-3a0ec92ea714', 'This was not what I was looking for at all!', '2019-07-24 23:32:11', 3, '84f7d8be-7c9b-4f93-ade3-9066c87da9ee', 'https://www.y4c.org/teacher-page'),
+		('f251dedd-5417-4938-922a-6bbe56b4c961', 'Not useful to what I was after.', '2018-12-19 03:27:40', 2, '3bf227f0-66b8-42a0-9875-3a33797bbf31', 'https://www.y4c.org/teacher-page'),
+		('94863ec6-c97d-4339-ac9f-b2ec4a435701', 'I did not like that you asked personal information', '2018-09-24 01:33:54', 1, '70439970-b973-42e6-8775-1f37941b06f2', 'https://www.y4c.org/new-page-4'),
+		('7c4dcd97-5b74-4fa8-9c40-e0d0cf4a89a7', 'Looking great! Thanks for this survey!', '2019-12-17 21:14:17', 5, 'c019906e-9c3c-4fd3-b033-5c7a748ae0a3', 'https://www.y4c.org/volunteer-1'),
+		('0e35f1b5-12f2-4f55-8451-500fb69b44b9', 'Nothing to add.', '2018-10-09 07:08:07', 5, '464deb3b-cd25-4757-8e13-7f070c04e43a', 'https://www.y4c.org/volunteer-1'),
+		('89cf82f1-5cdc-445d-ab95-8d5b279f3e8a', 'Well put together survey and resulting page.', '2020-01-10 01:08:55', 5, '20ccd95b-9bfc-413c-9b08-829bfab7be7b', 'https://www.y4c.org/teacher-page')
 END
