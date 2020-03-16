@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Yoga 4 Change - Contact";
+﻿@model IQueryable<SurveyQuestion>
+@{
+    ViewData["Title"] = "Test";
 }
+
 <style>
     input[type=text], select {
         width: 100%;
@@ -23,28 +25,22 @@
         cursor: pointer;
     }
 
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
 
     div #form {
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
-    }
-
-    div #formQuestion {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        font-size: large;
+        width: 75%;
+        margin: auto;
     }
 
     div #formText {
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
-        font-size: large;
-        font-weight: bold;
     }
 
     h1 {
@@ -52,60 +48,98 @@
     }
 </style>
 
-<div>
-    <h1>Learn More About Teaching!</h1>
-    <br />
-    <br />
+<div id="form">
+    <form asp-controller="Engagement" asp-action="NextStep" method="post">
+        <div id="formText">
+            Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
+            the below form to completion to find out where you can make the biggest difference.
+        </div>
+        <br />
 
-    <div id="form">
-        <form asp-controller="Engagement" asp-action="NextStep" method="post">
-            <div id="formText">
-                Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
-                the below form to completion to find out where you can make the biggest difference.
-            </div>
-            <br />
+        <div id="formText">
+            First, we would like to get a better understanding of who you are so we make sure this survey's placement is effective!
+            </br></br></br>
+        </div>
 
-            <div id="formText">
-                First, we would like to get a better understanding of who you are so we make sure this survey's placement is effective!
-                </br>
-                *All question in bold are required*
-            </div>
+        @*<lablel id="formQuestion"><strong>What gender do you identify with:</strong></lablel><br />
+        <input type="radio" name="gender" value="no" />  Male<br />
+        <input type="radio" name="gender" value="no" />  Female<br />
+        <input type="radio" name="gender" value="yes" /> Prefer not to say<br />
+        <input type="radio" name="gender" value="yes" /> Other<br /><br />
 
+        <lablel id="formQuestion"><strong>What ethnicity do you identify with:</strong></lablel><br />
+        <input type="radio" name="ethnicity" value="no" />  White<br />
+        <input type="radio" name="ethnicity" value="no" />  African American<br />
+        <input type="radio" name="ethnicity" value="no" />  American Indian or Alaska Native<br />
+        <input type="radio" name="ethnicity" value="no" />  Native Hawaiian or Other Pacific Islander<br />
+        <input type="radio" name="ethnicity" value="no" />  Asian<br />
+        <input type="radio" name="ethnicity" value="no" />  Hispanic, Latino, or Spanish<br />
+        <input type="radio" name="ethnicity" value="yes" /> Prefer not to say<br />
+        <input type="radio" name="ethnicity" value="yes" /> Other<br /><br />
 
-            <lablel id="formQuestion"><strong>What's the highest degree you have earned:</strong></lablel><br />
-            <input type="radio" name="teachExp" value="no" /> High school diploma or equivalency (GED)<br />
-            <input type="radio" name="teachExp" value="no" />  Associate degree (junior college)<br />
-            <input type="radio" name="teachExp" value="yes" /> Bachelor's degree<br />
-            <input type="radio" name="teachExp" value="yes" /> Master's degree<br />
-            <input type="radio" name="teachExp" value="yes" /> Doctorate<br />
-            <input type="radio" name="teachExp" value="yes" /> Professional (MD, JD, DDS, etc.)<br />
-            <input type="radio" name="teachExp" value="yes" /> Prefer not to say<br /><br />
-
-
-            <lablel id="formQuestion"><strong>How much do you make in a calendar year:</strong></lablel><br />
-            <input type="radio" name="teachExp" value="no" />  $1 - $19,999<br />
-            <input type="radio" name="teachExp" value="no" />  $20,000 - $49,999<br />
-            <input type="radio" name="teachExp" value="yes" /> $50,000 - $99,999<br />
-            <input type="radio" name="teachExp" value="yes" /> $100,000+<br />
-            <input type="radio" name="teachExp" value="yes" /> Prefer not to say<br /><br />
+        <lablel id="formQuestion"><strong>What's the highest degree you have earned:</strong></lablel><br />
+        <input type="radio" name="education" value="no" /> High school diploma or equivalency (GED)<br />
+        <input type="radio" name="education" value="no" />  Associate degree (junior college)<br />
+        <input type="radio" name="education" value="yes" /> Bachelor's degree<br />
+        <input type="radio" name="education" value="yes" /> Master's degree<br />
+        <input type="radio" name="education" value="yes" /> Doctorate<br />
+        <input type="radio" name="education" value="yes" /> Professional (MD, JD, DDS, etc.)<br />
+        <input type="radio" name="education" value="yes" /> Prefer not to say<br /><br />
 
 
-            <lablel id="formQuestion">Where do you teach:</lablel>
-            <input type="text" /><br /><br />
+        <lablel id="formQuestion"><strong>How much do you make in a calendar year:</strong></lablel><br />
+        <input type="radio" name="salary" value="no" />  $0 - $19,999<br />
+        <input type="radio" name="salary" value="no" />  $20,000 - $49,999<br />
+        <input type="radio" name="salary" value="yes" /> $50,000 - $99,999<br />
+        <input type="radio" name="salary" value="yes" /> $100,000+<br />
+        <input type="radio" name="salary" value="yes" /> Prefer not to say<br /><br />*@
 
-            <lablel id="formQuestion"><strong>How long have you been teaching yoga:</strong></lablel><br />
-            <input type="radio" name="teachExp" value="no" /> 0 - 1 Years<br />
-            <input type="radio" name="teachExp" value="yes" /> 2 - 5 Years<br />
-            <input type="radio" name="teachExp" value="yes" /> 5 - 10 Years<br />
-            <input type="radio" name="teachExp" value="yes" /> 10+ Years<br /><br />
 
-            <lablel id="formQuestion"><strong>Would you be interested in becoming a teacher for Yoga 4 Change:</strong></lablel><br />
-            <input type="radio" name="teachInterest" value="yes" /> Yes<br />
-            <input type="radio" name="teachInterest" value="no" /> No<br />
+        @{
+            foreach (var q in Model)
+            {
+                if (q.Category.Equals(QuestionCategory.Teach) || q.Category.Equals(QuestionCategory.Default))
+                {
+                    <label for=@q.Id>
+                        <label>@q.Text</label><br>
+                        <input type="hidden" name="weight" value="@q.Weight" />
 
-            <input type="hidden" name="page" value="teach" />
 
-            <input type="submit" value="Next Step" />
-        </form>
-    </div>
+                        @{
+                            if (q.Choices.Count == 0)
+                            {
+                                if (q.TypeId == QuestionType.Text)
+                                {
+                                    <input type="@q.TypeId" required />
+                                }
+                            }
+                            else
+                            {
+                                foreach (var c in q.Choices)
+                                {
+                                    if (q.Id == c.QuestionId)
+                                    {
+                                        <label for=@c.Id>
+                                            <input name="@c.QuestionId" type="@q.TypeId" required />
+                                            <label>@c.Text</label>
+                                        </label><br>
+                                    }
+                                }
+                            }
+                        }
+                    </label><br>
+                }
+            }
+        }
+
+
+        <input type="hidden" name="page" value="teach" />
+        <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;">
+            Submit
+        </button>
+    </form>
 </div>

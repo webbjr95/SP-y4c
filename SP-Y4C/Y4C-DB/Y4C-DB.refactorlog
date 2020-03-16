@@ -14,11 +14,102 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AnswerID" />
   </Operation>
-  <Operation Name="Rename Refactor" Key="3d05999b-ac5c-403f-8590-652876277c15" ChangeDateTime="02/14/2020 01:21:24">
-    <Property Name="ElementName" Value="[dbo].[SurveyAnswers].[UserType]" />
+  <Operation Name="Rename Refactor" Key="e33d0988-4df4-4190-8552-c73d0f1b3df5" ChangeDateTime="02/14/2020 00:50:17">
+    <Property Name="ElementName" Value="[dbo].[SurveyAnswers].[AnswerID]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
     <Property Name="ParentElementName" Value="[dbo].[SurveyAnswers]" />
     <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="UserTypeId" />
+    <Property Name="NewName" Value="AnswerId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aecdc85a-f763-4a49-9269-dafb584e8282" ChangeDateTime="02/14/2020 00:50:25">
+    <Property Name="ElementName" Value="[dbo].[SurveyAnswers].[UserID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyAnswers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7242cf0f-da79-4341-be22-cba6b1c0268d" ChangeDateTime="02/14/2020 00:50:28">
+    <Property Name="ElementName" Value="[dbo].[SurveyAnswers].[QuestionID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyAnswers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QuestionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3706e365-9f19-44f1-a096-37a54f403a68" ChangeDateTime="02/14/2020 00:52:09">
+    <Property Name="ElementName" Value="[dbo].[SurveyFeedback].[Answer]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyFeedback]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Rating" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e4491910-4d17-473d-b4b0-36348086d2ff" ChangeDateTime="02/18/2020 01:31:39">
+    <Property Name="ElementName" Value="[dbo].[SurveyQuestions].[QuestionTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyQuestions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e2d20c21-a89d-4125-999d-5d0cd39cd298" ChangeDateTime="02/18/2020 01:31:44">
+    <Property Name="ElementName" Value="[dbo].[ArchivedSurveyQuestions].[QuestionTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ArchivedSurveyQuestions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="10bc04df-d09e-422a-91b9-94a7bd1b01b2" ChangeDateTime="02/18/2020 05:36:12">
+    <Property Name="ElementName" Value="[dbo].[ArchivedSurveyQuestions].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ArchivedSurveyQuestions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ArchivedBy" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fab99767-d3b0-473c-872c-b98479e967c9" ChangeDateTime="02/18/2020 05:36:19">
+    <Property Name="ElementName" Value="[dbo].[ArchivedSurveyQuestions].[ArchivedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ArchivedSurveyQuestions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserArchivedBy" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="51f02dfd-b747-4776-993b-46f97a81402a" ChangeDateTime="02/18/2020 05:36:58">
+    <Property Name="ElementName" Value="[dbo].[SurveyFeedback].[FeedbackId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyFeedback]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="faf2f580-60f5-48df-9eba-20915ffef693" ChangeDateTime="02/18/2020 05:38:06">
+    <Property Name="ElementName" Value="[dbo].[SurveyFeedback].[SubmissionDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyFeedback]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubmissionAtUtc" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4a7bddc1-4860-4ab7-82cb-d7356b0858cf" ChangeDateTime="02/18/2020 05:38:20">
+    <Property Name="ElementName" Value="[dbo].[SurveyFeedback].[SubmissionAtUtc]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyFeedback]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubmittedAtUtc" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fc8857cf-8c3c-4754-83a2-8f50e873f744" ChangeDateTime="02/18/2020 05:39:21">
+    <Property Name="ElementName" Value="[dbo].[SurveyFeedback].[UserType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SurveyFeedback]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="20a4ced8-34ef-42f8-8581-9d9619a462b2" ChangeDateTime="02/18/2020 05:52:01">
+    <Property Name="ElementName" Value="[dbo].[ArchivedSurveyQuestions].[TypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ArchivedSurveyQuestions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QuestionTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3c25c664-ad64-4f2c-8a95-e4fea7474e50" ChangeDateTime="02/19/2020 07:17:57">
+    <Property Name="ElementName" Value="[dbo].[ArchivedSurveyQuestions].[QuestionTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ArchivedSurveyQuestions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TypeId" />
   </Operation>
 </Operations>

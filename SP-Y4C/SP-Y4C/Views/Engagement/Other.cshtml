@@ -1,4 +1,9 @@
-﻿<style>
+﻿@model IQueryable<SurveyQuestion>
+@{
+    ViewData["Title"] = "Test";
+}
+
+<style>
     input[type=text], select {
         width: 100%;
         padding: 12px 20px;
@@ -41,31 +46,56 @@
     }
 </style>
 
-<div>
-    <h1>Not Sure About Where to Start?</h1>
-    <br />
-    <br />
+<div id="form">
+    <form asp-controller="Engagement" asp-action="NextStep" method="post">   
+        <div>
+            <strong>
+                Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
+                the below form to completion to find out where you can make the biggest difference.
+            </strong>
+        </div>
+        <br>
+        <br>
 
-    <div id="form">
-        <form asp-controller="Engagement" asp-action="NextStep" method="post">
-            <div id="formText">
-                <strong>
-                    Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
-                    the below form to completion to find out where you can make the biggest difference.
-                </strong>
-            </div>
-            <br />
-            <br />
+        @{
+            foreach (var q in Model)
+            {
+                if (q.Category.Equals(QuestionCategory.Other) || q.Category.Equals(QuestionCategory.Default))
+                {
+                <label for=@q.Id>
+                    <label>@q.Text</label><br>
+                    <input type="hidden" name="weight" value="@q.Weight" />
 
-            <strong>Would you like to volunteer?</strong><br />
-            <input type="radio" name="gettingInvolved" value="no" /> No<br />
-            <input type="radio" name="gettingInvolved" value="yes" /> Yes<br />
 
-            <strong>Where did you hear about us:</strong>
-            <input type="text" />
+                    @{
+                        if (q.Choices.Count == 0)
+                        {
+                            if (q.TypeId == QuestionType.Text)
+                            {
+                                <input type="@q.TypeId" required />
+                            }
+                        }
+                        else
+                        {
+                            foreach (var c in q.Choices)
+                            {
+                                if (q.Id == c.QuestionId)
+                                {
+                                    <label for=@c.Id>
+                                        <input name="@c.QuestionId" type="@q.TypeId" required />
+                                        <label>@c.Text</label>
+                                    </label><br>
+                                }
+                            }
+                        }
+                    }
+                </label><br>
+                }
+            }
+        }
 
-            <input type="hidden" name="page" value="other" />
-            <input type="submit" value="Next Step" />
-        </form>
-    </div>
+        @* Need to change the below interest *@
+        <input type="hidden" name="page" value="other" />
+        <input type="submit" value="Next Step" />
+    </form>
 </div>

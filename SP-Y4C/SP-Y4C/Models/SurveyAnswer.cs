@@ -14,15 +14,15 @@ namespace SP_Y4C.Models
 
         [Key]
         [Display(Name = "ID")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
         [Display(Name = "Question ID")]
-        public int QuestionId { get; set; }
+        public Guid QuestionId { get; set; }
 
         public string Answer { get; set; }
         
         [Display(Name = "User ID")]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Display(Name = "User Type")]
         [Column("UserTypeId")]

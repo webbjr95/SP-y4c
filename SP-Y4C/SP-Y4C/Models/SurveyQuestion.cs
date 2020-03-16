@@ -1,7 +1,8 @@
 ﻿using SP_Y4C.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.SqlServer.Types;
+using System.Collections.Generic;
 
 namespace SP_Y4C.Models
 {
@@ -15,7 +16,7 @@ namespace SP_Y4C.Models
 
         [Key]
         [Display(Name = "ID")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Question Number")]
@@ -23,8 +24,7 @@ namespace SP_Y4C.Models
 
         [Required]
         [Display(Name ="Question Type")]
-        [Column("QuestionTypeId")]
-        public QuestionType QuestionType { get; set; }
+        public QuestionType TypeId { get; set; }
 
         [Required]
         [MaxLength(500)]
@@ -35,5 +35,17 @@ namespace SP_Y4C.Models
 
         [Display(Name = "Last Modified At")]
         public DateTimeOffset LastModifiedAtUtc { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public QuestionActiveStatus ActiveStatus { get; set; }
+
+        [Required]
+        public QuestionWeight Weight { get; set; }
+
+        [Required]
+        public QuestionCategory Category { get; set; }
+
+        public ICollection<SurveyChoice> Choices { get; set; }
     }
 }

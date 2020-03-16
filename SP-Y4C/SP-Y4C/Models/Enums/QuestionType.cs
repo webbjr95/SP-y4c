@@ -3,7 +3,6 @@
     public enum QuestionType
     {
         Text = 1,
-        Number,
         Checkbox,
         Radio
     }
