@@ -30,7 +30,11 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public IActionResult Teach()
         {
-            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices).OrderBy(q => q.QuestionNumber);
+            var questions = _dbContext.SurveyQuestions
+                .Where(t => t.Category == QuestionCategory.Teach || t.Category == QuestionCategory.Default)
+                .Where(s => s.ActiveStatus == QuestionActiveStatus.Active)
+                .Include(c => c.Choices)
+                .OrderBy(q => q.QuestionNumber);
 
             return View(questions);
         }
@@ -38,7 +42,11 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public IActionResult Practice()
         {
-            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices).OrderBy(q => q.QuestionNumber);
+            var questions = _dbContext.SurveyQuestions
+                .Where(t => t.Category == QuestionCategory.Practice || t.Category == QuestionCategory.Default)
+                .Where(s => s.ActiveStatus == QuestionActiveStatus.Active)
+                .Include(c => c.Choices)
+                .OrderBy(q => q.QuestionNumber);
 
             return View(questions);
         }
@@ -46,7 +54,11 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public IActionResult Other()
         {
-            var questions = _dbContext.SurveyQuestions.Include(c => c.Choices).OrderBy(q => q.QuestionNumber);
+            var questions = _dbContext.SurveyQuestions
+                .Where(t => t.Category == QuestionCategory.Other || t.Category == QuestionCategory.Default)
+                .Where(s => s.ActiveStatus == QuestionActiveStatus.Active)
+                .Include(c => c.Choices)
+                .OrderBy(q => q.QuestionNumber);
 
             return View(questions);
         }
@@ -54,102 +66,66 @@ namespace SP_Y4C.Controllers
         [HttpPost]
         public async Task<IActionResult> Submit(IFormCollection form)
         {
-            //Start at 1 so the question weight array is ignored, second to last is the hidden page value, and
-            // skip final value as it's an HTTP token.
-            var formAsList = form.ToList();
-            for(var s = 1; s < form.Count - 1; s++)
-            {
-               var subAnswer = new SurveyAnswer
-                {
-                    //TODO: Change this to be apart of the calculation
-                    Id = Guid.NewGuid(),
-                    QuestionId = new Guid(formAsList.ElementAt(s).Key),
-                    Answer = formAsList.ElementAt(s).Value,
-                    UserId = Guid.NewGuid(),
-                    UserType = UserType.Alumni
-                };
-
-                //Validate the model being created before adding the answers to the DB
-                if(ModelState.IsValid)
-                {
-                    await _dbContext.SurveyAnswers.AddAsync(subAnswer);
-                    await _dbContext.SaveChangesAsync();
-                }
-            }
-
             //Perform the calculation to see what the visitor should be placed as.
-            var urlForVisitor = CalculateWeightToUrl(form);
+            var (urlForVisitor, visitorType) = await CalculateWeightToUrlAsync(form);
+            await CreateAndStoreFormAnswersAsync(form, visitorType);
 
             return Redirect(urlForVisitor);
         }
 
+        //Create and store each answer from the user into the DB.
+        public async Task CreateAndStoreFormAnswersAsync(IFormCollection passedForm, UserType passedVisitorType)
+        {
+            var userGuid = Guid.NewGuid();
+            // Skip final value as it's an HTTP token.
+            var formAsList = passedForm.ToList();
+            for (var s = 1; s < passedForm.Count - 1; s++)
+            {
+                // _ is to discard the value as it is not needed. We are only curious if the value is a GUID
+                if (Guid.TryParse(formAsList.ElementAt(s).Key, out _))
+                {
+                    var formAnswer = new SurveyAnswer
+                    {
+                        Id = Guid.NewGuid(),
+                        QuestionId = new Guid(formAsList.ElementAt(s).Key),
+                        Answer = formAsList.ElementAt(s).Value,
+                        UserId = userGuid,
+                        UserType = passedVisitorType
+                    };
+
+                    //Validate the model being created before adding the answers to the DB
+                    if (ModelState.IsValid)
+                    {
+                        await _dbContext.SurveyAnswers.AddAsync(formAnswer);
+                        await _dbContext.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+
 
         //Calculation for when a visitor answers the survey. This will take into account
-        public string CalculateWeightToUrl(IFormCollection passedForm)
+        public async Task<(string redirectUrl, UserType visitorType)> CalculateWeightToUrlAsync(IFormCollection passedForm)
         {
-            var url = _dbContext.UrlToVisitors
-            return "https://www.y4c.org/teacher-page";
-            //DECISION: Pass in the form and then parse the keys? Will know the current category off of the hidden form value,
-            //  and the remaining values for each question. 
+            //Retrieve the array of questions to see which ones are weighed for querying the DB for the related branch
+            // URL. If the calculated URL is null or empty then default to the donation page.
+            var weightArray = passedForm["weight"];
+            var hasWeight = weightArray.Contains("yes", StringComparer.OrdinalIgnoreCase);
+            var weightvalue = hasWeight ? 1 : 0;
+            var branch = (SurveyBranch) Enum.Parse(typeof(SurveyBranch), passedForm["page"]);
 
-            /*
-             * Current form keys:
-             * - hidden value for the current page
-             * - questions and their choices
-             */
+            var allUrls = await _dbContext.UrlToVisitors.ToListAsync();
+            var calculatedUrl = allUrls.Where(w => w.Weight == weightvalue).Where(b => b.Category == branch).First();
+            var url = calculatedUrl.Url;
+            var visitorType = calculatedUrl.UserType;
 
-            //TODO: Need to work on the naming and values within the foreach loops since those are currently all using the ID
-            //  and is difficult to parse/understand from an admin's perspective.
+            if (string.IsNullOrEmpty(url))
+            {
+                url = "https://www.y4c.org/donate";
+                visitorType = UserType.Donor;
+            }
 
-            //TODO: Create a table to house the visitor types and the associated URLs. Allow management of them here.
-            //Question has the weight and category available. UrlToVistor will have the matching category and url. 
-            // Perform an include on this to have them associate and then display the relevant information.
-
-
-            //Need the logic to look something like this
-
-
-            //Need it to follow the below coding logic
-            //Choose a starting page from three options
-            //teach, practice, and volunteering
-            //teach - are you interested ? teacher : donate
-            //practice - are you interested ? alumni : donate
-            //volunteering - are you interested ? volunteer : donate
-            //switch (form["page"])
-            //{
-            //    case "teach":
-            //        if (form["teachInterest"].Equals("yes"))
-            //        {
-            //            return RedirectToAction("Survey", "Feedback");
-            //            return Redirect("https://www.y4c.org/teacher-page");
-            //        }
-            //        else
-            //        {
-            //            return Redirect("https://www.y4c.org/donate");
-            //        }
-            //    case "practice":
-            //        if (form["gettingInvolved"].Equals("yes"))
-            //        {
-            //            return Redirect("https://www.y4c.org/new-page-4");
-            //        }
-            //        else
-            //        {
-            //            return Redirect("https://www.y4c.org/donate");
-            //        }
-            //    case "other":
-            //        if (form["gettingInvolved"].Equals("yes"))
-            //        {
-            //            return RedirectToAction("Survey", "Feedback");
-            //            return Redirect("https://www.y4c.org/volunteer-1");
-            //        }
-            //        else
-            //        {
-            //            return Redirect("https://www.y4c.org/donate");
-            //        }
-            //    default:
-            //        return Redirect("https://www.y4c.org/donate");
-            //}
-
+            return (url, visitorType);
         }
     }
 }

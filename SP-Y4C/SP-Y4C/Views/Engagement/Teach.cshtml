@@ -67,42 +67,39 @@
         @{
             foreach (var q in Model)
             {
-                if (q.Category.Equals(QuestionCategory.Teach) || q.Category.Equals(QuestionCategory.Default))
-                {
-                    <label for="question" name="@q.Id">
-                        <label>@q.Text</label><br>
-                        <input type="hidden" name="weight" value="@q.Weight" />
+                <label for="question" name="@q.Id">
+                    <label>@q.Text</label><br />
+                    <input type="hidden" name="weight" value="@q.Weight" />
 
 
-                        @{
-                            if (q.Choices.Count == 0)
+                    @{
+                        if (q.Choices.Count == 0)
+                        {
+                            if (q.TypeId == QuestionType.Text)
                             {
-                                if (q.TypeId == QuestionType.Text)
-                                {
-                                    <input type="@q.TypeId" />
-                                }
+                                <input type="@q.TypeId" />
                             }
-                            else
+                        }
+                        else
+                        {
+                            foreach (var c in q.Choices)
                             {
-                                foreach (var c in q.Choices)
+                                if (q.Id == c.QuestionId)
                                 {
-                                    if (q.Id == c.QuestionId)
-                                    {
-                                        <label for="choice" name="@c.Id">
-                                            <input name="@c.QuestionId" type="@q.TypeId" value="@c.Id" required />
-                                            <label>@c.Text</label>
-                                        </label><br>
-                                    }
+                                    <label for="choice" name="@c.Id">
+                                        <input name="@c.QuestionId" type="@q.TypeId" value="@c.Id" required />
+                                        <label>@c.Text</label>
+                                    </label><br />
                                 }
                             }
                         }
-                    </label><br>
-                }
+                    }
+                </label><br />
             }
         }
 
 
-        <input type="hidden" name="page" value="teach" />
+        <input type="hidden" name="page" value="@SurveyBranch.Teach" />
         <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
         margin: 8px 0;
         border: none;

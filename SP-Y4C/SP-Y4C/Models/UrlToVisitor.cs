@@ -21,10 +21,10 @@ namespace SP_Y4C.Models
         public string Url { get; set; }
 
         [Required]
-        public QuestionCategory Category { get; set; }
+        public SurveyBranch Category { get; set; }
 
         [Required]
-        public bool Weight { get; set; }
+        public int Weight { get; set; }
 
         [Display(Name = "Created At")]
         public DateTimeOffset CreatedAtUtc { get; set; }

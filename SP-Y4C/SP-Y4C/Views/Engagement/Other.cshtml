@@ -62,37 +62,34 @@
         @{
             foreach (var q in Model)
             {
-                if (q.Category.Equals(QuestionCategory.Other) || q.Category.Equals(QuestionCategory.Default))
-                {
-                    <label for=@q.Id>
-                        <label>@q.Text</label><br>
-                        <input type="hidden" name="weight" value="@q.Weight" />
+                <label for=@q.Id>
+                    <label>@q.Text</label><br />
+                    <input type="hidden" name="weight" value="@q.Weight" />
 
 
-                        @{
-                            if (q.Choices.Count == 0)
+                    @{
+                        if (q.Choices.Count == 0)
+                        {
+                            if (q.TypeId == QuestionType.Text)
                             {
-                                if (q.TypeId == QuestionType.Text)
-                                {
-                                    <input type="@q.TypeId" required />
-                                }
+                                <input type="@q.TypeId" required />
                             }
-                            else
+                        }
+                        else
+                        {
+                            foreach (var c in q.Choices)
                             {
-                                foreach (var c in q.Choices)
+                                if (q.Id == c.QuestionId)
                                 {
-                                    if (q.Id == c.QuestionId)
-                                    {
-                                        <label for=@c.Id>
-                                            <input name="@c.QuestionId" type="@q.TypeId" required />
-                                            <label>@c.Text</label>
-                                        </label><br>
-                                    }
+                                    <label for=@c.Id>
+                                        <input name="@c.QuestionId" type="@q.TypeId" required />
+                                        <label>@c.Text</label>
+                                    </label><br />
                                 }
                             }
                         }
-                    </label><br>
-                }
+                    }
+                </label><br />
             }
         }
 
