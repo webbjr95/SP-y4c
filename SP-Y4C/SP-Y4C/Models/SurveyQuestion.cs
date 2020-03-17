@@ -1,8 +1,7 @@
 ﻿using SP_Y4C.Models.Enums;
 using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.SqlServer.Types;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SP_Y4C.Models
 {
@@ -46,6 +45,7 @@ namespace SP_Y4C.Models
         [Required]
         public QuestionCategory Category { get; set; }
 
+        [Display(Name = "Radio Options")]
         public ICollection<SurveyChoice> Choices { get; set; }
     }
 }

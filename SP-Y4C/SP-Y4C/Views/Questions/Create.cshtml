@@ -24,8 +24,20 @@
                 <input asp-for="Text" class="form-control" />
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
+
+            <label asp-for="@Model.Choices" class="control-label"></label>
+            <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
+
+            @*@for (int i = 1; i < Model.Choices.Count; i++)
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Choices.ToList()[i]" class="control-label">Option @(i+1)</label>
+                        <input asp-for="@Model.Choices.ToList()[i]" type="text" class="form-control" />
+                    </div>
+                }*@
+
             <div class="form-group">
-                <label asp-for="Weight" class="control-label"></label>
+                <label asp-for="Weight" class="control-label" id="Weight"></label>
                 <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control"></select>
                 <span asp-validation-for="Weight" class="text-danger"></span>
             </div>
@@ -41,3 +53,92 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var choiceCount = 0;
+
+        function addChoice() {
+            choiceCount += 1
+
+            let formGroupId = `new-choice-${choiceCount}`;
+
+            let weight = get("#Weight");
+
+            let formGroup = document.createElement("div");
+            formGroup.className = "form-group";
+            formGroup.id = formGroupId;
+
+            let label = document.createElement("label");
+            label.className = "control-label";
+            label.innerText = `Choice`; //${choiceCount} scrapped this to avoid visual confusion
+
+            let inputGroup = document.createElement("div");
+            inputGroup.className = "input-group";
+
+            let input = document.createElement("input");
+            input.type = "text";
+            input.className = "form-control";
+
+            let inputGroupBtn = document.createElement("div");
+            inputGroupBtn.className = "input-group-btn";
+
+            let btnSubtract = document.createElement("button");
+            btnSubtract.type = "button";
+            btnSubtract.id = "btnRemoveChoice";
+            btnSubtract.className = "btn btn-danger";
+            btnSubtract.innerText = "-";
+            btnSubtract.onclick = function () { removeChoice(formGroupId) };
+
+            inputGroupBtn.appendChild(btnSubtract);
+            inputGroup.appendChild(input);
+            inputGroup.appendChild(inputGroupBtn);
+            formGroup.appendChild(label);
+            formGroup.appendChild(inputGroup);
+            weight.before(formGroup);
+        }
+
+        function removeChoice(formGroupId) {
+            var formGroup = document.getElementById(formGroupId);
+            formGroup.remove();
+            choiceCount -= 1;
+        }
+
+        function showOrHideFormElements(typeId) {
+            let optionText = typeId.options[typeId.selectedIndex].text;
+
+            if (optionText == typeId.Radio) {
+                show("#Choices"); // TODO.JG - Show radio options label and choices
+            } else {
+                hide("#Choices"); // TODO.JG - Hide radio options label and choices
+            }
+        }
+
+        function get(selector) {
+            if (!selector) {
+                console.log("Element not found. No selector provided.");
+                return;
+            }
+
+            let result = document.querySelector(selector);
+            if (!result) {
+                console.log(`Element not found: "${selector}"`);
+                return;
+            }
+
+            return result;
+        }
+
+        function show(element) {
+            if (element) {
+                element.style.display = "block";
+            }
+        }
+
+        function hide(element) {
+            if (element) {
+                element.style.display = "none";
+            }
+        }
+    </script>
+}
