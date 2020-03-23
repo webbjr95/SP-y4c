@@ -6,30 +6,65 @@
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+
+a {
+    text-decoration: none;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+ul.tree, .tree li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.tree ul {
+    display: none;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
+.tree > li {
+    display: block;
+    background: #eee;
+    margin-bottom: 2px;
+}
+
+.tree span {
+    display: block;
+    padding: 10px 12px;
+}
+
+.icon {
+    display: inline-block;
+}
+
+.tree .hasChildren > .expanded {
+    background: #999;
+}
+
+    .tree .hasChildren > .expanded a {
+        color: #fff;
     }
+
+.icon:before {
+    content: "+";
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+}
+
+.tree .icon.expanded:before {
+    content: "-";
+}
+
+.show-effect {
+    display: block !important;
+}
+
+/*Have the */
+.dataTables_info {
+    text-align: right;
 }

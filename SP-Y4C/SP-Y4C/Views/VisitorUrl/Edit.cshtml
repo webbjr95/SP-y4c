@@ -1,6 +1,6 @@
-﻿@model SurveyQuestion
+﻿@model UrlToVisitor
 @{
-    ViewData["Title"] = "Edit Question";
+    ViewData["Title"] = "Edit URL";
 }
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -15,32 +15,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="QuestionNumber" class="control-label"></label>
-                <input asp-for="QuestionNumber" class="form-control" min="1" />
-                <span asp-validation-for="QuestionNumber" class="text-danger"></span>
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" class="form-control" min="1" />
+                <span asp-validation-for="Url" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypeId" class="control-label"></label>
-                <select asp-for="TypeId" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control"></select>
-                <span asp-validation-for="TypeId" class="text-danger"></span>
+                <label asp-for="UserType" class="control-label"></label>
+                <select asp-for="UserType" asp-items="Html.GetEnumSelectList<UserType>()" class="form-control"></select>
+                <span asp-validation-for="UserType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Weight" class="control-label"></label>
-                <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control"></select>
-                <span asp-validation-for="Weight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <select asp-for="Category" asp-items="Html.GetEnumSelectList<QuestionCategory>()" class="form-control"></select>
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-danger" type="button" onclick="location.href='@Url.Action("Index", "Questions")'">Cancel</button>
+                <button class="btn btn-danger" type="button" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">Cancel</button>
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

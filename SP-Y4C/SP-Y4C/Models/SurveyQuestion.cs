@@ -47,5 +47,6 @@ namespace SP_Y4C.Models
 
         [Display(Name = "Radio Options")]
         public ICollection<SurveyChoice> Choices { get; set; }
+        public ICollection<SurveyAnswer> Answer { get; set; }
     }
 }

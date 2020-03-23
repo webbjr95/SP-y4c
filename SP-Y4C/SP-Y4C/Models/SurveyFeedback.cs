@@ -17,7 +17,10 @@ namespace SP_Y4C.Models
 
         [Required]
         [Display(Name = "URL")]
-        public string Url { get; set; }
+        public string Url { get; set; }        
+        
+        [Required]
+        public string Text { get; set; }
 
         [Required]
         [Display(Name = "Rating")]
@@ -28,6 +31,6 @@ namespace SP_Y4C.Models
         public Guid UserId { get; set; }
 
         [Display(Name = "Submission Date")]
-        public DateTime SubmittedAtUtc { get; set; }
+        public DateTimeOffset SubmittedAtUtc { get; set; }
     }
 }

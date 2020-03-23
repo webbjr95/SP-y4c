@@ -112,4 +112,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TypeId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4392f698-a6cf-42ef-8582-03dfaf860e9e" ChangeDateTime="02/27/2020 02:33:44">
+    <Property Name="ElementName" Value="[dbo].[UrlAndVisitorPairing].[QuestionId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UrlAndVisitorPairing]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Url" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b9d7713a-698f-4c68-ad16-1c7435c9f3a4" ChangeDateTime="03/08/2020 21:40:33">
+    <Property Name="ElementName" Value="[dbo].[VisitorTypes].[Title]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VisitorTypes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Type" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1684c3b6-87a8-410d-a252-452adb9d56e8" ChangeDateTime="03/11/2020 22:51:49">
+    <Property Name="ElementName" Value="[dbo].[VisitorTypes].[Type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VisitorTypes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="96160e83-4c03-47ae-a5af-b27fb0f4a427" ChangeDateTime="03/11/2020 22:53:14">
+    <Property Name="ElementName" Value="[dbo].[VisitorTypes].[LastModifiedUtc]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VisitorTypes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastModifiedAtUtc" />
+  </Operation>
 </Operations>

@@ -171,10 +171,15 @@
         <form asp-controller="Feedback" asp-action="Survey" id="Feedback" method="post">
             <h4 class="modal-title">How'd we do? Was the information both relevant and helpful?</h4><br>
             <input id="input-id" type="text" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="lg" name="rating">
+            <br />
+
+            <textarea name="text" style="width: 100%;">
+                Please provide additional details as to why your rating was that particular value. This will allow
+                us to update our site as needed.
+            </textarea>
+            <br />
+
             <input type="hidden" id="currentUrl" name="currentUrl" value="" />
-            </br>
-
-
             <input type="submit" class="btn btn-default" value="Submit" />
             <script>
                 document.getElementById("currentUrl").value = window.location.href;
