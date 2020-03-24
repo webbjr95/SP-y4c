@@ -6,6 +6,7 @@ using SP_Y4C.Models.Enums;
 using SP_Y4C.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -59,30 +60,25 @@ namespace SP_Y4C.Controllers
                 Category = viewModel.Category
             };
 
-            using (var trans = new TransactionScope())
+            var choices = new List<SurveyChoice>();
+
+            for (var i = 0; i < viewModel.RadioOptions.Count; i++)
             {
-                var choices = new List<SurveyChoice>();
-
-                for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+                var choice = new SurveyChoice
                 {
-                    var choice = new SurveyChoice
-                    {
-                        QuestionId = question.Id,
-                        Text = viewModel.RadioOptions[i],
-                        OrderInQuestion = i
-                    };
+                    QuestionId = question.Id,
+                    Text = viewModel.RadioOptions[i],
+                    OrderInQuestion = i
+                };
 
-                    choices.Add(choice);
-                }
-
-                await _dbContext.SurveyQuestions.AddAsync(question);
-                await _dbContext.SaveChangesAsync();
-
-                await _dbContext.SurveyChoices.AddRangeAsync(choices);
-                await _dbContext.SaveChangesAsync();
-
-                trans.Complete();
+                choices.Add(choice);
             }
+
+            await _dbContext.SurveyQuestions.AddAsync(question);
+            await _dbContext.SaveChangesAsync();
+
+            await _dbContext.SurveyChoices.AddRangeAsync(choices);
+            await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }
