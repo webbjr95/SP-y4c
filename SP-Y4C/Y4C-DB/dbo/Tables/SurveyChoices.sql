@@ -9,5 +9,5 @@
     [OrderInQuestion] INT NOT NULL DEFAULT 1,
     
     CONSTRAINT [PK_SurveyChoices_Id] PRIMARY KEY ([Id]),
-    --CONSTRAINT [FK_SurveyChoices_QuestionId] FOREIGN KEY ([QuestionId]) REFERENCES [SurveyQuestions]([Id])
+    CONSTRAINT [FK_SurveyChoices_QuestionId] FOREIGN KEY ([QuestionId]) REFERENCES [SurveyQuestions]([Id])
 )

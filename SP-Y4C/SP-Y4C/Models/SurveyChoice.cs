@@ -14,7 +14,7 @@ namespace SP_Y4C.Models
 
         [Key]
         [Display(Name = "ID")]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [Display(Name ="Question ID")]

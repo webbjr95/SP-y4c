@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
 using SP_Y4C.Models.Enums;
+using SP_Y4C.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace SP_Y4C.Controllers
 {
@@ -40,17 +42,47 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SurveyQuestion question)
+        public async Task<IActionResult> Create(CreateQuestionViewModel viewModel)
         {
-            question.Id = Guid.NewGuid();
-            question.ActiveStatus = QuestionActiveStatus.Inactive;
             if (!ModelState.IsValid)
             {
-                return View(question);
+                return View(viewModel);
             }
 
-            await _dbContext.SurveyQuestions.AddAsync(question);
-            await _dbContext.SaveChangesAsync();
+            var question = new SurveyQuestion
+            {
+                QuestionNumber = viewModel.QuestionNumber,
+                TypeId = viewModel.QuestionType,
+                Text = viewModel.Text,
+                ActiveStatus = QuestionActiveStatus.Inactive,
+                Weight = viewModel.Weight,
+                Category = viewModel.Category
+            };
+
+            using (var trans = new TransactionScope())
+            {
+                var choices = new List<SurveyChoice>();
+
+                for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+                {
+                    var choice = new SurveyChoice
+                    {
+                        QuestionId = question.Id,
+                        Text = viewModel.RadioOptions[i],
+                        OrderInQuestion = i
+                    };
+
+                    choices.Add(choice);
+                }
+
+                await _dbContext.SurveyQuestions.AddAsync(question);
+                await _dbContext.SaveChangesAsync();
+
+                await _dbContext.SurveyChoices.AddRangeAsync(choices);
+                await _dbContext.SaveChangesAsync();
+
+                trans.Complete();
+            }
 
             return RedirectToAction("Index");
         }
