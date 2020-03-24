@@ -1,13 +1,14 @@
-﻿@model SP_Y4C.ViewModels.CreateQuestionViewModel
+﻿@model CreateQuestionViewModel
 @{
     ViewData["Title"] = "Create Question";
+    var radioOptionId = (int)QuestionType.Radio;
 }
 
 <h1><strong>@ViewData["Title"]</strong></h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" id="create-form">
+        <form asp-action="Create" method="post" id="create-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="QuestionNumber" class="control-label"></label>
@@ -16,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="QuestionType" class="control-label"></label>
-                <select asp-for="QuestionType" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control"></select>
+                <select asp-for="QuestionType" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
                 <span asp-validation-for="QuestionType" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -25,16 +26,11 @@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
 
-            <label asp-for="@Model.RadioOptions" class="control-label"></label>
-            <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
-
-            @*@for (int i = 1; i < Model.Choices.Count; i++)
-                {
-                    <div class="form-group">
-                        <label asp-for="@Model.Choices.ToList()[i]" class="control-label">Option @(i+1)</label>
-                        <input asp-for="@Model.Choices.ToList()[i]" type="text" class="form-control" />
-                    </div>
-                }*@
+            <div id="radio-options" style="display: none;">
+                <label asp-for="@Model.RadioOptions" class="control-label"></label>
+                <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
+                <input id="jake-easter-egg" value="reeses-cup" name="you-win" type="hidden" />
+            </div>
 
             <div class="form-group">
                 <label asp-for="Weight" class="control-label" id="Weight"></label>
@@ -58,6 +54,7 @@
     <script type="text/javascript">
         var choiceCount = 0;
         var nextIndex = 0;
+        var radioId = @radioOptionId;
 
         function addChoice() {
             choiceCount += 1
@@ -67,7 +64,7 @@
             let weight = get("#Weight");
 
             let formGroup = document.createElement("div");
-            formGroup.className = "form-group";
+            formGroup.className = "form-group radio-option-parent";
             formGroup.id = formGroupId;
 
             let label = document.createElement("label");
@@ -101,9 +98,30 @@
             weight.before(formGroup);
         }
 
+        function removeChoice(formGroupId) {
+            var formGroup = document.getElementById(formGroupId);
+            formGroup.remove();
+            choiceCount -= 1;
+        }
+
+        function handleQuestionTypeChange() {
+            var selectList = get("#QuestionType");
+            var selectedValue = selectList.value;
+
+            if (selectedValue == radioId) {
+                show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!
+            } else {
+                var options = document.querySelectorAll(".radio-option-parent");
+
+                for (var i = 0; i < options.length; i++){
+                    options[i].remove();
+                }
+
+                hide("radio-options");
+            }
+        }
+
         function handleSubmit() {
-            console.log('submit');
-            debugger;
             var inputs = document.getElementsByClassName('choices');
 
             for (var i = 0; i < inputs.length; i++) {
@@ -111,22 +129,6 @@
             }
 
             document.getElementById('create-form').submit();
-        }
-
-        function removeChoice(formGroupId) {
-            var formGroup = document.getElementById(formGroupId);
-            formGroup.remove();
-            choiceCount -= 1;
-        }
-
-        function showOrHideFormElements(typeId) {
-            let optionText = typeId.options[typeId.selectedIndex].text;
-
-            if (optionText == typeId.Radio) {
-                show("#Choices"); // TODO.JG - Show radio options label and choices
-            } else {
-                hide("#Choices"); // TODO.JG - Hide radio options label and choices
-            }
         }
 
         function get(selector) {
@@ -144,13 +146,17 @@
             return result;
         }
 
-        function show(element) {
+        function show(id) {
+            var element = get(`#${id}`);
+
             if (element) {
                 element.style.display = "block";
             }
         }
 
-        function hide(element) {
+        function hide(id) {
+            var element = get(`#${id}`);
+
             if (element) {
                 element.style.display = "none";
             }

@@ -1,10 +1,13 @@
 ﻿using SP_Y4C.Models.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace SP_Y4C.ViewModels
 {
-    public class CreateQuestionViewModel
+    public class EditQuestionViewModel
     {
+        public Guid Id { get; set; }
+
         public int QuestionNumber { get; set; }
 
         public QuestionType QuestionType { get; set; }

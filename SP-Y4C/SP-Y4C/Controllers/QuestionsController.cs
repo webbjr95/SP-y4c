@@ -92,28 +92,69 @@ namespace SP_Y4C.Controllers
             {
                 return NotFound();
             }
+
+            var radioOptions = await _dbContext.SurveyChoices.Where(c => c.QuestionId == question.Id).ToListAsync();
+
+            var viewModel = new EditQuestionViewModel
+            {
+                Id = question.Id,
+                QuestionNumber = question.QuestionNumber,
+                QuestionType = question.TypeId,
+                Text = question.Text,
+                RadioOptions = radioOptions.Select(o => o.Text).ToList(),
+                Weight = question.Weight,
+                Category = question.Category
+            };
             
-            return View(question);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SurveyQuestion question)
+        public async Task<IActionResult> Edit(EditQuestionViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(question);
+                return View(viewModel);
             }
 
-            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == question.Id);
+            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == viewModel.Id);
 
-            existingQuestion.Text = question.Text;
-            existingQuestion.QuestionNumber = question.QuestionNumber;
-            existingQuestion.TypeId = question.TypeId;
+            if (existingQuestion.TypeId == QuestionType.Radio)
+            {
+                var existingChoices = await _dbContext.SurveyChoices.Where(c => c.QuestionId == existingQuestion.Id).ToListAsync();
+
+                _dbContext.SurveyChoices.RemoveRange(existingChoices);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            existingQuestion.Text = viewModel.Text;
+            existingQuestion.QuestionNumber = viewModel.QuestionNumber;
+            existingQuestion.TypeId = viewModel.QuestionType;
             existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
 
             _dbContext.SurveyQuestions.Update(existingQuestion);
             await _dbContext.SaveChangesAsync();
 
+            if (viewModel.QuestionType == QuestionType.Radio)
+            {
+                var newChoices = new List<SurveyChoice>();
+
+                for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+                {
+                    var choice = new SurveyChoice
+                    {
+                        QuestionId = viewModel.Id,
+                        Text = viewModel.RadioOptions[i],
+                        OrderInQuestion = i
+                    };
+
+                    newChoices.Add(choice);
+                }
+
+                await _dbContext.SurveyChoices.AddRangeAsync(newChoices);
+                await _dbContext.SaveChangesAsync();
+            }
+            
             return RedirectToAction("Index");
         }
 
