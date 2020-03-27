@@ -3,10 +3,104 @@
 }
 
 <body>
+<<<<<<< Updated upstream
     <div>
         @*<div alt="Reporting">Reporting</div>
         <div alt="SurveyManagement">Survey Management</div>*@
 
         <img src="~/images/adminConsole.jpg" />
+=======
+    <h1><strong>@ViewData["Title"]</strong></h1>
+    <div class="row">
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
+                <div class="card">
+                    <img src="~/images/ajna.png" alt="Avatar" style="width:100%">
+                    <h4><b>Edit Questions</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "Choices")'">
+                <div class="card">
+                    <img src="~/images/muladhara.png" alt="Avatar" style="width:100%">
+                    <h4><b>Edit Choices</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "Pairing")'">
+                <div class="card">
+                    <img src="~/images/manipura.png" alt="Avatar" style="width:100%">
+                    <h4><b>Edit Question/Choice Pairing</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
+                <div class="card">
+                    <img src="~/images/surya.png" alt="Avatar" style="width:100%">
+                    <h4><b>Edit Survey Flow</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "Reports")'">
+                <div class="card">
+                    <img src="~/images/anahata.png" alt="Avatar" style="width:100%">
+                    <h4><b>View Survey Reports</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Feedback", "Reports")'">
+                <div class="card">
+                    <img src="~/images/sahrasrara.png" alt="Avatar" style="width:100%">
+                    <h4><b>View Feedback Reports</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "Users")'">
+                <div class="card">
+                    <img src="~/images/om.png" alt="Avatar" style="width:100%">
+                    <h4><b>Manage Users</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Create", "Users")'">
+                <div class="card">
+                    <img src="~/images/vishuddhi.png" alt="Avatar" style="width:100%">
+                    <h4><b>Create Users</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="column">
+            <button class="noborder" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">
+                <div class="card">
+                    <img src="~/images/svadhishthana.png" alt="Avatar" style="width:100%">
+                    <h4><b>Edit Survey URLs</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+            </button>
+        </div>
+>>>>>>> Stashed changes
     </div>
 </body>
