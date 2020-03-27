@@ -6,6 +6,6 @@
     [UserId] UNIQUEIDENTIFIER NOT NULL, 
     [Url] VARCHAR(MAX) NOT NULL,
 
-    [Text] VARCHAR(MAX) NOT NULL, 
+    [Text] VARCHAR(MAX) NOT NULL DEFAULT '', 
     CONSTRAINT [PK_SurveyFeedback_Id] PRIMARY KEY ([Id])
 )

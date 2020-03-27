@@ -1,7 +1,7 @@
 ﻿using SP_Y4C.Models.Enums;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SP_Y4C.Models
 {
@@ -15,7 +15,7 @@ namespace SP_Y4C.Models
 
         [Key]
         [Display(Name = "ID")]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [Display(Name = "Question Number")]
@@ -45,6 +45,7 @@ namespace SP_Y4C.Models
         [Required]
         public QuestionCategory Category { get; set; }
 
+        [Display(Name = "Radio Options")]
         public ICollection<SurveyChoice> Choices { get; set; }
         public ICollection<SurveyAnswer> Answer { get; set; }
     }
