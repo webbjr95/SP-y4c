@@ -16,8 +16,16 @@ namespace SP_Y4C.Controllers
         {
             _dbContext = dbContext;
         }
+
+        //httpContext-REquest-Headers-HeaderReferer
         public IActionResult Survey()
         {
+            //TOOD: Change the SquareSpace refer to be no-referrer-when-downgrade but will need to update our
+            // application to be hosted as a HTTPS site
+            var refererUrl = Microsoft.Extensions.Primitives.StringValues.Empty;
+            HttpContext.Request.Headers.TryGetValue("Referer", out refererUrl);
+            ViewBag.RefererUrl = refererUrl;
+
             return View();
         }
 
@@ -34,8 +42,11 @@ namespace SP_Y4C.Controllers
                 SubmittedAtUtc = DateTime.UtcNow
             };
 
-            await _dbContext.AddAsync(feedback);
-            await _dbContext.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                await _dbContext.AddAsync(feedback);
+                await _dbContext.SaveChangesAsync();
+            }
 
             return View();
         }
