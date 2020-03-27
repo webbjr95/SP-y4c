@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
 using SP_Y4C.Models.Enums;
-using SP_Y4C.ViewModels;
 
 namespace SP_Y4C.Controllers
 {
@@ -73,42 +72,84 @@ namespace SP_Y4C.Controllers
             return Redirect(urlForVisitor);
         }
 
-        //Create and store each answer from the user into the DB.
+        // Create and store each answer from the user into the DB.
         public async Task CreateAndStoreFormAnswersAsync(IFormCollection passedForm, UserType passedVisitorType)
         {
             var userGuid = Guid.NewGuid();
-            // Skip final value as it's an HTTP token.
-            var formAsList = passedForm.ToList();
-            for (var s = 1; s < passedForm.Count - 1; s++)
-            {
-                // _ is to discard the value as it is not needed. We are only curious if the value is a GUID
-                if (Guid.TryParse(formAsList.ElementAt(s).Key, out _))
-                {
-                    var formAnswer = new SurveyAnswer
-                    {
-                        Id = Guid.NewGuid(),
-                        QuestionId = new Guid(formAsList.ElementAt(s).Key),
-                        Answer = formAsList.ElementAt(s).Value,
-                        UserId = userGuid,
-                        UserType = passedVisitorType
-                    };
 
-                    //Validate the model being created before adding the answers to the DB
-                    if (ModelState.IsValid)
+            // Gather all the choices so we can get the text for their answer later on. Create a list of Answers for 
+            // iteration later on.
+            var listOfChoices = _dbContext.SurveyChoices.AsQueryable();
+            var listOfAnswers = new List<SurveyAnswer>();
+
+            // Answer is going to be a key,value pair. Key will be the QuestionId while the value is the ChoiceId. 
+            foreach (var formChoice in passedForm.ToList())
+            {
+                // _ is to discard the value as it is not needed. We are only curious if the value is a GUID which would
+                // correspond a question being present at that enumeration.
+                if (Guid.TryParse(formChoice.Key, out _))
+                {
+                    // Create the answer objects after parsing the form submission.
+                    var userAnswer = "";
+                    if (formChoice.Value.Count == 1)
                     {
-                        await _dbContext.SurveyAnswers.AddAsync(formAnswer);
-                        await _dbContext.SaveChangesAsync();
+                        //Only need to check if this is a text input field since the value can only of a count of one.
+                        if (Guid.TryParse(formChoice.Value, out _))
+                        {
+                            userAnswer = listOfChoices.Where(x => x.Id == new Guid(formChoice.Value)).First().Text;
+                        } else {
+                            userAnswer = formChoice.Value;
+                        }
+
+                        var formAnswer = new SurveyAnswer
+                        {
+                            Id = Guid.NewGuid(),
+                            QuestionId = new Guid(formChoice.Key),
+                            Answer = userAnswer,
+                            UserId = userGuid,
+                            UserType = passedVisitorType
+                        };
+
+                        listOfAnswers.Add(formAnswer);
+                    } 
+                    else if (formChoice.Value.Count > 1)
+                    {
+
+                        foreach (var choice in formChoice.Value)
+                        {
+                            userAnswer = listOfChoices.Where(x => x.Id == new Guid(choice)).First().Text;
+                            var formAnswer = new SurveyAnswer
+                            {
+                                Id = Guid.NewGuid(),
+                                QuestionId = new Guid(formChoice.Key),
+                                Answer = userAnswer,
+                                UserId = userGuid,
+                                UserType = passedVisitorType
+                            };
+
+                            listOfAnswers.Add(formAnswer);
+                        }
                     }
+                }
+            }
+
+            // Validate the model being created before adding the answers to the DB
+            foreach (var answer in listOfAnswers)
+            {
+                if (ModelState.IsValid)
+                {
+                    await _dbContext.SurveyAnswers.AddAsync(answer);
+                    await _dbContext.SaveChangesAsync();
                 }
             }
         }
 
 
-        //Calculation for when a visitor answers the survey. This will take into account
+        // Calculation for when a visitor answers the survey. This will take into account
         public async Task<(string redirectUrl, UserType visitorType)> CalculateWeightToUrlAsync(IFormCollection passedForm)
         {
-            //Retrieve the array of questions to see which ones are weighed for querying the DB for the related branch
-            // URL. If the calculated URL is null or empty then default to the donation page.
+            // Retrieve the array of questions to see which ones are weighed for querying the DB for the related branch
+            // URL.
             var weightArray = passedForm["weight"];
             var hasWeight = weightArray.Contains("yes", StringComparer.OrdinalIgnoreCase);
             var weightvalue = hasWeight ? 1 : 0;
@@ -121,8 +162,8 @@ namespace SP_Y4C.Controllers
 
             if (string.IsNullOrEmpty(url))
             {
-                url = "https://www.y4c.org/donate";
-                visitorType = UserType.Donor;
+                url = "N/A";
+                visitorType = UserType.NotFound;
             }
 
             return (url, visitorType);

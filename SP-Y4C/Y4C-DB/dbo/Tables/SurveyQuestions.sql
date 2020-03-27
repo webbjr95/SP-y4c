@@ -8,8 +8,7 @@
     [LastModifiedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(),
     [ActiveStatus] INT NOT NULL DEFAULT 0, 
     [Weight] INT NOT NULL DEFAULT 1, 
-    [Category] INT NOT NULL DEFAULT 0, 
-    --[Node] HierarchyId NOT NULL, 
+    [Category] INT NOT NULL DEFAULT 0,
 
     CONSTRAINT [PK_SurveyQuestions_Id] PRIMARY KEY ([Id])
 )

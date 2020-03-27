@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
-using SP_Y4C.ViewModels;
 using System.Diagnostics;
 
 namespace SP_Y4C.Controllers
@@ -24,11 +23,6 @@ namespace SP_Y4C.Controllers
             var questions = _dbContext.SurveyQuestions.Include(c => c.Choices);
 
             return View(questions);
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

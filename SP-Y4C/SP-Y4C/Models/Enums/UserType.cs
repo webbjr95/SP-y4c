@@ -5,6 +5,7 @@
         Volunteer = 1,
         Teacher,
         Donor,
-        Alumni
+        Alumni,
+        NotFound
     }
 }
