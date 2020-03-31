@@ -1,5 +1,5 @@
 ﻿@{ 
-
+    ViewData["Title"] = "Thank you for your feedback!";
 }
 
 
@@ -25,9 +25,9 @@
         cursor: pointer;
     }
 
-        input[type=button]:hover {
-            background-color: #45a049;
-        }
+    input[type=button]:hover {
+        background-color: #45a049;
+    }
 
     input[type=submit] {
         width: 25%;
@@ -40,9 +40,9 @@
         cursor: pointer;
     }
 
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
 
 
     div #Feedback {
@@ -82,32 +82,34 @@
         align-items: center;
     }
 
-        form#Feedback input[type="radio"]:hover, form#Feedback input[type="radio"]:checked {
-            -webkit-filter: grayscale(0);
-            filter: grayscale(0);
-        }
+    form#Feedback input[type="radio"]:hover, form#Feedback input[type="radio"]:checked {
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+    }
 
-        form#Feedback input[type="radio"]:focus {
-            outline: 0;
-        }
+    form#Feedback input[type="radio"]:focus {
+        outline: 0;
+    }
 
-        form#Feedback input[type="radio"].good {
-            background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg") center;
-            background-size: cover;
-        }
+    form#Feedback input[type="radio"].good {
+        background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg") center;
+        background-size: cover;
+    }
 
-        form#Feedback input[type="radio"].neutral {
-            background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/neutral_t3q8hz.svg") center;
-            background-size: cover;
-        }
+    form#Feedback input[type="radio"].neutral {
+        background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/neutral_t3q8hz.svg") center;
+        background-size: cover;
+    }
 
-        form#Feedback input[type="radio"].bad {
-            background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg") center;
-            background-size: cover;
-        }
+    form#Feedback input[type="radio"].bad {
+        background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg") center;
+        background-size: cover;
+    }
 </style>    
 
 <body>
+    <h1><strong>@ViewData["Title"]</strong></h1>
+
     <div>
         <form asp-controller="Feedback" asp-action="Survey" id="Feedback" method="post">
             <h4>

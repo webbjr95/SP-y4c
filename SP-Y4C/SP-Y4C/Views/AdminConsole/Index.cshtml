@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Admin Console";
+    ViewData["Title"] = "Admin Console - Navigate to Other Features";
 }
 
 <style>
@@ -62,7 +62,7 @@
         <div class="column">
             <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
                     <h4><b>Edit Questions</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
@@ -70,30 +70,10 @@
         </div>
 
         <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Choices")'">
+            <button class="noborder" onclick="location.href='@Url.Action("Archived", "Questions")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Choices</b></h4>
-                    <p>Architect & Engineer</p>
-                </div>
-            </button>
-        </div>
-
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Pairing")'">
-                <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Question/Choice Pairing</b></h4>
-                    <p>Architect & Engineer</p>
-                </div>
-            </button>
-        </div>
-
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
-                <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Survey Flow</b></h4>
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
+                    <h4><b>View Archived Questions</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
             </button>
@@ -102,7 +82,7 @@
         <div class="column">
             <button class="noborder" onclick="location.href='@Url.Action("Index", "Reports")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
                     <h4><b>View Survey Reports</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
@@ -112,17 +92,17 @@
         <div class="column">
             <button class="noborder" onclick="location.href='@Url.Action("Feedback", "Reports")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
                     <h4><b>View Feedback Reports</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
             </button>
         </div>
 
-        <div class="column">
+        @*<div class="column">
             <button class="noborder" onclick="location.href='@Url.Action("Index", "Users")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
                     <h4><b>Manage Users</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
@@ -132,17 +112,17 @@
         <div class="column">
             <button class="noborder" onclick="location.href='@Url.Action("Create", "Users")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
                     <h4><b>Create Users</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
             </button>
-        </div>
+        </div>*@
 
         <div class="column">
             <button class="noborder" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" alt="Avatar" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg" style="width:100%">
                     <h4><b>Edit Survey URLs</b></h4>
                     <p>Architect & Engineer</p>
                 </div>

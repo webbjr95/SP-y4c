@@ -23,4 +23,11 @@
     <None Include="wwwroot\images\y4c-logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\bootstrap\dist\" />
+    <Folder Include="wwwroot\lib\buttons\dist\" />
+    <Folder Include="wwwroot\lib\dataTables\dist\" />
+    <Folder Include="wwwroot\lib\jquery\" />
+  </ItemGroup>
+
 </Project>

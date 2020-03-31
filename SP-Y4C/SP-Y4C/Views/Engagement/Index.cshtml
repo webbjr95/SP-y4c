@@ -1,47 +1,7 @@
-﻿<style>
-    input[type=text], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
+﻿<head>
+    <link rel="stylesheet" href="~/css/engagement-form.css" />
+</head>
 
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    div #form {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        width: 75%;
-        margin: auto;
-    }
-
-    div #formText {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-</style>
 <div id="form">
     <div id="formText">
         <strong>
@@ -60,20 +20,26 @@
         margin: 8px 0;
         border: none;
         border-radius: 4px;
-        cursor: pointer;">Teach</button>
+        cursor: pointer;">
+            Teach
+        </button>
     </form>
     <form asp-controller="Engagement" asp-action="Practice" method="post">
         <button type="submit" value="Practice" class="btn btn-primary" style="width:100%; padding: 14px 20px;
         margin: 8px 0;
         border: none;
         border-radius: 4px;
-        cursor: pointer;">Practice</button>
+        cursor: pointer;">
+            Practice
+        </button>
     </form>
     <form asp-controller="Engagement" asp-action="Other" method="post">
         <button type="submit" value="Other" class="btn btn-primary" style="width:100%; padding: 14px 20px;
         margin: 8px 0;
         border: none;
         border-radius: 4px;
-        cursor: pointer;">Other</button>
+        cursor: pointer;">
+            Other
+        </button>
     </form>
 </div>

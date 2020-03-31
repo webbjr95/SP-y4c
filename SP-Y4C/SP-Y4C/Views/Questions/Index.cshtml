@@ -3,74 +3,16 @@
     ViewData["Title"] = "Engagement Survey - Active Questions";
 }
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<style>
-    a {
-        text-decoration: none;
-    }
+<head>
+    <link rel="stylesheet" href="~/css/survey-flow.css" />
 
-    ul.tree, .tree li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-    }
-
-    .tree ul {
-        display: none;
-    }
-
-    .tree > li {
-        display: block;
-        background: #eee;
-        margin-bottom: 2px;
-    }
-
-    .tree span {
-        display: block;
-        padding: 10px 12px;
-    }
-
-    .icon {
-        display: inline-block;
-    }
-
-    .tree .hasChildren > .expanded {
-        background: #999;
-    }
-
-        .tree .hasChildren > .expanded a {
-            color: #fff;
-        }
-
-    .icon:before {
-        content: "+";
-        display: inline-block;
-        min-width: 20px;
-        text-align: center;
-    }
-
-    .tree .icon.expanded:before {
-        content: "-";
-    }
-
-    .show-effect {
-        display: block !important;
-    }
-
-
-    .dataTables_info {
-        text-align: right;
-    }
-</style>
+</head>
 
 <body>
     <h1><strong>@ViewData["Title"]</strong></h1>
 
-    <h2><strong>Question Flow</strong></h2>
+    <h2><strong>Survey Flow</strong></h2>
     <ul class="tree">
         <li class="tree__item">
             <span style="font-size: x-large">
@@ -235,7 +177,7 @@
 
 
 
-    <h2><strong>Question Bank</strong></h2>
+    <h2><strong>Survey Questions</strong></h2>
     <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Questions")'">Create</button>
     <br />
     <br />
@@ -281,7 +223,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure you want to archive this question? Restoration after an archive is not supported. 
+                                        Are you sure you want to archive this question? Restoration after an archive is not supported.
                                         You will need to create a new question in the event this one is needed in the future.
                                     </div>
                                     <div class="modal-footer">
@@ -296,63 +238,25 @@
             }
         </tbody>
     </table>
-
-
-    @*<div id="dialog" title="Confirmation Required">
-            Are you sure about this?
-        </div>
-        <button class="lb">test</button>
-
-        <script>
-            $(document).ready(function () {
-                $("#dialog").dialog({
-                    modal: true,
-                    bgiframe: true,
-                    width: 500,
-                    height: 200,
-                    autoOpen: false
-                });
-
-
-                $(".lb").click(function (e) {
-
-                    e.preventDefault();
-                    var theHREF = $(this).attr("href");
-
-                    $("#dialog").dialog('option', 'buttons', {
-                        "Confirm": function () {
-                            window.location.href = theHREF;
-                        },
-                        "Cancel": function () {
-                            $(this).dialog("close");
-                        }
-                    });
-
-                    $("#dialog").dialog("open");
-
-                });
-
-            });
-        </script>*@
-
-    <script>
-
-
-        $(document).ready(function () {
-            $("#example").DataTable({
-                "processing": true, // for show progress bar
-                "serverSide": false, // for process server side
-                "filter": true, // this is for disable filter (search box)
-                "pageLength": 50,
-                "dom": '<"top"Bf>rt<"bottom"pi>',
-                "buttons": ['excelHtml5', 'print']
-            });
-        });
-
-        //Needed to style the datatable buttons
-        $(document).ready(function () {
-            $('button').addClass("btn btn-primary");
-            $('button').removeClass("dt-button");
-        });
-    </script>
 </body>
+
+<script>
+
+
+    $(document).ready(function () {
+        $("#example").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "pageLength": 50,
+            "dom": '<"top"Bf>rt<"bottom"pi>',
+            "buttons": ['excelHtml5', 'print']
+        });
+    });
+
+    //Needed to style the datatable buttons
+    $(document).ready(function () {
+        $('button').addClass("btn btn-primary");
+        $('button').removeClass("dt-button");
+    });
+</script>
