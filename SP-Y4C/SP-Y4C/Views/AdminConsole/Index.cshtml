@@ -8,24 +8,24 @@
 
 <body>
     <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
-    <div class="row">
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
-                <div class="card">
-                    <img src="~/images/ajna.png" style="width:100%">
+    <div class="gridContainer">
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Index", "Questions")'">
+                <div>
+                    <img src="~/images/ajna.png">
                     <h4><b>Edit Questions/View Survey Flow</b></h4>
                     <p>
-                        Use this to edit existing questions and their choices, add new questions or choices, 
+                        Use this to edit existing questions and their choices, add new questions or choices,
                         archive unused questions, or view the current survey flow.
                     </p>
                 </div>
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Archived", "Questions")'">
-                <div class="card">
-                    <img src="~/images/vishuddhi.png" style="width:100%">
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Archived", "Questions")'">
+                <div>
+                    <img src="~/images/vishuddhi.png">
                     <h4><b>View Archived Questions</b></h4>
                     <p>
                         View archived questions from the engagement survey if you're curious about the past.
@@ -34,59 +34,62 @@
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Reports")'">
-                <div class="card">
-                    <img src="~/images/manipura.png" style="width:100%">
+
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Index", "Reports")'">
+                <div>
+                    <img src="~/images/manipura.png">
                     <h4><b>View Survey Reports</b></h4>
                     <p>
-                        Take a look into how the users are currently answering the questions within the 
+                        Take a look into how the users are currently answering the questions within the
                         engagement survey. Download to Excel or print the results.
                     </p>
                 </div>
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Feedback", "Reports")'">
-                <div class="card">
-                    <img src="~/images/muladhara.png" style="width:100%">
+
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Feedback", "Reports")'">
+                <div>
+                    <img src="~/images/muladhara.png">
                     <h4><b>View Feedback Reports</b></h4>
                     <p>
-                        Take a look at the feedback users are providing regarding what destination page they land on. 
+                        Take a look at the feedback users are providing regarding what destination page they land on.
                         This will be useful to update the information currently present on each landing page.
                     </p>
                 </div>
             </button>
         </div>
 
-        @*<div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Users")'">
+        @*
+            <button class="child" onclick="location.href='@Url.Action("Index", "Users")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg">
                     <h4><b>Manage Users</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Create", "Users")'">
+
+            <button class="child" onclick="location.href='@Url.Action("Create", "Users")'">
                 <div class="card">
-                    <img src="~/images/yogaHealing.jpg" style="width:100%">
+                    <img src="~/images/yogaHealing.jpg">
                     <h4><b>Create Users</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
             </button>
         </div>*@
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">
-                <div class="card">
-                    <img src="~/images/om.png" style="width:100%">
+
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">
+                <div>
+                    <img src="~/images/om.png">
                     <h4><b>Edit Survey URLs</b></h4>
                     <p>
-                        Manage the landing page URLs which a visitor will be redirected towards after submitting 
+                        Manage the landing page URLs which a visitor will be redirected towards after submitting
                         the engagement survey.
                     </p>
                 </div>
@@ -94,3 +97,7 @@
         </div>
     </div>
 </body>
+
+<script>
+    
+</script>

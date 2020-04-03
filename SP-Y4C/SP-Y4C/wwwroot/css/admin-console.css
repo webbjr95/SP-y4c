@@ -1,44 +1,45 @@
-﻿* {
-    box-sizing: border-box;
+﻿/* Create three equal columns that floats next to each other */
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-auto-rows: auto;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Create three equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 10px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Style the counter cards */
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px; /* 5px rounded corners */
-    height: 500px;
-}
-
-/* Add rounded corners */
-img {
-    border-radius: 5px;
-}
-
-/* Removes the background and lines for the buttons */
-.noborder {
+.child {
+    height: 100%;
+    /* Removes the background and lines for the buttons */
     border: none;
-    background: none;
+    outline: none;
+}
+
+.child > div {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.card :hover {
+       outline: dashed;
+}
+.card > * :hover {
+    outline: none;
+}
+
+/* Add rounded corners and fill out the child container */
+/* Best height and width seem to be  */
+.child img {
+    border-radius: 5px;
+    /*width: 100%;*/
+    width: 250px;
+    height: 250px;
+}
+
+/* Card effects applied to each child */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    background-color: #f1f1f1;
+    transition: 0.3s;
+    border-radius: 5px;
+    padding: 5px;
 }
