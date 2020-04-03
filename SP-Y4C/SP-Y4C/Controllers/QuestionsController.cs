@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
 using SP_Y4C.Models.Enums;
-using SP_Y4C.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -43,31 +42,31 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateQuestionViewModel viewModel)
+        public async Task<IActionResult> Create(SurveyQuestion question)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return View(question);
             }
 
-            var question = new SurveyQuestion
+            var newQuestion = new SurveyQuestion
             {
-                QuestionNumber = viewModel.QuestionNumber,
-                TypeId = viewModel.QuestionType,
-                Text = viewModel.Text,
+                QuestionNumber = question.QuestionNumber,
+                TypeId = question.TypeId,
+                Text = question.Text,
                 ActiveStatus = QuestionActiveStatus.Inactive,
-                Weight = viewModel.Weight,
-                Category = viewModel.Category
+                Weight = question.Weight,
+                Category = question.Category
             };
 
             var choices = new List<SurveyChoice>();
 
-            for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+            for (var i = 0; i < question.RadioOptions.Count; i++)
             {
                 var choice = new SurveyChoice
                 {
                     QuestionId = question.Id,
-                    Text = viewModel.RadioOptions[i],
+                    Text = question.RadioOptions[i],
                     OrderInQuestion = i
                 };
 
@@ -95,29 +94,29 @@ namespace SP_Y4C.Controllers
 
             var radioOptions = await _dbContext.SurveyChoices.Where(c => c.QuestionId == question.Id).ToListAsync();
 
-            var viewModel = new EditQuestionViewModel
+            var newQuestion = new SurveyQuestion
             {
                 Id = question.Id,
                 QuestionNumber = question.QuestionNumber,
-                QuestionType = question.TypeId,
+                TypeId = question.TypeId,
                 Text = question.Text,
                 RadioOptions = radioOptions.Select(o => o.Text).ToList(),
                 Weight = question.Weight,
                 Category = question.Category
             };
             
-            return View(viewModel);
+            return View(newQuestion);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditQuestionViewModel viewModel)
+        public async Task<IActionResult> Edit(SurveyQuestion question)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return View(question);
             }
 
-            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == viewModel.Id);
+            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == question.Id);
 
             if (existingQuestion.TypeId == QuestionType.Radio)
             {
@@ -127,24 +126,24 @@ namespace SP_Y4C.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
-            existingQuestion.Text = viewModel.Text;
-            existingQuestion.QuestionNumber = viewModel.QuestionNumber;
-            existingQuestion.TypeId = viewModel.QuestionType;
+            existingQuestion.Text = question.Text;
+            existingQuestion.QuestionNumber = question.QuestionNumber;
+            existingQuestion.TypeId = question.TypeId;
             existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
 
             _dbContext.SurveyQuestions.Update(existingQuestion);
             await _dbContext.SaveChangesAsync();
 
-            if (viewModel.QuestionType == QuestionType.Radio)
+            if (question.TypeId == QuestionType.Radio)
             {
                 var newChoices = new List<SurveyChoice>();
 
-                for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+                for (var i = 0; i < question.RadioOptions.Count; i++)
                 {
                     var choice = new SurveyChoice
                     {
-                        QuestionId = viewModel.Id,
-                        Text = viewModel.RadioOptions[i],
+                        QuestionId = question.Id,
+                        Text = question.RadioOptions[i],
                         OrderInQuestion = i
                     };
 

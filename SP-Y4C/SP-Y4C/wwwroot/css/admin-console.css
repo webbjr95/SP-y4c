@@ -19,10 +19,10 @@
 }
 
 .card :hover {
-       outline: dashed;
+    box-shadow: 0px 0px 4px 4px rgb(76, 255, 0);
 }
 .card > * :hover {
-    outline: none;
+    box-shadow: none;
 }
 
 /* Add rounded corners and fill out the child container */

@@ -1,4 +1,4 @@
-﻿@model EditQuestionViewModel
+﻿@model SurveyQuestion
 @{
     ViewData["Title"] = "Edit a Question";
     var radioOptionId = (int)QuestionType.Radio;
@@ -18,9 +18,9 @@
                 <span asp-validation-for="QuestionNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="QuestionType" class="control-label"></label>
-                <select asp-for="QuestionType" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
-                <span asp-validation-for="QuestionType" class="text-danger"></span>
+                <label asp-for="TypeId" class="control-label"></label>
+                <select asp-for="TypeId" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
+                <span asp-validation-for="TypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
@@ -28,7 +28,7 @@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
 
-            @{ var hidden = Model.QuestionType != QuestionType.Radio; }
+            @{ var hidden = Model.TypeId != QuestionType.Radio; }
 
             @if (!hidden)
             {
