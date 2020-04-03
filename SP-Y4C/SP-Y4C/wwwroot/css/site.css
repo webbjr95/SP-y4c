@@ -5,7 +5,7 @@
 /* This is for the data tables EXCEL And PRINT buttons */
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-    margin: 2.5px;
+    margin-right: 5px;
     border-radius: 5px;
 }
 

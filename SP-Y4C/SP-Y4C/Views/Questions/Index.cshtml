@@ -200,7 +200,7 @@
                     <td>@question.ActiveStatus</td>
                     <td>@question.QuestionNumber</td>
                     <td>@question.TypeId.ToString()</td>
-                    <td width="50%">@question.Text</td>
+                    <td>@question.Text</td>
                     <td>@question.CreatedAtUtc.LocalDateTime</td>
                     <td>@question.Weight</td>
                     <td>
@@ -254,6 +254,5 @@
     //Needed to style the datatable buttons
     $(document).ready(function () {
         $('button').addClass("btn btn-primary");
-        $('button').removeClass("dt-button");
     });
 </script>

@@ -19,13 +19,13 @@
         <tbody>
             @foreach (var answer in Model)
             {
-            <tr>
-                <td>@answer.UserId</td>
-                <td>@answer.Rating</td>
-                <td>@answer.Text</td>
-                <td>@answer.Url</td>
-                <td>@answer.SubmittedAtUtc.LocalDateTime</td>
-            </tr>
+                <tr>
+                    <td>@answer.UserId</td>
+                    <td>@answer.Rating</td>
+                    <td>@answer.Text</td>
+                    <td>@answer.Url</td>
+                    <td>@answer.SubmittedAtUtc.LocalDateTime</td>
+                </tr>
             }
         </tbody>
     </table>
@@ -47,6 +47,5 @@
     //Needed to style the datatable buttons
     $(document).ready(function () {
         $('button').addClass("btn btn-primary");
-        $('button').removeClass("dt-button");
     });
 </script>
