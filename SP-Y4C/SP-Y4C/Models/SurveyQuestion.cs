@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SP_Y4C.Models
 {
@@ -48,5 +49,8 @@ namespace SP_Y4C.Models
         [Display(Name = "Radio Options")]
         public ICollection<SurveyChoice> Choices { get; set; }
         public ICollection<SurveyAnswer> Answer { get; set; }
+
+        [NotMapped]
+        public List<string> RadioOptions { get; set; }
     }
 }

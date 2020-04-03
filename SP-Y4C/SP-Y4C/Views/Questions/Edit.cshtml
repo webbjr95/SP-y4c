@@ -1,7 +1,7 @@
-﻿@model EditQuestionViewModel
+﻿@model SurveyQuestion
 @{
     ViewData["Title"] = "Edit a Question";
-    var radioOptionId = (int)QuestionType.Radio;
+    var textOptionId = (int)QuestionType.Text;
 }
 
 
@@ -18,9 +18,9 @@
                 <span asp-validation-for="QuestionNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="QuestionType" class="control-label"></label>
-                <select asp-for="QuestionType" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
-                <span asp-validation-for="QuestionType" class="text-danger"></span>
+                <label asp-for="TypeId" class="control-label"></label>
+                <select asp-for="TypeId" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
+                <span asp-validation-for="TypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
@@ -28,7 +28,7 @@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
 
-            @{ var hidden = Model.QuestionType != QuestionType.Radio; }
+            @{ var hidden = ( Model.TypeId == QuestionType.Text ); }
 
             @if (!hidden)
             {
@@ -43,7 +43,7 @@
                         <div class="form-group radio-option-parent" id="@parentId">
                             <label asp-for="@Model.RadioOptions[i]" class="control-label">Choice</label>
                             <div class="input-group">
-                                <input asp-for="@Model.RadioOptions[i]" type="text" class="form-control" />
+                                <input asp-for="@Model.RadioOptions[i]" type="text" class="choices form-control" />
                                 <div class="input-group-btn">
                                     <button type="button" id="btnRemoveChoice" class="btn btn-danger" onclick="removeChoice('@parentId')">-</button>
                                 </div>
@@ -110,7 +110,7 @@
     <script type="text/javascript">
         var choiceCount = 0;
         var nextIndex = 0;
-        var radioId = @radioOptionId;
+        var textId = @textOptionId;
 
         function addChoice() {
             choiceCount += 1
@@ -161,19 +161,19 @@
         }
 
         function handleQuestionTypeChange() {
-            var selectList = get("#QuestionType");
+            var selectList = get("#TypeId");
             var selectedValue = selectList.value;
 
-            if (selectedValue == radioId) {
-                show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!
-            } else {
+            if (selectedValue == textId) {
                 var options = document.querySelectorAll(".radio-option-parent");
 
-                for (var i = 0; i < options.length; i++){
+                for (var i = 0; i < options.length; i++) {
                     options[i].remove();
                 }
 
                 hide("radio-options");
+            } else {
+                show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!
             }
         }
 

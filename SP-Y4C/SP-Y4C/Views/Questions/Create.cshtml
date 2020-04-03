@@ -1,4 +1,4 @@
-﻿@model CreateQuestionViewModel
+﻿@model SurveyQuestion
 @{
     ViewData["Title"] = "Create a Question";
     var radioOptionId = (int)QuestionType.Radio;
@@ -16,9 +16,9 @@
                 <span asp-validation-for="QuestionNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="QuestionType" class="control-label"></label>
-                <select asp-for="QuestionType" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
-                <span asp-validation-for="QuestionType" class="text-danger"></span>
+                <label asp-for="TypeId" class="control-label"></label>
+                <select asp-for="TypeId" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
+                <span asp-validation-for="TypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
@@ -43,7 +43,7 @@
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Questions")'">Cancel</button>
+                <button class="btn btn-danger" type="button" onclick="location.href='@Url.Action("Index", "Questions")'">Cancel</button>
                 <input type="button" value="Create" class="btn btn-primary" onclick="handleSubmit();" />
             </div>
         </form>

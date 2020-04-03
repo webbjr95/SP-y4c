@@ -1,3 +1,25 @@
 ﻿.dataTables_info {
     text-align: right;
 }
+
+/* This is for the data tables EXCEL And PRINT buttons */
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+body {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    letter-spacing: 0em;
+    line-height: 1.6em;
+    font-family: p22-mackinac-pro;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: .01em;
+    line-height: 1.8em;
+    text-transform: none;
+    color: #555;
+}

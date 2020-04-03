@@ -6,7 +6,6 @@
 
 <head>
     <link rel="stylesheet" href="~/css/survey-flow.css" />
-
 </head>
 
 <body>
@@ -201,7 +200,7 @@
                     <td>@question.ActiveStatus</td>
                     <td>@question.QuestionNumber</td>
                     <td>@question.TypeId.ToString()</td>
-                    <td width="50%">@question.Text</td>
+                    <td>@question.Text</td>
                     <td>@question.CreatedAtUtc.LocalDateTime</td>
                     <td>@question.Weight</td>
                     <td>
@@ -241,8 +240,6 @@
 </body>
 
 <script>
-
-
     $(document).ready(function () {
         $("#example").DataTable({
             "processing": true, // for show progress bar
@@ -257,6 +254,5 @@
     //Needed to style the datatable buttons
     $(document).ready(function () {
         $('button').addClass("btn btn-primary");
-        $('button').removeClass("dt-button");
     });
 </script>

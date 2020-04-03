@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
 using SP_Y4C.Models.Enums;
-using SP_Y4C.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -43,31 +42,31 @@ namespace SP_Y4C.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateQuestionViewModel viewModel)
+        public async Task<IActionResult> Create(SurveyQuestion question)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return View(question);
             }
 
-            var question = new SurveyQuestion
+            var newQuestion = new SurveyQuestion
             {
-                QuestionNumber = viewModel.QuestionNumber,
-                TypeId = viewModel.QuestionType,
-                Text = viewModel.Text,
+                QuestionNumber = question.QuestionNumber,
+                TypeId = question.TypeId,
+                Text = question.Text,
                 ActiveStatus = QuestionActiveStatus.Inactive,
-                Weight = viewModel.Weight,
-                Category = viewModel.Category
+                Weight = question.Weight,
+                Category = question.Category
             };
 
             var choices = new List<SurveyChoice>();
 
-            for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+            for (var i = 0; i < question.RadioOptions.Count; i++)
             {
                 var choice = new SurveyChoice
                 {
                     QuestionId = question.Id,
-                    Text = viewModel.RadioOptions[i],
+                    Text = question.RadioOptions[i],
                     OrderInQuestion = i
                 };
 
@@ -95,31 +94,31 @@ namespace SP_Y4C.Controllers
 
             var radioOptions = await _dbContext.SurveyChoices.Where(c => c.QuestionId == question.Id).ToListAsync();
 
-            var viewModel = new EditQuestionViewModel
+            var questionWithChoices = new SurveyQuestion
             {
                 Id = question.Id,
                 QuestionNumber = question.QuestionNumber,
-                QuestionType = question.TypeId,
+                TypeId = question.TypeId,
                 Text = question.Text,
                 RadioOptions = radioOptions.Select(o => o.Text).ToList(),
                 Weight = question.Weight,
                 Category = question.Category
             };
             
-            return View(viewModel);
+            return View(questionWithChoices);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditQuestionViewModel viewModel)
+        public async Task<IActionResult> Edit(SurveyQuestion question)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return View(question);
             }
 
-            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == viewModel.Id);
+            var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == question.Id);
 
-            if (existingQuestion.TypeId == QuestionType.Radio)
+            if (existingQuestion.TypeId == QuestionType.Radio || existingQuestion.TypeId == QuestionType.Checkbox)
             {
                 var existingChoices = await _dbContext.SurveyChoices.Where(c => c.QuestionId == existingQuestion.Id).ToListAsync();
 
@@ -127,36 +126,106 @@ namespace SP_Y4C.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
-            existingQuestion.Text = viewModel.Text;
-            existingQuestion.QuestionNumber = viewModel.QuestionNumber;
-            existingQuestion.TypeId = viewModel.QuestionType;
+            existingQuestion.Text = question.Text;
+            existingQuestion.QuestionNumber = question.QuestionNumber;
+            existingQuestion.TypeId = question.TypeId;
             existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
+            existingQuestion.Category = question.Category;
 
             _dbContext.SurveyQuestions.Update(existingQuestion);
             await _dbContext.SaveChangesAsync();
 
-            if (viewModel.QuestionType == QuestionType.Radio)
+
+            // Makes sure we don't experience an error message when checking if there are any choices.
+            if (question.RadioOptions != null && question.TypeId != QuestionType.Text)
             {
                 var newChoices = new List<SurveyChoice>();
 
-                for (var i = 0; i < viewModel.RadioOptions.Count; i++)
+                for (var i = 0; i < question.RadioOptions.Count; i++)
                 {
-                    var choice = new SurveyChoice
-                    {
-                        QuestionId = viewModel.Id,
-                        Text = viewModel.RadioOptions[i],
-                        OrderInQuestion = i
-                    };
+                    // Since the choice(s) aren't valid without the text field and would cause an error we need to check
+                    if (question.RadioOptions[i] != null) 
+                    { 
+                        var choice = new SurveyChoice
+                        {
+                            Id = Guid.NewGuid(),
+                            QuestionId = question.Id,
+                            Text = question.RadioOptions[i],
+                            OrderInQuestion = i
+                        };
 
-                    newChoices.Add(choice);
+                        newChoices.Add(choice);
+                    }
                 }
 
                 await _dbContext.SurveyChoices.AddRangeAsync(newChoices);
                 await _dbContext.SaveChangesAsync();
             }
-            
+
             return RedirectToAction("Index");
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(SurveyQuestion question)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(question);
+        //    }
+
+        //    var existingQuestion = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == question.Id);
+        //    //var existingChoices = new List<SurveyChoice>();
+        //    if (existingQuestion.TypeId == QuestionType.Radio || existingQuestion.TypeId == QuestionType.Checkbox)
+        //    {
+        //        var existingChoices = await _dbContext.SurveyChoices.Where(c => c.QuestionId == existingQuestion.Id).ToListAsync();
+
+        //        //Deletes the existing choices before recreating them later on.
+        //        _dbContext.SurveyChoices.RemoveRange(existingChoices);
+        //        await _dbContext.SaveChangesAsync();
+        //    }
+
+        //    //Update the existing question fields if they are changed within the form.
+        //    existingQuestion.Text = question.Text;
+        //    existingQuestion.QuestionNumber = question.QuestionNumber;
+        //    existingQuestion.TypeId = question.TypeId;
+        //    existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
+        //    existingQuestion.Category = question.Category;
+
+        //    _dbContext.SurveyQuestions.Update(existingQuestion);
+        //    await _dbContext.SaveChangesAsync();
+
+
+        //    //Check to see if there are any choices for checkboxes or radio buttons.
+        //    if ((question.RadioOptions.Count > 0)  && 
+        //        (question.TypeId == QuestionType.Radio || question.TypeId == QuestionType.Checkbox))
+        //    {
+        //        var newChoices = new List<SurveyChoice>();
+
+        //        for (var i = 0; i < question.RadioOptions.Count; i++)
+        //        {
+        //            var choice = new SurveyChoice
+        //            {
+        //                Id = Guid.NewGuid(),
+        //                QuestionId = question.Id,
+        //                Text = question.RadioOptions[i],
+        //                OrderInQuestion = i++
+        //            };
+
+        //            newChoices.Add(choice);
+
+        //            ////Check if the new choice text is found within the existing choices.
+        //            //if (IsChoiceNew(existingChoices, choice))
+        //            //{
+        //            //    newChoices.Add(choice);
+        //            //}
+        //        }
+
+        //        await _dbContext.SurveyChoices.AddRangeAsync(newChoices);
+        //        await _dbContext.SaveChangesAsync();
+        //    }
+
+        //    return RedirectToAction("Index");
+        //}
 
         public async Task<IActionResult> Archive(Guid id)
         {
@@ -192,6 +261,18 @@ namespace SP_Y4C.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        private bool IsChoiceNew(List<SurveyChoice> choices, SurveyChoice choice)
+        {
+            for (int i = 0; i < choices.Count; i++)
+            {
+                if (choices[i].Text == choice.Text)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

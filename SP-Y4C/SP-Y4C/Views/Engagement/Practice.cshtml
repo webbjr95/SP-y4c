@@ -6,7 +6,7 @@
 
 <div id="form">
     <form asp-controller="Engagement" asp-action="Submit" method="post">
-        <div class="QuestionContainer">
+        <div class="HeaderContainer">
             Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
             the below form to completion to find out where you can make the biggest difference.
             <br />
@@ -55,7 +55,7 @@
         }
 
         @* Need to change the below interest *@
-        <input type="hidden" name="page" value="practice" />
+        <input type="hidden" name="page" value="@SurveyBranch.Practice" />
         <button type="submit" value="Practice" class="btn btn-primary" style="width:100%; padding: 14px 20px;
         margin: 8px 0;
         border: none;
