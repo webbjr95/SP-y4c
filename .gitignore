@@ -328,3 +328,8 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder
 .mfractor/
+
+
+SP-Y4C/SP-Y4C/Migrations/
+SP-Y4C/SP-Y4C/wwwroot/lib/
+

@@ -26,7 +26,13 @@ namespace SP_Y4C
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Y4CDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));            
+            
+            services.AddDbContext<UserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<UserDbContext>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

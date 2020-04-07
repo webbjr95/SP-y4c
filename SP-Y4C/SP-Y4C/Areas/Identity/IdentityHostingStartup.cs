@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SP_Y4C.Areas.Identity.Data;
 using SP_Y4C.Data;
 
 [assembly: HostingStartup(typeof(SP_Y4C.Areas.Identity.IdentityHostingStartup))]
@@ -16,12 +15,6 @@ namespace SP_Y4C.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<UserDbContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("UserDbContextConnection")));
-
-                services.AddDefaultIdentity<ApplicationUser>()
-                    .AddEntityFrameworkStores<UserDbContext>();
             });
         }
     }
