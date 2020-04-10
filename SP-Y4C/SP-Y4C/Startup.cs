@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SP_Y4C.Data;
 using Microsoft.AspNetCore.Mvc;
+using SP_Y4C.Areas.Identity.Data;
 
 namespace SP_Y4C
 {
@@ -26,12 +27,12 @@ namespace SP_Y4C
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Y4CDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));            
-            
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<UserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<UserDbContext>();
 
             services.AddMvc()
