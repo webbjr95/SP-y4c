@@ -1,8 +1,7 @@
 ﻿/* Create three equal columns that floats next to each other */
 .gridContainer {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-auto-rows: auto;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .child {
@@ -27,12 +26,11 @@
 
 /* Add rounded corners and fill out the child container */
 /* Best height and width seem to be  */
-.child img {
+/*.child img {
     border-radius: 5px;
-    /*width: 100%;*/
     width: 250px;
     height: 250px;
-}
+}*/
 
 /* Card effects applied to each child */
 .card {
@@ -42,4 +40,12 @@
     transition: 0.3s;
     border-radius: 5px;
     padding: 5px;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+p {
+    text-align: left;
 }

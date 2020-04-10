@@ -45,10 +45,6 @@ namespace SP_Y4C.Areas.Identity.Pages.Account.Manage
             [Required]
             [EmailAddress]
             public string Email { get; set; }
-
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
