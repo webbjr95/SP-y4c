@@ -1,7 +1,7 @@
 ﻿@model SurveyQuestion
 @{
     ViewData["Title"] = "Create a Question";
-    var radioOptionId = (int)QuestionType.Radio;
+    var textOptionId = (int)QuestionType.Text;
 }
 
 <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
@@ -54,7 +54,7 @@
     <script type="text/javascript">
         var choiceCount = 0;
         var nextIndex = 0;
-        var radioId = @radioOptionId;
+        var textId = @textOptionId;
 
         function addChoice() {
             choiceCount += 1
@@ -105,19 +105,19 @@
         }
 
         function handleQuestionTypeChange() {
-            var selectList = get("#QuestionType");
+            var selectList = get("#TypeId");
             var selectedValue = selectList.value;
 
-            if (selectedValue == radioId) {
-                show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!
-            } else {
+            if (selectedValue == textId) {
                 var options = document.querySelectorAll(".radio-option-parent");
 
-                for (var i = 0; i < options.length; i++){
+                for (var i = 0; i < options.length; i++) {
                     options[i].remove();
                 }
 
                 hide("radio-options");
+            } else {
+                show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!
             }
         }
 
