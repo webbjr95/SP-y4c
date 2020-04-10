@@ -69,3 +69,47 @@
         </table>
     </div>
 </body>
+<<<<<<< Updated upstream
+=======
+
+<script>
+    $(document).ready( function () {
+    var currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+
+    var d = day + "-" + month + "-" + year;
+
+    $(document).ready(function () {
+        $("#example").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "pageLength": 50,
+            "dom": '<"top"Bf>rt<"bottom"pi>',
+            "buttons": [
+                {
+                    sExtends: 'excelHtml5',
+                    sTitle: d+' '              //Devany you left off here
+                },
+                {
+                    extend: 'print'
+                }
+            ],
+            "columns": [
+                { "visible": false },
+                null,
+                null,
+                null,
+                null
+            ]
+        });
+    });
+
+    //Needed to style the datatable buttons
+    $(document).ready(function () {
+        $('button').addClass("btn btn-primary");
+    });
+</script>
+>>>>>>> Stashed changes

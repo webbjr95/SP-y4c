@@ -20,7 +20,13 @@ namespace SP_Y4C.Controllers
         // GET: GenerateReport
         public async Task<ActionResult> Index()
         {
+<<<<<<< Updated upstream
             return View(await _dbContext.SurveyAnswers.ToListAsync());
+=======
+            var answers = _dbContext.SurveyAnswers.Include(q => q.Question);
+            return View(answers);
+
+>>>>>>> Stashed changes
         }
 
         // GET: GenerateReport/Create
