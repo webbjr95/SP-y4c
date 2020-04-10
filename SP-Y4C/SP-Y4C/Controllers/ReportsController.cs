@@ -18,38 +18,15 @@ namespace SP_Y4C.Controllers
             _dbContext = dbContext;
         }
         // GET: GenerateReport
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-<<<<<<< Updated upstream
-            return View(await _dbContext.SurveyAnswers.ToListAsync());
-=======
             var answers = _dbContext.SurveyAnswers.Include(q => q.Question);
             return View(answers);
-
->>>>>>> Stashed changes
         }
-
-        // GET: GenerateReport/Create
-        public ActionResult Generate()
+        public ActionResult Feedback()
         {
-            return View();
+            var feedback = _dbContext.SurveyFeedback;
+            return View(feedback);
         }
-
-        //// POST: GenerateReport/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }

@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.4.1",
+      "files": [
+        "jquery.min.js",
+        "jquery.js"
+      ],
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "twitter-bootstrap@3.4.1",
+      "files": [
+        "css/bootstrap.css",
+        "css/bootstrap.min.css",
+        "css/bootstrap.css.map",
+        "css/bootstrap.min.css.map",
+        "js/bootstrap.js",
+        "js/bootstrap.min.js"
+      ],
+      "destination": "wwwroot/lib/bootstrap/dist/"
+    },
+    {
+      "library": "jquery@3.4.1",
+      "files": [
+        "jquery.js",
+        "jquery.min.js"
+      ],
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "datatables@1.10.20",
+      "files": [
+        "css/dataTables.bootstrap4.css",
+        "css/dataTables.bootstrap4.min.css",
+        "css/dataTables.jqueryui.css",
+        "css/dataTables.jqueryui.min.css",
+        "js/dataTables.bootstrap4.js",
+        "js/dataTables.bootstrap4.min.js",
+        "js/dataTables.dataTables.js",
+        "js/dataTables.dataTables.min.js",
+        "js/dataTables.jqueryui.js",
+        "js/dataTables.jqueryui.min.js"
+      ],
+      "destination": "wwwroot/lib/dataTables/dist/"
+    },
+    {
+      "library": "Buttons@2.0.0",
+      "files": [
+        "css/buttons.css",
+        "css/buttons.min.css",
+        "js/buttons.js",
+        "js/buttons.min.js"
+      ],
+      "destination": "wwwroot/lib/buttons/dist/"
+    }
+  ]
+}

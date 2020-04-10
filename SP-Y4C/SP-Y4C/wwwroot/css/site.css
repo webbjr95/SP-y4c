@@ -1,35 +1,25 @@
-﻿﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.dataTables_info {
+    text-align: right;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/* This is for the data tables EXCEL And PRINT buttons */
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    margin-right: 5px;
+    border-radius: 5px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+body {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    letter-spacing: 0em;
+    line-height: 1.6em;
+    font-family: p22-mackinac-pro;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: .01em;
+    line-height: 1.8em;
+    text-transform: none;
+    color: #555;
 }

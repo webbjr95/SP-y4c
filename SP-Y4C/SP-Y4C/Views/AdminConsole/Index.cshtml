@@ -1,25 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Admin Console";
+    ViewData["Title"] = "Admin Console - Navigate to Other Features";
 }
 
-<body>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    <div>
-        @*<div alt="Reporting">Reporting</div>
-        <div alt="SurveyManagement">Survey Management</div>*@
+<head>
+    <link rel="stylesheet" href="~/css/admin-console.css" />
+</head>
 
-        <img src="~/images/adminConsole.jpg" />
-=======
-    <h1><strong>@ViewData["Title"]</strong></h1>
-    <div class="row">
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
-                <div class="card">
-                    <img src="~/images/ajna.png" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Questions</b></h4>
-                    <p>Architect & Engineer</p>
-=======
+<body>
     <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
     <div class="gridContainer">
         <div class="card">
@@ -30,19 +17,10 @@
                         Use this to edit existing questions and their choices, add new questions or choices,
                         archive unused questions, or view the current survey flow.
                     </p>
->>>>>>> Stashed changes
                 </div>
             </button>
         </div>
 
-<<<<<<< Updated upstream
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Choices")'">
-                <div class="card">
-                    <img src="~/images/muladhara.png" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Choices</b></h4>
-                    <p>Architect & Engineer</p>
-=======
         <div class="card">
             <button class="child" onclick="location.href='@Url.Action("Archived", "Questions")'">
                 <div>
@@ -50,29 +28,10 @@
                     <p>
                         View archived questions from the engagement survey if you're curious about the past.
                     </p>
->>>>>>> Stashed changes
                 </div>
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Pairing")'">
-                <div class="card">
-                    <img src="~/images/manipura.png" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Question/Choice Pairing</b></h4>
-                    <p>Architect & Engineer</p>
-                </div>
-            </button>
-        </div>
-
-<<<<<<< Updated upstream
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Questions")'">
-                <div class="card">
-                    <img src="~/images/surya.png" alt="Avatar" style="width:100%">
-                    <h4><b>Edit Survey Flow</b></h4>
-                    <p>Architect & Engineer</p>
-=======
         <div class="card">
             <button class="child" onclick="location.href='@Url.Action("Index", "Reports")'">
                 <div>
@@ -81,78 +40,29 @@
                         Take a look into how the users are currently answering the questions within the
                         engagement survey. Download to Excel or print the results.
                     </p>
->>>>>>> Stashed changes
                 </div>
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Reports")'">
-                <div class="card">
-                    <img src="~/images/anahata.png" alt="Avatar" style="width:100%">
-                    <h4><b>View Survey Reports</b></h4>
-                    <p>Architect & Engineer</p>
-                </div>
-            </button>
-        </div>
-
-<<<<<<< Updated upstream
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Feedback", "Reports")'">
-                <div class="card">
-                    <img src="~/images/sahrasrara.png" alt="Avatar" style="width:100%">
-=======
         <div class="card">
             <button class="child" onclick="location.href='@Url.Action("Feedback", "Reports")'">
                 <div>
->>>>>>> Stashed changes
                     <h4><b>View Feedback Reports</b></h4>
                     <p>Architect & Engineer</p>
                 </div>
             </button>
         </div>
 
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "Users")'">
-                <div class="card">
-<<<<<<< Updated upstream
-                    <img src="~/images/om.png" alt="Avatar" style="width:100%">
-=======
->>>>>>> Stashed changes
-                    <h4><b>Manage Users</b></h4>
-                    <p>Architect & Engineer</p>
-                </div>
-            </button>
-        </div>
-
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Create", "Users")'">
-                <div class="card">
-<<<<<<< Updated upstream
-                    <img src="~/images/vishuddhi.png" alt="Avatar" style="width:100%">
-=======
->>>>>>> Stashed changes
-                    <h4><b>Create Users</b></h4>
-                    <p>Architect & Engineer</p>
-                </div>
-            </button>
-        </div>
-
-<<<<<<< Updated upstream
-        <div class="column">
-            <button class="noborder" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">
-                <div class="card">
-                    <img src="~/images/svadhishthana.png" alt="Avatar" style="width:100%">
-=======
         <div class="card">
             <button class="child" onclick="location.href='@Url.Action("Index", "VisitorUrl")'">
                 <div>
->>>>>>> Stashed changes
                     <h4><b>Edit Survey URLs</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>
+                        Manage the landing page URLs which a visitor will be redirected towards after submitting
+                        the engagement survey.
+                    </p>
                 </div>
             </button>
         </div>
->>>>>>> Stashed changes
     </div>
 </body>

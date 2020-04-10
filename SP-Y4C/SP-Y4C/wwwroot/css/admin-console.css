@@ -1,0 +1,45 @@
+﻿/* Create three equal columns that floats next to each other */
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-auto-rows: auto;
+}
+
+.child {
+    height: 100%;
+    /* Removes the background and lines for the buttons */
+    border: none;
+    outline: none;
+}
+
+.child > div {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.card :hover {
+    box-shadow: 0px 0px 4px 4px rgb(76, 255, 0);
+}
+.card > * :hover {
+    box-shadow: none;
+}
+
+/* Add rounded corners and fill out the child container */
+/* Best height and width seem to be  */
+.child img {
+    border-radius: 5px;
+    /*width: 100%;*/
+    width: 250px;
+    height: 250px;
+}
+
+/* Card effects applied to each child */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    background-color: #f1f1f1;
+    transition: 0.3s;
+    border-radius: 5px;
+    padding: 5px;
+}

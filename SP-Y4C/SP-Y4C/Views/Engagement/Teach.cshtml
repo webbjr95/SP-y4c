@@ -1,111 +1,72 @@
-﻿@{
-    ViewData["Title"] = "Yoga 4 Change - Contact";
+﻿@model IQueryable<SurveyQuestion>
+@{
+    ViewData["Title"] = "Test";
 }
-<style>
-    input[type=text], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
 
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
+<head>
+    <link rel="stylesheet" href="~/css/engagement-form.css" />
+</head>
+
+<body>
+    <div id="form">
+        <form asp-controller="Engagement" asp-action="Submit" method="post">
+            <div class="HeaderContainer">
+                Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
+                the below form to completion to find out where you can make the biggest difference.
+                <br />
+                <br />
+                <br />
+                First, we would like to get a better understanding of who you are so we make sure this survey's placement is effective!
+            </div>
+
+
+            @{
+                foreach (var q in Model)
+                {
+                    <div class="QuestionContainer">
+                        <label style="width:100%;" for="question" name="@q.Id">
+                            <label class="QuestionTitle">@q.Text</label><br />
+                            <input type="hidden" name="weight" value="@q.Weight" />
+
+
+                            @{
+                                if (q.Choices.Count == 0)
+                                {
+                                    if (q.TypeId == QuestionType.Text)
+                                    {
+                                        <input name="@q.Id" type="@q.TypeId" required />
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var c in q.Choices)
+                                    {
+                                        if (q.Id == c.QuestionId)
+                                        {
+                                            <label for="@c.QuestionId" name="@c.Id">
+                                                <label class="ChoiceText">
+                                                    <input name="@c.QuestionId" type="@q.TypeId" value="@c.Id" required />
+                                                    @c.Text
+                                                </label>
+                                            </label><br />
+                                        }
+                                    }
+                                }
+                            }
+                        </label><br />
+                    </div>
+                }
+            }
+
+
+            <input type="hidden" name="page" value="@SurveyBranch.Teach" />
+            <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
         margin: 8px 0;
         border: none;
         border-radius: 4px;
-        cursor: pointer;
-    }
-
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
-
-    div #form {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
-    div #formQuestion {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        font-size: large;
-    }
-
-    div #formText {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        font-size: large;
-        font-weight: bold;
-    }
-
-    h1 {
-        text-align: center;
-    }
-</style>
-
-<div>
-    <h1>Learn More About Teaching!</h1>
-    <br />
-    <br />
-
-    <div id="form">
-        <form asp-controller="Engagement" asp-action="NextStep" method="post">
-            <div id="formText">
-                Thank you for visiting Yoga 4 Change! Are you new or interested in our cause? Follow
-                the below form to completion to find out where you can make the biggest difference.
-            </div>
-            <br />
-
-            <div id="formText">
-                First, we would like to get a better understanding of who you are so we make sure this survey's placement is effective!
-                </br>
-                *All question in bold are required*
-            </div>
-
-
-            <lablel id="formQuestion"><strong>What's the highest degree you have earned:</strong></lablel><br />
-            <input type="radio" name="teachExp" value="no" /> High school diploma or equivalency (GED)<br />
-            <input type="radio" name="teachExp" value="no" />  Associate degree (junior college)<br />
-            <input type="radio" name="teachExp" value="yes" /> Bachelor's degree<br />
-            <input type="radio" name="teachExp" value="yes" /> Master's degree<br />
-            <input type="radio" name="teachExp" value="yes" /> Doctorate<br />
-            <input type="radio" name="teachExp" value="yes" /> Professional (MD, JD, DDS, etc.)<br />
-            <input type="radio" name="teachExp" value="yes" /> Prefer not to say<br /><br />
-
-
-            <lablel id="formQuestion"><strong>How much do you make in a calendar year:</strong></lablel><br />
-            <input type="radio" name="teachExp" value="no" />  $1 - $19,999<br />
-            <input type="radio" name="teachExp" value="no" />  $20,000 - $49,999<br />
-            <input type="radio" name="teachExp" value="yes" /> $50,000 - $99,999<br />
-            <input type="radio" name="teachExp" value="yes" /> $100,000+<br />
-            <input type="radio" name="teachExp" value="yes" /> Prefer not to say<br /><br />
-
-
-            <lablel id="formQuestion">Where do you teach:</lablel>
-            <input type="text" /><br /><br />
-
-            <lablel id="formQuestion"><strong>How long have you been teaching yoga:</strong></lablel><br />
-            <input type="radio" name="teachExp" value="no" /> 0 - 1 Years<br />
-            <input type="radio" name="teachExp" value="yes" /> 2 - 5 Years<br />
-            <input type="radio" name="teachExp" value="yes" /> 5 - 10 Years<br />
-            <input type="radio" name="teachExp" value="yes" /> 10+ Years<br /><br />
-
-            <lablel id="formQuestion"><strong>Would you be interested in becoming a teacher for Yoga 4 Change:</strong></lablel><br />
-            <input type="radio" name="teachInterest" value="yes" /> Yes<br />
-            <input type="radio" name="teachInterest" value="no" /> No<br />
-
-            <input type="hidden" name="page" value="teach" />
-
-            <input type="submit" value="Next Step" />
+        cursor: pointer;">
+                Submit
+            </button>
         </form>
     </div>
-</div>
+</body>

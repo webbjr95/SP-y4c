@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <script src="~/lib/jquery/jquery.min.js"></script>
+
+        @* Related to the datatables plugin *@
+        <script src="~/js/jszip.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/sp-1.0.1/datatables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/sp-1.0.1/datatables.min.css" />
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <script src="~/lib/jquery/jquery.min.js"></script>
+        
+        @* Related to the datatables plugin *@
+        <script src="~/js/jszip.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/sp-1.0.1/datatables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/sp-1.0.1/datatables.min.css" />
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -28,13 +40,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="AdminConsole" asp-action="Index">Admin</a></li>
-                    <li><a asp-area="" asp-controller="Reports" asp-action="Index">Reports</a></li>
+                    <li><a asp-area="" asp-controller="Engagement" asp-action="Index">Engagement</a></li>
+                    <li><a asp-area="" asp-controller="Reports" asp-action="Index">Survey Reports</a></li>
+                    <li><a asp-area="" asp-controller="Reports" asp-action="Feedback">Feedback Reports</a></li>
                     <li><a asp-area="" asp-controller="Questions" asp-action="Index">Question Management</a></li>
-                    <li><a asp-area="" asp-controller="Questions" asp-action="Inactive">Inactive</a></li>
-                    <li><a asp-area="" asp-controller="Questions" asp-action="Archived">Archived</a></li>
+                    <li><a asp-area="" asp-controller="Questions" asp-action="Archived">Archived Questions</a></li>
                 </ul>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -42,30 +55,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - Yoga 4 Change. All Rights Reserved.</p>
+            <p>&copy; @DateTime.Today.Year - Yoga 4 Change. All Rights Reserved.</p>
         </footer>
     </div>
-
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
 
     @RenderSection("Scripts", required: false)
 </body>

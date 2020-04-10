@@ -1,0 +1,100 @@
+﻿input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=button] {
+    width: 25%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: #45a049;
+}
+
+input[type=submit] {
+    width: 25%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+div #Feedback {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 75%;
+    margin: auto;
+}
+
+div #formText {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+div .modal-body {
+    margin: auto;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+form#Feedback input[type="radio"] {
+    -webkit-appearance: none;
+    width: 90px;
+    height: 90px;
+    border: none;
+    cursor: pointer;
+    transition: border .2s ease;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    margin: 0 5px;
+    transition: all .2s ease;
+    align-items: center;
+}
+
+form#Feedback input[type="radio"]:hover, form#Feedback input[type="radio"]:checked {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+form#Feedback input[type="radio"]:focus {
+    outline: 0;
+}
+
+form#Feedback input[type="radio"].good {
+    background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg") center;
+    background-size: cover;
+}
+
+form#Feedback input[type="radio"].neutral {
+    background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/neutral_t3q8hz.svg") center;
+    background-size: cover;
+}
+
+form#Feedback input[type="radio"].bad {
+    background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg") center;
+    background-size: cover;
+}
