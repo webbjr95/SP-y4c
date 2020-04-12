@@ -24,14 +24,6 @@
     box-shadow: none;
 }
 
-/* Add rounded corners and fill out the child container */
-/* Best height and width seem to be  */
-/*.child img {
-    border-radius: 5px;
-    width: 250px;
-    height: 250px;
-}*/
-
 /* Card effects applied to each child */
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -44,6 +36,7 @@
 
 h2 {
     text-decoration: underline;
+    width: 100%;
 }
 
 p {
