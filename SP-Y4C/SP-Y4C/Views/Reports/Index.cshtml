@@ -33,13 +33,12 @@
 </body>
 
 <script>
-    $(document).ready( function () {
-    var currentDate = new Date()
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-
+    var currentdate = new Date();
+    var day = currentdate.getDate();
+    var month = currentdate.getMonth() + 1;
+    var year = currentdate.getFullYear();
     var d = day + "-" + month + "-" + year;
+
     $(document).ready(function () {
         $("#example").DataTable({
             "processing": true, // for show progress bar
@@ -49,14 +48,13 @@
             "dom": '<"top"Bf>rt<"bottom"pi>',
             "buttons": [
                 {
-                    sExtends: 'excelHtml5',
-                    sTitle: d+' '              //Devany you left off here
+                    extend: 'excelHtml5',
+                    title: d              //Devany you left off here
                 },
                 {
                     extend: 'print'
                 }
             ],
-            "buttons": ['excelHtml5', 'print'],
             "columns": [
                 { "visible": false },
                 null,

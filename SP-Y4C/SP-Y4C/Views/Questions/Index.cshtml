@@ -26,7 +26,14 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            <a href="#">@question.Text</a>
+                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                            }
                         </span>
                         <ul>
                             @foreach (var c in question.Choices)
@@ -56,7 +63,14 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            <a href="#">@question.Text</a>
+                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                            }
                         </span>
                         <ul>
                             @foreach (var c in question.Choices)
@@ -86,7 +100,14 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            <a href="#">@question.Text</a>
+                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                            }
                         </span>
                         <ul>
                             @foreach (var c in question.Choices)
@@ -116,7 +137,14 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            <a href="#">@question.Text</a>
+                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                            }
                         </span>
                         <ul>
                             @foreach (var c in question.Choices)
@@ -148,7 +176,14 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            <a href="#">@question.Text</a>
+                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                            }
                         </span>
                         <ul>
                             @foreach (var c in question.Choices)

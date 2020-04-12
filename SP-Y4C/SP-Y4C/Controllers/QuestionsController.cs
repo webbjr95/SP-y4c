@@ -49,16 +49,6 @@ namespace SP_Y4C.Controllers
                 return View(question);
             }
 
-            var newQuestion = new SurveyQuestion
-            {
-                QuestionNumber = question.QuestionNumber,
-                TypeId = question.TypeId,
-                Text = question.Text,
-                ActiveStatus = QuestionActiveStatus.Inactive,
-                Weight = question.Weight,
-                Category = question.Category
-            };
-
             await _dbContext.SurveyQuestions.AddAsync(question);
             await _dbContext.SaveChangesAsync();
 
@@ -95,25 +85,17 @@ namespace SP_Y4C.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var question = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
+            var questionWithChoices = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
             
-            if (question == null)
+            if (questionWithChoices == null)
             {
                 return NotFound();
             }
 
-            var radioOptions = await _dbContext.SurveyChoices.Where(c => c.QuestionId == question.Id).ToListAsync();
 
-            var questionWithChoices = new SurveyQuestion
-            {
-                Id = question.Id,
-                QuestionNumber = question.QuestionNumber,
-                TypeId = question.TypeId,
-                Text = question.Text,
-                RadioOptions = radioOptions.Select(o => o.Text).ToList(),
-                Weight = question.Weight,
-                Category = question.Category
-            };
+            //Add in the choices for the questions. Sort them by ASC order.
+            var radioOptions = await _dbContext.SurveyChoices.Where(c => c.QuestionId == questionWithChoices.Id).OrderBy(n => n.OrderInQuestion).Select(t => t.Text).ToListAsync();
+            questionWithChoices.RadioOptions = radioOptions;
             
             return View(questionWithChoices);
         }
@@ -210,18 +192,6 @@ namespace SP_Y4C.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        private bool IsChoiceNew(List<SurveyChoice> choices, SurveyChoice choice)
-        {
-            for (int i = 0; i < choices.Count; i++)
-            {
-                if (choices[i].Text == choice.Text)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }
