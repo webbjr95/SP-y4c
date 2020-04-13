@@ -18,7 +18,7 @@
 }
 
 .card :hover {
-    box-shadow: 0px 0px 4px 4px rgb(76, 255, 0);
+    box-shadow: 0px 0px 4px 4px #4cff00;
 }
 .card > * :hover {
     box-shadow: none;
