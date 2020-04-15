@@ -43,7 +43,7 @@
                         <div class="form-group radio-option-parent" id="@parentId">
                             <label asp-for="@Model.RadioOptions[i]" class="control-label">Choice</label>
                             <div class="input-group">
-                                <input asp-for="@Model.RadioOptions[i]" type="text" class="choices form-control" />
+                                <input asp-for="@Model.RadioOptions[i]" type="text" class="choices form-control" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"/>
                                 <div class="input-group-btn">
                                     <button type="button" id="btnRemoveChoice" class="btn btn-danger" onclick="removeChoice('@parentId')">-</button>
                                 </div>
@@ -166,13 +166,17 @@
 
             if (selectedValue == textId) {
                 var options = document.querySelectorAll(".radio-option-parent");
-
                 for (var i = 0; i < options.length; i++) {
-                    options[i].remove();
+                    options[i].style.display = "none";
                 }
 
                 hide("radio-options");
             } else {
+                var options = document.querySelectorAll(".radio-option-parent");
+                for (var i = 0; i < options.length; i++) {
+                    options[i].style.display = "block";
+                }
+
                 show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!
             }
         }
@@ -216,6 +220,43 @@
             if (element) {
                 element.style.display = "none";
             }
+        }
+    </script>
+
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            //Capture the value of the input being dragged.
+            ev.dataTransfer.clearData();
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+
+            //Retrieves the value of the initial input drag and stores its text value
+            var initialInputId = ev.dataTransfer.getData("text");
+            var initialInputText = document.getElementById(initialInputId).defaultValue;
+            //console.log("Initial input id " + initialInputId);
+            //console.log("Initial input text " + initialInputText);
+
+            //Stores the value of drop input
+            var targetInputId = ev.target.id;
+            var targetInputText = document.getElementById(targetInputId).defaultValue;
+            //console.log("Target input id " + targetInputId);
+            //console.log("Target input text " + targetInputText);
+
+            //Update the values of the drag and dropped inputs
+            document.getElementById(initialInputId).defaultValue = targetInputText;
+            document.getElementById(targetInputId).defaultValue = initialInputText;
+            //console.log("New initial input value " + document.getElementById(initialInputId).defaultValue);
+            //console.log("New target input value " + document.getElementById(targetInputId).defaultValue);
+
+            ev.dataTransfer.clearData();
         }
     </script>
 }

@@ -1,41 +1,43 @@
 ﻿@{ 
-    ViewData["Title"] = "Thank you for your feedback!";
+    ViewData["Title"] = "Feedback Survey";
 }
-
 
 <head>
     <link rel="stylesheet" href="~/css/survey-feedback.css" />
 </head>   
 
-<body>
-    <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
+<div id="form">
+    <form asp-controller="Feedback" asp-action="Survey" id="Feedback" method="post">
+        <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
+        <div class="HeaderContainer">
+            We appreciate your time and feedback as Yoga 4 Change continues to strive for lasting,
+            demonstrative change for veterans, incarcerated individuals, youth, and those in recovery through an
+            evidence-based, purpose-driven yoga curriculum.
+        </div>
 
-    <div>
-        <form asp-controller="Feedback" asp-action="Survey" id="Feedback" method="post">
-            <h4>
-                We appreciate your time and feedback as Yoga 4 Change continues to strive for lasting,
-                demonstrative change for veterans, incarcerated individuals, youth, and those in recovery through an
-                evidence-based, purpose-driven yoga curriculum.
-            </h4>
-            <input id="input-id" type="text" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="lg" name="rating">
-            <br />
+        <div class="QuestionContainer">
+            <label class="QuestionTitle">Overall Usefulness of the Visited Webpage</label>
+            <input id="input-id" type="text" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="lg" name="rating" required>
+        </div>
 
-            <textarea name="text" rows="10" style="width: 100%;" placeholder="
-                      Please provide additional details as to why your rating was that particular value. This will allow
-                      us to update our site as needed for future visitors."></textarea>
-            <br />
+        <div class="QuestionContainer">
+            <label class="QuestionTitle">
+                Please provide additional details as to why your rating was that particular value. This will allow
+                us to update our site as needed for future visitors.
+            </label>
+            <input type="text" name="text" />
+        </div>
 
-            <input type="hidden" id="currentUrl" name="currentUrl" value="@ViewBag.RefererUrl" />
-            <button type="submit" value="Submit" class="btn btn-primary" style="width:100%; padding: 14px 20px;
-                margin: 8px 0;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;">
-                Submit
-            </button>
-        </form>
-    </div>
-</body>
+        <input type="hidden" id="currentUrl" name="currentUrl" value="@ViewBag.RefererUrl" />
+        <button type="submit" value="Submit" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;">
+            Submit
+        </button>
+    </form>
+</div>
 
 
 

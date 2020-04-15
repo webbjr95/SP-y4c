@@ -48,6 +48,11 @@ namespace SP_Y4C.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
+            return View("Completed");
+        }
+
+        public IActionResult Completed()
+        {
             return View();
         }
     }
