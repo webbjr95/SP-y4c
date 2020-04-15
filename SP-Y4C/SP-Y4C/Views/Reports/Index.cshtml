@@ -33,11 +33,19 @@
 </body>
 
 <script>
+<<<<<<< Updated upstream
     $(document).ready( function () {
     var currentDate = new Date()
     var day = currentDate.getDate()
     var month = currentDate.getMonth() + 1
     var year = currentDate.getFullYear()
+=======
+    var currentdate = new Date();
+    var day = currentdate.getDate();
+    var month = currentdate.getMonth() + 1;
+    var year = currentdate.getFullYear();
+    var d = year + "-" + month + "-" + day;
+>>>>>>> Stashed changes
 
     var d = day + "-" + month + "-" + year;
     $(document).ready(function () {
@@ -49,11 +57,17 @@
             "dom": '<"top"Bf>rt<"bottom"pi>',
             "buttons": [
                 {
+<<<<<<< Updated upstream
                     sExtends: 'excelHtml5',
                     sTitle: d+' '              //Devany you left off here
+=======
+                    extend: 'excelHtml5',
+                    title: d              
+>>>>>>> Stashed changes
                 },
                 {
-                    extend: 'print'
+                    extend: 'print',
+                    title: 'Print of the Survey Reports as of ' + d
                 }
             ],
             "buttons": ['excelHtml5', 'print'],

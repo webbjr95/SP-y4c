@@ -39,6 +39,12 @@
 </body>
 
 <script>
+    var currentdate = new Date();
+    var day = currentdate.getDate();
+    var month = currentdate.getMonth() + 1;
+    var year = currentdate.getFullYear();
+    var d = year + "-" + month + "-" + day;
+
     $(document).ready(function () {
         $("#example").DataTable({
             "processing": true, // for show progress bar
@@ -46,9 +52,25 @@
             "filter": true, // this is for disable filter (search box)
             "pageLength": 50,
             "dom": '<"top"Bf>rt<"bottom"pi>',
-            "buttons": ['excelHtml5', 'print']
-        });
-    });
+            "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    title: d              
+                },
+                {
+                    extend: 'print',
+                    title: 'Print of the Survey Reports as of ' + d
+                }
+            ],
+
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
 
     //Needed to style the datatable buttons
     $(document).ready(function () {
