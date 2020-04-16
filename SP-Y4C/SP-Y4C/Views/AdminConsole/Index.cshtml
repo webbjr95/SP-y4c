@@ -3,55 +3,24 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/admin-console.css" />
+    <link rel="stylesheet" href="~/css/admin-console.css" asp-append-version="true"/>
 </head>
 
 <body>
     <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
+    
+    
+    <br />
+    <br />
+    <h1 style="text-align: center;"><strong>Survey Management</strong></h1>
     <div class="gridContainer">
-
         <div class="card">
             <button class="child" onclick="location.href='@Url.Action("Index", "Questions")'">
                 <div>
-                    <h2><b>Edit Questions &<br>View Survey Flow</b></h2>
+                    <h2><b>Edit Questions &<br> Survey Flow</b></h2>
                     <p>
                         Use this to edit existing questions and their choices, add new questions or choices,
                         archive unused questions, or view the current survey flow.
-                    </p>
-                </div>
-            </button>
-        </div>
-
-        <div class="card">
-            <button class="child" onclick="location.href='@Url.Action("Archived", "Questions")'">
-                <div>
-                    <h2><b>View Archived Questions</b></h2>
-                    <p>
-                        View archived questions from the engagement survey if you're curious about the past.
-                    </p>
-                </div>
-            </button>
-        </div>
-
-        <div class="card">
-            <button class="child" onclick="location.href='@Url.Action("Index", "Reports")'">
-                <div>
-                    <h2><b>View Survey Reports</b></h2>
-                    <p>
-                        Take a look into how the users are currently answering the questions within the
-                        engagement survey. Download to Excel or print the results.
-                    </p>
-                </div>
-            </button>
-        </div>
-
-        <div class="card">
-            <button class="child" onclick="location.href='@Url.Action("Feedback", "Reports")'">
-                <div>
-                    <h2><b>View Feedback Reports</b></h2>
-                    <p>
-                        Take a look at the feedback users are providing regarding what destination page they land on.
-                        This will be useful to update the information currently present on each landing page.
                     </p>
                 </div>
             </button>
@@ -69,4 +38,57 @@
             </button>
         </div>
     </div>
+
+
+    <br />
+    <br />
+    <h1 style="text-align: center;"><strong>Reporting</strong></h1>
+    <div class="gridContainer">
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Archived", "Questions")'">
+                <div>
+                    <h2><b>Archived Questions</b></h2>
+                    <p>
+                        View archived questions from the engagement survey if you're curious about the past.
+                    </p>
+                </div>
+            </button>
+        </div>
+
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Index", "Reports")'">
+                <div>
+                    <h2><b>Survey Answers</b></h2>
+                    <p>
+                        Take a look into how the users are currently answering the questions within the
+                        engagement survey. Download to Excel or print the results.
+                    </p>
+                </div>
+            </button>
+        </div>
+
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("Feedback", "Reports")'">
+                <div>
+                    <h2><b>Site Feedback</b></h2>
+                    <p>
+                        Take a look at the feedback users are providing regarding what destination page they land on.
+                        This will be useful to update the information currently present on each landing page.
+                    </p>
+                </div>
+            </button>
+        </div>
+
+        <div class="card">
+            <button class="child" onclick="location.href='@Url.Action("FeedbackArchived", "Reports")'">
+                <div>
+                    <h2><b>Archived Site Feedback</b></h2>
+                    <p>
+                        Review previously submitted user feedback regarding the Yoga 4 Change site.
+                    </p>
+                </div>
+            </button>
+        </div>
+    </div>
+
 </body>
