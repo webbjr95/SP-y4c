@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
@@ -21,6 +22,7 @@ namespace SP_Y4C.Controllers
             _dbContext = dbContext;
         }
         
+        //[Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Index()
         {

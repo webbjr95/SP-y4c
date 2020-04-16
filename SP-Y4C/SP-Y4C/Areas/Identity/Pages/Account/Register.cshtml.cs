@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using SP_Y4C.Areas.Identity.Data;
 
 namespace SP_Y4C.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    //[Authorize(Roles = "ADMIN")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -80,8 +82,19 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+                    var client = new SendGridClient(apiKey);
+                    var from = new EmailAddress("webbjr95@gmail.com", "Y4C Admin");
+                    var subject = "Account Creation Confirmation";
+                    var userEmail = await _userManager.GetEmailAsync(user);
+                    var userName = await _userManager.GetUserNameAsync(user);
+
+                    var to = new EmailAddress(userEmail, userName);
+                    var plainTextContent = "Hello, Email from the helper [SendSingleEmailAsync]!";
+                    var htmlContent = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                    var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                    var response = await client.SendEmailAsync(msg);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

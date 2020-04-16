@@ -101,6 +101,9 @@
             formGroup.appendChild(label);
             formGroup.appendChild(inputGroup);
             weight.before(formGroup);
+
+            //Need to increment the input ID for the drag and drop.
+            nextIndex++;
         }
 
         function removeChoice(formGroupId) {
@@ -200,21 +203,21 @@
 
             //Retrieves the value of the initial input drag and stores its text value
             var initialInputId = ev.dataTransfer.getData("text");
-            var initialInputText = document.getElementById(initialInputId).defaultValue;
+            var initialInputText = document.getElementById(initialInputId).value;
             //console.log("Initial input id " + initialInputId);
             //console.log("Initial input text " + initialInputText);
 
             //Stores the value of drop input
-            var targetInputId = ev.target.id;
-            var targetInputText = document.getElementById(targetInputId).defaultValue;
+            var targetInputId = ev.currentTarget.id;
+            var targetInputText = document.getElementById(targetInputId).value;
             //console.log("Target input id " + targetInputId);
             //console.log("Target input text " + targetInputText);
 
             //Update the values of the drag and dropped inputs
-            document.getElementById(initialInputId).defaultValue = targetInputText;
-            document.getElementById(targetInputId).defaultValue = initialInputText;
-            //console.log("New initial input value " + document.getElementById(initialInputId).defaultValue);
-            //console.log("New target input value " + document.getElementById(targetInputId).defaultValue);
+            document.getElementById(initialInputId).value = targetInputText;
+            document.getElementById(targetInputId).value = initialInputText;
+            //console.log("New initial input value " + document.getElementById(initialInputId).value);
+            //console.log("New target input value " + document.getElementById(targetInputId).value);
 
 
             //Remove any styling for the drag and drop process.
