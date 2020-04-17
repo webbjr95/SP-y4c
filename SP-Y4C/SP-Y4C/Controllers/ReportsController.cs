@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SP_Y4C.Areas.Identity.Data;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
 
 namespace SP_Y4C.Controllers
 {
+    [Authorize]
     public class ReportsController : Controller
     {
         private readonly Y4CDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ReportsController(Y4CDbContext dbContext)
+        public ReportsController(Y4CDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
         public ActionResult Index()
@@ -43,6 +49,7 @@ namespace SP_Y4C.Controllers
             {
                 var allFeedback = await _dbContext.SurveyFeedback.ToListAsync();
                 var toBeArchivedFeedback = new List<ArchivedSurveyFeedback>();
+                ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
                 foreach (var feedback in allFeedback)
                 {
                     var newRecord = new ArchivedSurveyFeedback
@@ -52,9 +59,7 @@ namespace SP_Y4C.Controllers
                         Rating = feedback.Rating,
                         Text = feedback.Text,
                         Url = feedback.Url,
-                        UserArchivedBy = Guid.NewGuid(),
-                        //TODO: Add this back in once we have the login portion incorporated. Need to get the user ID.
-                        //UserArchivedBy = User.Identity.Name,
+                        UserArchivedBy = Guid.Parse(applicationUser.Id),
                         ArchivedAtUtc = DateTime.UtcNow,
                     };
 

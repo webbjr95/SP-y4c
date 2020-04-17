@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SP_Y4C.Data;
 using Microsoft.AspNetCore.Mvc;
 using SP_Y4C.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SP_Y4C
 {
@@ -56,6 +57,7 @@ namespace SP_Y4C
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseAuthentication();
 
             app.UseMvc(routes =>
@@ -64,6 +66,7 @@ namespace SP_Y4C
                     name: "default",
                     template: "{controller=AdminConsole}/{action=Index}/{id?}");
             });
+
 
             //CreateDefaultRoles(services).Wait();
             //CreateDefaultAdminAccount(services).Wait();
@@ -88,7 +91,7 @@ namespace SP_Y4C
         //private async Task CreateDefaultAdminAccount(IServiceProvider services)
         //{
         //    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-            
+
         //    //TODO: Need to change this to be the admin email account for y4c
         //    ApplicationUser admin = await userManager.FindByEmailAsync("webbjr95@gmail.com");
         //    if (admin == null)
@@ -98,7 +101,7 @@ namespace SP_Y4C
         //            UserName = "webbjr95@gmail.com",
         //            Email = "webbjr95@gmail.com",
         //        };
-        //        await userManager.CreateAsync(admin);
+        //        await userManager.CreateAsync(admin, "Test123!@#");
         //    }
         //    await userManager.AddToRoleAsync(admin, "Admin");
         //}
