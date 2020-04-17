@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using SP_Y4C.Areas.Identity.Data;
 
 namespace SP_Y4C.Areas.Identity.Pages.Account
@@ -45,6 +47,7 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
 
+
                 // For more information on how to enable account confirmation and password reset please 
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -54,10 +57,19 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("webbjr95@gmail.com", "Y4C Admin");
+                var subject = "Password Reset";
+                var userEmail = await _userManager.GetEmailAsync(user);
+                var userName = await _userManager.GetUserNameAsync(user);
+
+                var to = new EmailAddress(userEmail, userName);
+                var plainTextContent = "";
+                var htmlContent = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = await client.SendEmailAsync(msg);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

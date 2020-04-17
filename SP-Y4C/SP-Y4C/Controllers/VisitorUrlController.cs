@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SP_Y4C.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class VisitorUrlController : Controller
     {
         private readonly Y4CDbContext _dbContext;

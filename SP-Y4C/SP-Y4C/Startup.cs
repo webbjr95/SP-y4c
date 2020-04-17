@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SP_Y4C.Data;
 using Microsoft.AspNetCore.Mvc;
 using SP_Y4C.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SP_Y4C
 {
@@ -33,14 +34,16 @@ namespace SP_Y4C
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<UserDbContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<UserDbContext>()
+                .AddDefaultUI();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +57,7 @@ namespace SP_Y4C
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseAuthentication();
 
             app.UseMvc(routes =>
@@ -62,6 +66,44 @@ namespace SP_Y4C
                     name: "default",
                     template: "{controller=AdminConsole}/{action=Index}/{id?}");
             });
+
+
+            //CreateDefaultRoles(services).Wait();
+            //CreateDefaultAdminAccount(services).Wait();
         }
+
+        //private async Task CreateDefaultRoles(IServiceProvider services)
+        //{
+        //    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        //    string[] roleNames = { "Admin", "Volunteer" };
+
+        //    foreach (var roleName in roleNames)
+        //    {
+        //        var roleExist = await roleManager.RoleExistsAsync(roleName);
+        //        if (!roleExist)
+        //        {
+        //            //Create the roles and seed them to the database 
+        //            await roleManager.CreateAsync(new IdentityRole(roleName));
+        //        }
+        //    }
+        //}
+
+        //private async Task CreateDefaultAdminAccount(IServiceProvider services)
+        //{
+        //    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+        //    //TODO: Need to change this to be the admin email account for y4c
+        //    ApplicationUser admin = await userManager.FindByEmailAsync("webbjr95@gmail.com");
+        //    if (admin == null)
+        //    {
+        //        admin = new ApplicationUser()
+        //        {
+        //            UserName = "webbjr95@gmail.com",
+        //            Email = "webbjr95@gmail.com",
+        //        };
+        //        await userManager.CreateAsync(admin, "Test123!@#");
+        //    }
+        //    await userManager.AddToRoleAsync(admin, "Admin");
+        //}
     }
 }

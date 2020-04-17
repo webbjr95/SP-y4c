@@ -121,7 +121,7 @@ namespace SP_Y4C.Areas.Identity.Pages.Account.Manage
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
 
-            var apiKey = "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";
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("webbjr95@gmail.com", "Y4C Admin");
             var subject = "Email Verification";
