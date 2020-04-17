@@ -33,6 +33,7 @@
 </body>
 
 <script>
+
     var currentdate = new Date();
     var day = currentdate.getDate();
     var month = currentdate.getMonth() + 1;
@@ -49,10 +50,11 @@
             "buttons": [
                 {
                     extend: 'excelHtml5',
-                    title: d              //Devany you left off here
+                    title: d              
                 },
                 {
-                    extend: 'print'
+                    extend: 'print',
+                    title: 'Print of the Survey Reports as of ' + d
                 }
             ],
             "columns": [
