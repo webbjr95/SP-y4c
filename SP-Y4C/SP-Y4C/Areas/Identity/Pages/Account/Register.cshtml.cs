@@ -19,7 +19,7 @@ using SP_Y4C.Data;
 
 namespace SP_Y4C.Areas.Identity.Pages.Account
 {
-    //[Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN")]
     public class RegisterModel : PageModel
     {
         public readonly UserDbContext _dbContext;
@@ -79,8 +79,8 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
                 userRolesList.Add(
                     new SelectListItem
                     {
-                        Value = role.Id.ToString(),
-                        Text = role.Name.ToString()
+                        Value = role.NormalizedName.ToString(),
+                        Text = role.NormalizedName.ToString()
                     }
                 );
             }
@@ -97,11 +97,12 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                await _userManager.AddToRoleAsync(user, Input.SelectedUserRole);
-                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, Input.SelectedUserRole));
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _userManager.AddToRoleAsync(user, Input.SelectedUserRole);
+                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, Input.SelectedUserRole));
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
@@ -132,6 +133,22 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+
+
+            var allRoles = _dbContext.Roles;
+            List<SelectListItem> userRolesList = new List<SelectListItem>();
+            foreach (var role in allRoles)
+            {
+                userRolesList.Add(
+                    new SelectListItem
+                    {
+                        Value = role.NormalizedName.ToString(),
+                        Text = role.NormalizedName.ToString()
+                    }
+                );
+            }
+
+            ViewData["Roles"] = userRolesList;
 
             // If we got this far, something failed, redisplay form
             return Page();
