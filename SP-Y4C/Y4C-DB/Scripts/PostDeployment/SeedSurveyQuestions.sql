@@ -121,4 +121,11 @@
 		--Other branch
 		('6c840c44-5c68-4d81-871c-3633c3ce2630', 'https://www.y4c.org/volunteer-1', 1, 3, 1, '2020-08-08 04:20:53', '2020-08-08 04:20:53'),
 		('a4755ed3-253f-4798-9681-7cf3f2847f19', 'https://www.y4c.org/donate', 3, 3, 0, '2020-08-08 04:20:53', '2020-08-08 04:20:53');
+
+	--Was Done by Devany to try to get mock data into archived questions. Not functioning yet
+	INSERT INTO [dbo].[ArchivedSurveyQuestions] ([Id], [QuestionNumber], [TypeId], [Text], [UserArchivedBy], [ArchivedAtUtc.LocalDateTime])	
+	VALUES 
+		
+		('7fd775df-5a7c-4279-a9c2-139df691da3d', '12342342', 'Radio, Why would you Want To Teach?', 'Admin1', '2020-08-08 04:20:53');
+		
 END

@@ -224,6 +224,11 @@
                 <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().CreatedAtUtc"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Weight"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().RadioOptions"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Category"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Choices"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Answer"></label></th>
                 <th><label>Actions</label></th>
             </tr>
         </thead>
@@ -231,50 +236,61 @@
             @foreach (var question in Model)
             {
                 var modalId = $"modal-{question.Id}";
-                <tr>
-                    <td>@question.ActiveStatus</td>
-                    <td>@question.QuestionNumber</td>
-                    <td>@question.TypeId.ToString()</td>
-                    <td>@question.Text</td>
-                    <td>@question.CreatedAtUtc.LocalDateTime</td>
-                    <td>@question.Weight</td>
-                    <td>
-                        <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
+            <tr>
+                <td>@question.ActiveStatus</td>
+                <td>@question.QuestionNumber</td>
+                <td>@question.TypeId.ToString()</td>
+                <td>@question.Text</td>
+                <td>@question.CreatedAtUtc.LocalDateTime</td>
+                <td>@question.Weight</td>
+                <td>@question.RadioOptions</td>
+                <td>@question.Id</td>
+                <td>@question.Category</td>
+                <td>@question.Choices</td>
+                <td>@question.Answer</td>
+                <td>
+                    <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">
-                            Archive
-                        </button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">
+                        Archive
+                    </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Confirm Archive Event</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to archive this question? Restoration after an archive is not supported.
-                                        You will need to create a new question in the event this one is needed in the future.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-primary" id="archive-question-@question.Id" onclick="location.href='@Url.Action("Archive", "Questions", new { id = @question.Id })'">Archive</button>
-                                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Archive Event</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to archive this question? Restoration after an archive is not supported.
+                                    You will need to create a new question in the event this one is needed in the future.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="archive-question-@question.Id" onclick="location.href='@Url.Action("Archive", "Questions", new { id = @question.Id })'">Archive</button>
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
+                    </div>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 </body>
 
 <script>
+    var currentdate = new Date();
+    var day = currentdate.getDate();
+    var month = currentdate.getMonth() + 1;
+    var year = currentdate.getFullYear();
+    var d = year + "-" + month + "-" + day;
+
     $(document).ready(function () {
         $("#example").DataTable({
             "processing": true, // for show progress bar
@@ -282,7 +298,29 @@
             "filter": true, // this is for disable filter (search box)
             "pageLength": 50,
             "dom": '<"top"Bf>rt<"bottom"pi>',
-            "buttons": ['excelHtml5', 'print']
+           "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    title: d
+                },
+                {                           
+                    extend: 'print',
+                    title: 'Print of the Survey Reports as of ' + d
+                }
+            ],
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                { "visible": false },
+                { "visible": false },
+                { "visible": false },
+                { "visible": false },
+                { "visible": false },
+            ]
         });
     });
 
