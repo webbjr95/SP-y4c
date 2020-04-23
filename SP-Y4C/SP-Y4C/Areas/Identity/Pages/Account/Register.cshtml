@@ -30,7 +30,6 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.SelectedUserRole"></label><br />
-                @*<select asp-for="Input.SelectedUserRole" asp-items="@(new SelectList((IEnumerable<SelectListItem>)Model.ViewData["Roles"], "Value", "Text"))" class="form-control" />*@
                 @Html.DropDownList("Input.SelectedUserRole", new SelectList((IEnumerable<SelectListItem>)ViewData["Roles"], "Value", "Text"))
                 <span asp-validation-for="Input.SelectedUserRole" class="text-danger"></span>
             </div>

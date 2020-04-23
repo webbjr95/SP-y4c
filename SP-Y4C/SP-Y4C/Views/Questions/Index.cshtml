@@ -5,7 +5,7 @@
 
 
 <head>
-    <link rel="stylesheet" href="~/css/survey-flow.css" />
+    <link rel="stylesheet" href="~/css/survey-flow.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
                             }
                         </span>
                         <ul>
@@ -69,7 +69,7 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
                             }
                         </span>
                         <ul>
@@ -106,7 +106,7 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
                             }
                         </span>
                         <ul>
@@ -143,7 +143,7 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
                             }
                         </span>
                         <ul>
@@ -182,7 +182,7 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" >@question.Text</a>
+                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
                             }
                         </span>
                         <ul>
@@ -200,17 +200,6 @@
 
     </ul>
 
-
-    <script>
-        $('.tree .icon').click(function () {
-            $(this).parent().toggleClass('expanded').
-                closest('li').find('ul:first').
-                toggleClass('show-effect');
-        });
-    </script>
-
-
-
     <h2><strong>Survey Questions</strong></h2>
     <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Questions")'">Create</button>
     <br />
@@ -218,7 +207,7 @@
     <table id="example" class="table table-striped table-bordered dt-responsive" style="table-layout: auto;width: 100%;" cellspacing="0">
         <thead>
             <tr>
-                <th><label asp-for="@Model.FirstOrDefault().ActiveStatus"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Category"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().QuestionNumber"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().TypeId"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
@@ -232,7 +221,7 @@
             {
                 var modalId = $"modal-{question.Id}";
                 <tr>
-                    <td>@question.ActiveStatus</td>
+                    <td>@question.Category</td>
                     <td>@question.QuestionNumber</td>
                     <td>@question.TypeId.ToString()</td>
                     <td>@question.Text</td>
@@ -242,11 +231,11 @@
                         <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@modalId">
                             Archive
                         </button>
 
-                        <!-- Modal -->
+                        <!-- Modal  -->
                         <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -316,6 +305,12 @@
             document.getElementById('example_next').addEventListener("click", testNext);
         }
     });
+</script>
 
-
+<script>
+    $('.tree .icon').click(function () {
+        $(this).parent().toggleClass('expanded').
+            closest('li').find('ul:first').
+            toggleClass('show-effect');
+    });
 </script>

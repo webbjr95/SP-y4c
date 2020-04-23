@@ -156,7 +156,7 @@ namespace SP_Y4C.Controllers
             var weightvalue = 0;
             if (hasWeight)
             {
-                weightedQuestionIndex = Array.FindIndex(weightArray, v => v.Equals("Yes")) + 1;
+                weightedQuestionIndex = Array.FindIndex(weightArray, v => v.Equals("Yes"));
                 var userChoiceId = Guid.Parse(passedForm.ElementAt(weightedQuestionIndex).Value);
                 var userChoiceText = _dbContext.SurveyChoices.Where(c => c.Id == userChoiceId).First().Text;
                 weightvalue = userChoiceText.Equals("Yes") ? 1 : 0;

@@ -79,5 +79,37 @@ namespace SP_Y4C.Controllers
 
             return RedirectToAction("Feedback");
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Archive(Guid id)
+        {
+            var feedback = await _dbContext.SurveyFeedback.FindAsync(id);
+            
+            if(feedback == null)
+            {
+                return NotFound();
+            }
+
+            ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+            var archivedFeedback = new ArchivedSurveyFeedback
+            {
+                UserId = feedback.UserId,
+                Id = feedback.Id,
+                Rating = feedback.Rating,
+                Text = feedback.Text,
+                Url = feedback.Url,
+                UserArchivedBy = Guid.Parse(applicationUser.Id),
+                ArchivedAtUtc = DateTime.UtcNow,
+            };
+
+            
+            _dbContext.SurveyFeedback.Remove(feedback);
+            await _dbContext.SaveChangesAsync();
+
+            await _dbContext.ArchivedSurveyFeedback.AddAsync(archivedFeedback);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Feedback");
+        }
     }
 }
