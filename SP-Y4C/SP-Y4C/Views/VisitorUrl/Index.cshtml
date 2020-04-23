@@ -26,7 +26,16 @@
                     <td>@url.Url</td>
                     <td>@url.UserType</td>
                     <td>@url.Category</td>
-                    <td>@url.Weight</td>
+                    @{
+                        if (url.Weight == 1)
+                        {
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>No</td>
+                        }
+                    }
                     <td>@url.CreatedAtUtc.LocalDateTime</td>
                     <td>@url.LastModifiedAtUtc.LocalDateTime</td>
                     <td>
@@ -55,15 +64,15 @@
             "buttons": [
                 {
                     extend: 'excelHtml5',
-                    title: d              
+                    title: d
                 },
                 {
                     extend: 'print',
                     title: 'Print of the Survey Reports as of ' + d
                 }
             ],
-
             "columns": [
+                null,
                 null,
                 null,
                 null,
@@ -71,6 +80,8 @@
                 null,
                 null
             ]
+        })
+    });
 
     //Needed to style the datatable buttons
     $(document).ready(function () {
