@@ -218,16 +218,14 @@
     <table id="example" class="table table-striped table-bordered dt-responsive" style="table-layout: auto;width: 100%;" cellspacing="0">
         <thead>
             <tr>
-                <th><label asp-for="@Model.FirstOrDefault().ActiveStatus"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Category"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().QuestionNumber"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().TypeId"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().CreatedAtUtc"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Weight"></label></th>
-                <th><label asp-for="@Model.FirstOrDefault().RadioOptions"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
-                <th><label asp-for="@Model.FirstOrDefault().Category"></label></th>
-                <th><label asp-for="@Model.FirstOrDefault().Choices"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().ActiveStatus"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Answer"></label></th>
                 <th><label>Actions</label></th>
             </tr>
@@ -237,16 +235,14 @@
             {
                 var modalId = $"modal-{question.Id}";
             <tr>
-                <td>@question.ActiveStatus</td>
+                <td>@question.Category</td>
                 <td>@question.QuestionNumber</td>
                 <td>@question.TypeId.ToString()</td>
                 <td>@question.Text</td>
                 <td>@question.CreatedAtUtc.LocalDateTime</td>
                 <td>@question.Weight</td>
-                <td>@question.RadioOptions</td>
                 <td>@question.Id</td>
-                <td>@question.Category</td>
-                <td>@question.Choices</td>
+                <td>@question.ActiveStatus</td>
                 <td>@question.Answer</td>
                 <td>
                     <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
@@ -318,8 +314,7 @@
                 { "visible": false },
                 { "visible": false },
                 { "visible": false },
-                { "visible": false },
-                { "visible": false },
+                null
             ]
         });
     });
