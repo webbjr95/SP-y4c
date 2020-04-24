@@ -1,10 +1,11 @@
-﻿@{ 
+﻿@{
     ViewData["Title"] = "Feedback Survey";
+    Layout = "_ExternalLayout";
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/survey-feedback.css" asp-append-version="true"/>
-</head>   
+    <link rel="stylesheet" href="~/css/survey-feedback.css" asp-append-version="true" />
+</head>
 
 <div id="form">
     <form asp-controller="Feedback" asp-action="Survey" id="Feedback" method="post">

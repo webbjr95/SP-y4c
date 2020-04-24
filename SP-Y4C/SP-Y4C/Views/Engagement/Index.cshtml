@@ -1,43 +1,59 @@
-﻿<head>
+﻿@{ 
+    Layout = "_ExternalLayout";
+}
+
+<head>
     <link rel="stylesheet" href="~/css/engagement-form.css" asp-append-version="true"/>
 </head>
 
-<div id="form">
-    <div class="HeaderContainer">
-        Yoga 4 Change is a non-profit organization that achieves meaningful change for veterans,
-        incarcerated individuals, at-hope youth, and those recovering from substance use.
-        Our purpose-driven yoga program enables us to heal and empower these underserved populations,
-        creating healthier, safer communities, one class at a time.
-    </div>
-    <br />
-    <br />
+<style>
+    .background {
+        background-image: url("images/test.jpg");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
 
-    <strong>Regarding yoga I...</strong>
-    <form asp-controller="Engagement" asp-action="Teach" method="post">
-        <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;">
-            Teach
-        </button>
-    </form>
-    <form asp-controller="Engagement" asp-action="Practice" method="post">
-        <button type="submit" value="Practice" class="btn btn-primary" style="width:100%; padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;">
-            Practice
-        </button>
-    </form>
-    <form asp-controller="Engagement" asp-action="Other" method="post">
-        <button type="submit" value="Other" class="btn btn-primary" style="width:100%; padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;">
-            Other
-        </button>
-    </form>
-</div>
+<body>
+    <div class="background"></div>
+    <div id="form">
+        <div class="HeaderContainer">
+            Yoga 4 Change is a non-profit organization that achieves meaningful change for veterans,
+            incarcerated individuals, at-hope youth, and those recovering from substance use.
+            Our purpose-driven yoga program enables us to heal and empower these underserved populations,
+            creating healthier, safer communities, one class at a time.
+        </div>
+        <br />
+        <br />
+
+        <strong>Regarding yoga I...</strong>
+        <form asp-controller="Engagement" asp-action="Teach" method="post">
+            <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;">
+                Teach
+            </button>
+        </form>
+        <form asp-controller="Engagement" asp-action="Practice" method="post">
+            <button type="submit" value="Practice" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;">
+                Practice
+            </button>
+        </form>
+        <form asp-controller="Engagement" asp-action="Other" method="post">
+            <button type="submit" value="Other" class="btn btn-primary" style="width:100%; padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;">
+                Other
+            </button>
+        </form>
+    </div>
+</body>

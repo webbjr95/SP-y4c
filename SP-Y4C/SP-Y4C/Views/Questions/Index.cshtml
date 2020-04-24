@@ -36,7 +36,7 @@
                             }
                         </span>
                         <ul>
-                            @foreach (var c in question.Choices)
+                            @foreach (var c in question.Choices.OrderBy(c => c.OrderInQuestion))
                             {
                                 <li>
                                     <span><a href="">@c.Text</a></span>
@@ -73,7 +73,7 @@
                             }
                         </span>
                         <ul>
-                            @foreach (var c in question.Choices)
+                            @foreach (var c in question.Choices.OrderBy(c => c.OrderInQuestion))
                             {
                                 <li>
                                     <span><a href="">@c.Text</a></span>
@@ -110,7 +110,7 @@
                             }
                         </span>
                         <ul>
-                            @foreach (var c in question.Choices)
+                            @foreach (var c in question.Choices.OrderBy(c => c.OrderInQuestion))
                             {
                                 <li>
                                     <span><a href="">@c.Text</a></span>
@@ -147,7 +147,7 @@
                             }
                         </span>
                         <ul>
-                            @foreach (var c in question.Choices)
+                            @foreach (var c in question.Choices.OrderBy(c => c.OrderInQuestion))
                             {
                                 <li>
                                     <span><a href="">@c.Text</a></span>
@@ -186,7 +186,7 @@
                             }
                         </span>
                         <ul>
-                            @foreach (var c in question.Choices)
+                            @foreach (var c in question.Choices.OrderBy(c => c.OrderInQuestion))
                             {
                                 <li>
                                     <span><a href="">@c.Text</a></span>
@@ -231,7 +231,7 @@
                         <button class="btn btn-primary" id="edit-question-@question.Id" type="button" onclick="location.href='@Url.Action("Edit", "Questions", new { id = @question.Id })'">Edit</button>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@modalId">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#@modalId">
                             Archive
                         </button>
 
@@ -269,7 +269,7 @@
             "processing": true, // for show progress bar
             "serverSide": false, // for process server side
             "filter": true, // this is for disable filter (search box)
-            "pageLength": 2,
+            "pageLength": 10,
             "dom": '<"top"Bf>rt<"bottom"pi>',
             "buttons": ['excelHtml5', 'print']
         });
