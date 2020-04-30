@@ -145,14 +145,23 @@ namespace SP_Y4C.Controllers
         }
 
 
-        // Calculation for when a visitor answers the survey. This will take into account
+        // Calculation for when a visitor answers the survey. This will take into account weighted a question.
         public async Task<(string redirectUrl, UserType visitorType)> CalculateWeightToUrlAsync(IFormCollection passedForm)
         {
             // Retrieve the array of questions to see which ones are weighed for querying the DB for the related branch
             // URL.
-            var weightArray = passedForm["weight"];
+            var weightArray = passedForm["weight"].ToArray();
             var hasWeight = weightArray.Contains("yes", StringComparer.OrdinalIgnoreCase);
-            var weightvalue = hasWeight ? 1 : 0;
+            var weightedQuestionIndex = 0;
+            var weightvalue = 0;
+            if (hasWeight)
+            {
+                weightedQuestionIndex = Array.FindIndex(weightArray, v => v.Equals("Yes")) + 1;
+                var userChoiceId = Guid.Parse(passedForm.ElementAt(weightedQuestionIndex).Value);
+                var userChoiceText = _dbContext.SurveyChoices.Where(c => c.Id == userChoiceId).First().Text;
+                weightvalue = userChoiceText.Equals("Yes") ? 1 : 0;
+            }
+
             var branch = (SurveyBranch) Enum.Parse(typeof(SurveyBranch), passedForm["page"]);
 
             var allUrls = await _dbContext.UrlToVisitors.ToListAsync();

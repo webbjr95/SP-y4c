@@ -1,4 +1,6 @@
 ﻿BEGIN
+	IF NOT EXISTS (SELECT * FROM SurveyQuestions)
+	BEGIN
 	INSERT INTO [dbo].[SurveyQuestions] ([Id], [Text], [CreatedAtUtc], [QuestionNumber], [TypeId], [ActiveStatus], [Weight], [Category]) 
 	VALUES
 		--TypeId: Text = 1, Checkbox, Radio
@@ -52,6 +54,7 @@
 		('2d49e166-590f-4618-b33f-2fb0c0d7c446', '82fb6add-449d-4758-a97e-33731437928b', 'Yes', '2019-11-02 01:56:30', 1),
 		('673e57ce-130c-40e2-97be-e9e47191eaca', '82fb6add-449d-4758-a97e-33731437928b', 'No', '2019-05-20 01:33:33', 2),	
 		
+
 		--For the default questions: Gender, ethnicity, degree, salary
 		('edb2b15e-fff6-4acb-ab50-dcf9a1e410e1', 'C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'Male', '2019-10-29 17:58:39', 1),
 		('b6efb993-6b28-402a-8d3d-4e4b639e2f78', 'C4A198DD-D450-4DF5-A086-CE2AEDE6B643', 'Female', '2019-11-26 06:40:20', 2),
@@ -121,11 +124,5 @@
 		--Other branch
 		('6c840c44-5c68-4d81-871c-3633c3ce2630', 'https://www.y4c.org/volunteer-1', 1, 3, 1, '2020-08-08 04:20:53', '2020-08-08 04:20:53'),
 		('a4755ed3-253f-4798-9681-7cf3f2847f19', 'https://www.y4c.org/donate', 3, 3, 0, '2020-08-08 04:20:53', '2020-08-08 04:20:53');
-
-	--Was Done by Devany to try to get mock data into archived questions. Not functioning yet
-	INSERT INTO [dbo].[ArchivedSurveyQuestions] ([Id], [QuestionNumber], [TypeId], [Text], [UserArchivedBy], [ArchivedAtUtc.LocalDateTime])	
-	VALUES 
-		
-		('7fd775df-5a7c-4279-a9c2-139df691da3d', '12342342', 'Radio, Why would you Want To Teach?', 'Admin1', '2020-08-08 04:20:53');
-		
+	END
 END

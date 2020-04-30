@@ -12,7 +12,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="QuestionNumber" class="control-label"></label>
-                <input asp-for="QuestionNumber" class="form-control" min="1" />
+                <input asp-for="QuestionNumber" class="form-control" />
                 <span asp-validation-for="QuestionNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -78,6 +78,11 @@
             input.type = "text";
             input.className = "form-control choices";
             input.id = nextIndex;
+            input.draggable = true;
+            input.ondragstart = function () { drag(event); };
+            input.ondrop = function () { drop(event); };
+            input.ondragover = function () { dragOver(event); };
+            input.ondragleave = function () { dragLeave(event); };
 
 
             let inputGroupBtn = document.createElement("div");
@@ -96,6 +101,9 @@
             formGroup.appendChild(label);
             formGroup.appendChild(inputGroup);
             weight.before(formGroup);
+
+            //Need to increment the input ID for the drag and drop.
+            nextIndex++;
         }
 
         function removeChoice(formGroupId) {
@@ -168,14 +176,26 @@
     </script>
 
     <script>
-        function allowDrop(ev) {
+        function dragOver(ev) {
             ev.preventDefault();
+
+            //Change target background color to highlight where the user is
+            ev.currentTarget.style.backgroundColor = "orange";
+        }
+
+        function dragLeave(ev) {
+            //After leaving the target change background color back to nothing
+            ev.currentTarget.style.backgroundColor = "";
         }
 
         function drag(ev) {
             //Capture the value of the input being dragged.
             ev.dataTransfer.clearData();
             ev.dataTransfer.setData("text", ev.target.id);
+
+
+            //Create a border around the input where the drag started from
+            ev.currentTarget.style.border = "5px dashed #4cff00";
         }
 
         function drop(ev) {
@@ -183,22 +203,26 @@
 
             //Retrieves the value of the initial input drag and stores its text value
             var initialInputId = ev.dataTransfer.getData("text");
-            var initialInputText = document.getElementById(initialInputId).defaultValue;
+            var initialInputText = document.getElementById(initialInputId).value;
             //console.log("Initial input id " + initialInputId);
             //console.log("Initial input text " + initialInputText);
 
             //Stores the value of drop input
-            var targetInputId = ev.target.id;
-            var targetInputText = document.getElementById(targetInputId).defaultValue;
+            var targetInputId = ev.currentTarget.id;
+            var targetInputText = document.getElementById(targetInputId).value;
             //console.log("Target input id " + targetInputId);
             //console.log("Target input text " + targetInputText);
 
             //Update the values of the drag and dropped inputs
-            document.getElementById(initialInputId).defaultValue = targetInputText;
-            document.getElementById(targetInputId).defaultValue = initialInputText;
-            //console.log("New initial input value " + document.getElementById(initialInputId).defaultValue);
-            //console.log("New target input value " + document.getElementById(targetInputId).defaultValue);
+            document.getElementById(initialInputId).value = targetInputText;
+            document.getElementById(targetInputId).value = initialInputText;
+            //console.log("New initial input value " + document.getElementById(initialInputId).value);
+            //console.log("New target input value " + document.getElementById(targetInputId).value);
 
+
+            //Remove any styling for the drag and drop process.
+            ev.currentTarget.style.backgroundColor = "";
+            document.getElementById(initialInputId).style.border = "1px solid #ccc";
             ev.dataTransfer.clearData();
         }
     </script>

@@ -1,0 +1,86 @@
+@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "Accounts - All Accounts";
+}
+
+@{ 
+    var currentUser = await _userManager.GetUserAsync(User);
+    var currentUserRoles = await _userManager.GetRolesAsync(currentUser);
+}
+<body>
+    <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
+
+    <table id="example" class="table table-striped table-bordered dt-responsive" style="table-layout: auto;width: 100%;" cellspacing="0">
+        <thead>
+            <tr>
+                <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().UserName"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Email"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().EmailConfirmed"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().AccessFailedCount"></label></th>
+                <th><label>Role</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.EmailConfirmed</td>
+                    <td>@user.AccessFailedCount</td>
+
+                    @if(@currentUserRoles.Any())
+                    {
+                        <td>@currentUserRoles.First()</td>
+                    }
+                    else
+                    {
+                        <td>N/A</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+<script>
+    var currentdate = new Date();
+    var day = currentdate.getDate();
+    var month = currentdate.getMonth() + 1;
+    var year = currentdate.getFullYear();
+    var d = day + "-" + month + "-" + year;
+
+    $(document).ready(function () {
+        $("#example").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "pageLength": 50,
+            "dom": '<"top"Bf>rt<"bottom"pi>',
+            "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    title: d              //Devany you left off here
+                },
+                {
+                    extend: 'print'
+                }
+            ],
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        });
+    });
+
+    //Needed to style the datatable buttons
+    $(document).ready(function () {
+        $('button').addClass("btn btn-primary");
+    });
+</script>

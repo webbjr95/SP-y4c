@@ -1,5 +1,7 @@
-﻿using SP_Y4C.Models.Enums;
+﻿using SP_Y4C.Areas.Identity.Data;
+using SP_Y4C.Models.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

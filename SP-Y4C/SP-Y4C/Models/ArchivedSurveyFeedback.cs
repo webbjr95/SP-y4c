@@ -1,14 +1,15 @@
 ﻿using SP_Y4C.Models.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SP_Y4C.Models
 {
-    public class SurveyFeedback
+    public class ArchivedSurveyFeedback
     {
-        public SurveyFeedback()
+        public ArchivedSurveyFeedback()
         {
-            SubmittedAtUtc = DateTime.UtcNow;
+            ArchivedAtUtc = DateTime.UtcNow;
         }
 
         [Key]
@@ -16,12 +17,12 @@ namespace SP_Y4C.Models
         public Guid Id { get; set; }
 
         [Required]
-        [Display(Name = "URL")]
-        public string Url { get; set; }        
-        
-        [Required]
         [Display(Name = "Feedback")]
         public string Text { get; set; }
+
+        [Required]
+        [Display(Name = "URL")]
+        public string Url { get; set; }
 
         [Required]
         [Display(Name = "Rating")]
@@ -31,7 +32,12 @@ namespace SP_Y4C.Models
         [Display(Name = "User ID")]
         public Guid UserId { get; set; }
 
-        [Display(Name = "Submission Date")]
-        public DateTimeOffset SubmittedAtUtc { get; set; }
+        [Required]
+        [Display(Name = "Archived At")]
+        public DateTimeOffset ArchivedAtUtc { get; set; }
+
+        [Required]
+        [Display(Name = "User Archived By")]
+        public Guid UserArchivedBy { get; set; }
     }
 }

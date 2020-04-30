@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SP_Y4C.Areas.Identity.Data;
 using SP_Y4C.Data;
 using SP_Y4C.Models;
 using SP_Y4C.Models.Enums;
@@ -12,15 +15,19 @@ using System.Transactions;
 
 namespace SP_Y4C.Controllers
 {
+    [Authorize]
     public class QuestionsController : Controller
     {
         private readonly Y4CDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public QuestionsController(Y4CDbContext dbContext)
+        public QuestionsController(Y4CDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
-        
+
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -36,11 +43,14 @@ namespace SP_Y4C.Controllers
             return View(questions);
         }
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Create()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public async Task<IActionResult> Create(SurveyQuestion question)
         {
@@ -82,6 +92,7 @@ namespace SP_Y4C.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -100,6 +111,7 @@ namespace SP_Y4C.Controllers
             return View(questionWithChoices);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public async Task<IActionResult> Edit(SurveyQuestion question)
         {
@@ -157,7 +169,7 @@ namespace SP_Y4C.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Archive(Guid id)
         {
             var question = await _dbContext.SurveyQuestions.FirstOrDefaultAsync(q => q.Id == id);
@@ -169,15 +181,14 @@ namespace SP_Y4C.Controllers
 
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
+                ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
                 var archivedQuestion = new ArchivedSurveyQuestion
                 {
                     Id = question.Id,
                     QuestionNumber = question.QuestionNumber,
                     TypeId = question.TypeId,
                     Text = question.Text,
-                    UserArchivedBy = Guid.NewGuid(),
-                    //TODO: Add this back in once we have the login portion incorporated. Need to get the user ID.
-                    //UserArchivedBy = User.Identity.Name,
+                    UserArchivedBy = Guid.Parse(applicationUser.Id),
                     ArchivedAtUtc = DateTime.UtcNow,
                     ActiveStatus = question.ActiveStatus
                 };
