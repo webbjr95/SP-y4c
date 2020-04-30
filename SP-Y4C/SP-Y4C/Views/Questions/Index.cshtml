@@ -224,6 +224,9 @@
                 <th><label asp-for="@Model.FirstOrDefault().Text"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().CreatedAtUtc"></label></th>
                 <th><label asp-for="@Model.FirstOrDefault().Weight"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().ActiveStatus"></label></th>
+                <th><label asp-for="@Model.FirstOrDefault().Answer"></label></th>
                 <th><label>Actions</label></th>
             </tr>
         </thead>
@@ -275,6 +278,12 @@
 </body>
 
 <script>
+    var currentdate = new Date();
+    var day = currentdate.getDate();
+    var month = currentdate.getMonth() + 1;
+    var year = currentdate.getFullYear();
+    var d = year + "-" + month + "-" + day;
+
     $(document).ready(function () {
         let table = $("#example").DataTable({
             "processing": true, // for show progress bar
@@ -282,7 +291,28 @@
             "filter": true, // this is for disable filter (search box)
             "pageLength": 10,
             "dom": '<"top"Bf>rt<"bottom"pi>',
-            "buttons": ['excelHtml5', 'print']
+           "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    title: d
+                },
+                {                           
+                    extend: 'print',
+                    title: 'Print of the Survey Reports as of ' + d
+                }
+            ],
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                { "visible": false },
+                { "visible": false },
+                { "visible": false },
+                null
+            ]
         });
         console.log(table);
     });
