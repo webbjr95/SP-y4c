@@ -29,7 +29,7 @@
                 <td>@answer.Question.Text</td>
                 <td>@answer.Answer</td>
                 <td>@answer.UserType</td>
-                <td>@answer.SubmittedAtUtc</td>
+                <td>@answer.SubmittedAtUtc.LocalDateTime</td>
             </tr>
             }
         </tbody>
@@ -49,7 +49,7 @@
             "processing": true, // for show progress bar
             "serverSide": false, // for process server side
             "filter": true, // this is for disable filter (search box)
-            "pageLength": 50,
+            "pageLength": 10,
             "dom": '<"top"Bf>rt<"bottom"pi>',
             "buttons": [
                 {
