@@ -7,16 +7,16 @@
 </head>
 
 <style>
-    .background {
-        background-image: url("images/test.jpg");
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+    .ImageHeader img {
+        border-radius: 8px;
+        width: 100%;
     }
 </style>
 
 <body>
-    <div class="background"></div>
+    <div class="ImageHeader">
+        <img src="~/images/Index.png"/>
+    </div>
     <div id="form">
         <div class="HeaderContainer">
             Yoga 4 Change is a non-profit organization that achieves meaningful change for veterans,
@@ -29,11 +29,12 @@
 
         <strong>Regarding yoga I...</strong>
         <form asp-controller="Engagement" asp-action="Teach" method="post">
-            <button type="submit" value="Teach" class="btn btn-primary" style="width:100%; padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;">
+            <button type="submit" value="Teach" class="btn btn-primary" style="        width: 100%;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;">
                 Teach
             </button>
         </form>

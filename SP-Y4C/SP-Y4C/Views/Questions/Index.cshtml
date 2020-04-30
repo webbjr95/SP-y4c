@@ -28,11 +28,22 @@
                             <div class="icon"></div>
                             @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
                             {
+                                if (question.Weight == QuestionWeight.Yes)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                }
                                 <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                if (question.Weight == QuestionWeight.Yes)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                }
                             }
                         </span>
                         <ul>

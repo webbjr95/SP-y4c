@@ -156,10 +156,10 @@ namespace SP_Y4C.Controllers
             var weightvalue = 0;
             if (hasWeight)
             {
-                weightedQuestionIndex = Array.FindIndex(weightArray, v => v.Equals("Yes"));
+                weightedQuestionIndex = Array.FindIndex(weightArray, v => v.Equals("Yes")) + 1;
                 var userChoiceId = Guid.Parse(passedForm.ElementAt(weightedQuestionIndex).Value);
                 var userChoiceText = _dbContext.SurveyChoices.Where(c => c.Id == userChoiceId).First().Text;
-                weightvalue = userChoiceText.Equals("Yes") ? 1 : 0;
+                weightvalue = userChoiceText.Equals("Yes", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
             }
 
             var branch = (SurveyBranch) Enum.Parse(typeof(SurveyBranch), passedForm["page"]);

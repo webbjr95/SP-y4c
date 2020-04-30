@@ -14,7 +14,7 @@ using SP_Y4C.Models;
 
 namespace SP_Y4C.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     public class AccountController : Controller
     {
         private readonly UserDbContext _dbContext;
