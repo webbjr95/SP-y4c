@@ -59,6 +59,9 @@ namespace SP_Y4C.Controllers
                 return View(question);
             }
 
+            // Create any new questions as active since there is no input on the form to do so.
+            question.ActiveStatus = QuestionActiveStatus.Active;
+
             await _dbContext.SurveyQuestions.AddAsync(question);
             await _dbContext.SaveChangesAsync();
 
@@ -135,6 +138,8 @@ namespace SP_Y4C.Controllers
             existingQuestion.TypeId = question.TypeId;
             existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
             existingQuestion.Category = question.Category;
+            existingQuestion.Weight = question.Weight;
+            existingQuestion.ActiveStatus = question.ActiveStatus;
 
             _dbContext.SurveyQuestions.Update(existingQuestion);
             await _dbContext.SaveChangesAsync();
@@ -190,7 +195,7 @@ namespace SP_Y4C.Controllers
                     Text = question.Text,
                     UserArchivedBy = Guid.Parse(applicationUser.Id),
                     ArchivedAtUtc = DateTime.UtcNow,
-                    ActiveStatus = question.ActiveStatus
+                    ActiveStatus = QuestionActiveStatus.Archived
                 };
 
                 await _dbContext.ArchivedSurveyQuestions.AddAsync(archivedQuestion);

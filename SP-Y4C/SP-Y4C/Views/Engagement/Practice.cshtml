@@ -41,16 +41,29 @@
 
 
                             @{
-                                if (q.Choices.Count == 0)
+                                if (q.TypeId == QuestionType.Text)
                                 {
-                                    if (q.TypeId == QuestionType.Text)
+                                    <input name="@q.Id" type="@q.TypeId" required />
+                                }
+                                else if (q.TypeId == QuestionType.Checkbox)
+                                {
+                                    foreach (var c in q.Choices.OrderBy(x => x.OrderInQuestion))
                                     {
-                                        <input name="@q.Id" type="@q.TypeId" required />
+                                        if (q.Id == c.QuestionId)
+                                        {
+                                            <label for="@c.QuestionId" name="@c.Id">
+                                                <label class="ChoiceText">
+                                                    <input name="@c.QuestionId" type="@q.TypeId" value="@c.Id" />
+                                                    <input type="hidden" name="@c.QuestionId" value="hiddenCheckbox"/>
+                                                    @c.Text
+                                                </label>
+                                            </label><br />
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    foreach (var c in q.Choices)
+                                    foreach (var c in q.Choices.OrderBy(x => x.OrderInQuestion))
                                     {
                                         if (q.Id == c.QuestionId)
                                         {

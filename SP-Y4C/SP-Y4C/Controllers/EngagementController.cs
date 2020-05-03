@@ -117,17 +117,23 @@ namespace SP_Y4C.Controllers
 
                         foreach (var choice in formChoice.Value)
                         {
-                            userAnswer = listOfChoices.Where(x => x.Id == new Guid(choice)).First().Text;
-                            var formAnswer = new SurveyAnswer
+                            // Want to make sure that if there are no answers for a checkbox that we don't input
+                            // the hidden values that are being used for the URL calculation.
+                            if (!choice.Equals("hiddenCheckbox", StringComparison.OrdinalIgnoreCase))
                             {
-                                Id = Guid.NewGuid(),
-                                QuestionId = new Guid(formChoice.Key),
-                                Answer = userAnswer,
-                                UserId = userGuid,
-                                UserType = passedVisitorType
-                            };
+                                userAnswer = listOfChoices.Where(x => x.Id == new Guid(choice)).First().Text;
+                                var formAnswer = new SurveyAnswer
+                                {
+                                    Id = Guid.NewGuid(),
+                                    QuestionId = new Guid(formChoice.Key),
+                                    Answer = userAnswer,
+                                    UserId = userGuid,
+                                    UserType = passedVisitorType
+                                };
 
-                            listOfAnswers.Add(formAnswer);
+                                listOfAnswers.Add(formAnswer);
+
+                            }
                         }
                     }
                 }
@@ -156,6 +162,7 @@ namespace SP_Y4C.Controllers
             var weightvalue = 0;
             if (hasWeight)
             {
+                // +1 to ignore the weightArray that is created at the top of the submissions
                 weightedQuestionIndex = Array.FindIndex(weightArray, v => v.Equals("Yes")) + 1;
                 var userChoiceId = Guid.Parse(passedForm.ElementAt(weightedQuestionIndex).Value);
                 var userChoiceText = _dbContext.SurveyChoices.Where(c => c.Id == userChoiceId).First().Text;

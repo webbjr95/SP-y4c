@@ -25,16 +25,14 @@
                 <input asp-for="Text" class="form-control" />
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
-
             <div id="radio-options" style="display: none;">
                 <label asp-for="@Model.RadioOptions" class="control-label"></label>
                 <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
                 <input id="jake-easter-egg" value="reeses-cup" name="you-win" type="hidden" />
             </div>
-
             <div class="form-group">
                 <label asp-for="Weight" class="control-label" id="Weight"></label>
-                <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control"></select>
+                <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control" disabled></select>
                 <span asp-validation-for="Weight" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -115,6 +113,7 @@
         function handleQuestionTypeChange() {
             var selectList = get("#TypeId");
             var selectedValue = selectList.value;
+            console.log(selectedValue);
 
             if (selectedValue == textId) {
                 var options = document.querySelectorAll(".radio-option-parent");
@@ -122,11 +121,24 @@
                     options[i].style.display = "none";
                 }
 
+                // Disable the weight dropdown again just in case the input type was changed to a radio and
+                // set the selected value to 'No'.
+                $('#Weight.form-control').prop('disabled', true);
+                $('#Weight.form-control').val('0');
+
                 hide("radio-options");
             } else {
                 var options = document.querySelectorAll(".radio-option-parent");
                 for (var i = 0; i < options.length; i++) {
                     options[i].style.display = "block";
+                }
+
+                // Checkbox means we should disable the weight dropdown and set it to no.
+                if (selectedValue == 2) {
+                    $('#Weight.form-control').prop('disabled', true);
+                    $('#Weight.form-control').val('0');
+                } else {
+                    $('#Weight.form-control').prop('disabled', false);
                 }
 
                 show("radio-options"); // TODO.DOINK - FIND MY EASTER EGG!

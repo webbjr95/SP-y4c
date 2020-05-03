@@ -6,6 +6,10 @@
     <RootNamespace>SP_Y4C</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\AdvancedSettings.pubxml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

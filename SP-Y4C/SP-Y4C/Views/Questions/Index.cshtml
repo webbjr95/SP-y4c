@@ -7,11 +7,35 @@
 <head>
     <link rel="stylesheet" href="~/css/survey-flow.css" asp-append-version="true" />
 </head>
+<style>
+    .legend-top ul li {
+        list-style: none;
+
+    }
+
+    .legend-labels li span {
+        display: block;
+        float: left;
+        height: 16px;
+        width: 30px;
+        margin-top: 5px;
+        margin-right: 5px;
+        border: 1px solid #999;
+    }
+</style>
 
 <body>
     <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
 
     <h2><strong>Survey Flow</strong></h2>
+    <div class="legend-top">
+        <p><strong><u>Color Legend</u></strong></p>
+        <ul class="legend-labels">
+            <li><span style='background:#ff0000;'></span>Question with no choices</li>
+            <li><span style='background:#000000;'></span>Weighted question within a branch</li>
+        </ul>
+    </div>
+
     <ul class="tree">
         <li class="tree__item">
             <span style="font-size: x-large">
@@ -26,19 +50,22 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            @if (question.Weight == QuestionWeight.Yes)
                             {
-                                if (question.Weight == QuestionWeight.Yes)
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
                                 {
                                     <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
                                 }
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
                             }
                             else
                             {
-                                if (question.Weight == QuestionWeight.Yes)
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
                                 {
-                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
                                 }
                                 else
                                 {
@@ -74,13 +101,27 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            @if (question.Weight == QuestionWeight.Yes)
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                }
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                }
                             }
                         </span>
                         <ul>
@@ -111,13 +152,27 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            @if (question.Weight == QuestionWeight.Yes)
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                }
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                }
                             }
                         </span>
                         <ul>
@@ -148,13 +203,27 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            @if (question.Weight == QuestionWeight.Yes)
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                }
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                }
                             }
                         </span>
                         <ul>
@@ -187,13 +256,27 @@
                     <li class="tree__item hasChildren">
                         <span>
                             <div class="icon"></div>
-                            @if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                            @if (question.Weight == QuestionWeight.Yes)
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:red;">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#000000;">@question.Text</a>
+                                }
                             }
                             else
                             {
-                                <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                if (question.Choices.Count == 0 && question.TypeId != QuestionType.Text)
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })" style="color:#ff0000;">@question.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", "Questions", new { id = @question.Id })">@question.Text</a>
+                                }
                             }
                         </span>
                         <ul>

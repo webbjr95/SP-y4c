@@ -69,43 +69,43 @@ namespace SP_Y4C
             });
 
 
-            //CreateDefaultRoles(services).Wait();
-            //CreateDefaultAdminAccount(services).Wait();
+            CreateDefaultRoles(services).Wait();
+            CreateDefaultAdminAccount(services).Wait();
         }
 
-        //private async Task CreateDefaultRoles(IServiceProvider services)
-        //{
-        //    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-        //    string[] roleNames = { "ADMIN", "VOLUNTEER" };
+        private async Task CreateDefaultRoles(IServiceProvider services)
+        {
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            string[] roleNames = { "ADMIN", "VOLUNTEER" };
 
-        //    foreach (var roleName in roleNames)
-        //    {
-        //        var roleExist = await roleManager.RoleExistsAsync(roleName);
-        //        if (!roleExist)
-        //        {
-        //            //Create the roles and seed them to the database 
-        //            await roleManager.CreateAsync(new IdentityRole(roleName));
-        //        }
-        //    }
-        //}
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await roleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //Create the roles and seed them to the database 
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+        }
 
-        //private async Task CreateDefaultAdminAccount(IServiceProvider services)
-        //{
-        //    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        private async Task CreateDefaultAdminAccount(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-        //    //TODO: Need to change this to be the admin email account for y4c
-        //    ApplicationUser admin = await userManager.FindByEmailAsync("info@y4c.org");
-        //    if (admin == null)
-        //    {
-        //        admin = new ApplicationUser()
-        //        {
-        //            UserName = "info@y4c.org",
-        //            Email = "info@y4c.org",
-        //        };
-        //        await userManager.CreateAsync(admin, "Test123!@#");
-        //    }
-        //    await userManager.AddToRoleAsync(admin, "ADMIN");
-        //    await userManager.AddClaimAsync(admin, new Claim(ClaimTypes.Role, "ADMIN"));
-        //}
+            //TODO: Need to change this to be the admin email account for y4c
+            ApplicationUser admin = await userManager.FindByEmailAsync("info@y4c.org");
+            if (admin == null)
+            {
+                admin = new ApplicationUser()
+                {
+                    UserName = "info@y4c.org",
+                    Email = "info@y4c.org",
+                };
+                await userManager.CreateAsync(admin, "Test123!@#");
+            }
+            await userManager.AddToRoleAsync(admin, "ADMIN");
+            await userManager.AddClaimAsync(admin, new Claim(ClaimTypes.Role, "ADMIN"));
+        }
     }
 }
