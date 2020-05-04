@@ -14,26 +14,11 @@
         <head>
             <link rel="stylesheet" href="~/css/survey-flow.css" asp-append-version="true" />
         </head>
-        <style>
-            .legend-top ul li {
-                list-style: none;
-            }
-
-            .legend-labels li span {
-                display: block;
-                float: left;
-                height: 16px;
-                width: 30px;
-                margin-top: 5px;
-                margin-right: 5px;
-                border: 1px solid #999;
-            }
-        </style>
 
         <body>
             <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
 
-            <h2><strong>Survey Flow</strong></h2>
+            <h1 style="text-align: center;"><strong>Survey Flow</strong></h1>
             <div class="legend-top">
                 <p><strong><u>Color Legend</u></strong></p>
                 <ul class="legend-labels">
@@ -300,7 +285,7 @@
 
             </ul>
 
-            <h2><strong>Survey Questions</strong></h2>
+            <h1 style="text-align: center;"><strong>Survey Questions</strong></h1>
             <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Questions")'">Create</button>
             <br />
             <br />
@@ -384,11 +369,11 @@
                     "buttons": [
                         {
                             extend: 'excelHtml5',
-                            title: d
+                            title: 'Survey Questions as of ' + d
                         },
                         {
                             extend: 'print',
-                            title: 'Print of the Survey Reports as of ' + d
+                            title: 'Print of the Survey Questions as of ' + d
                         }
                     ],
                     "columns": [

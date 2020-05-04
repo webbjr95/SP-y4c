@@ -43,7 +43,7 @@ namespace SP_Y4C.Controllers
             return View(archived);
         }
 
-        public async Task<IActionResult> Archive()
+        public async Task<IActionResult> ArchiveAll()
         {
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
@@ -59,7 +59,7 @@ namespace SP_Y4C.Controllers
                         Rating = feedback.Rating,
                         Text = feedback.Text,
                         Url = feedback.Url,
-                        UserArchivedBy = Guid.Parse(applicationUser.Id),
+                        UserArchivedBy = applicationUser.UserName,
                         ArchivedAtUtc = DateTime.UtcNow,
                     };
 
@@ -80,7 +80,7 @@ namespace SP_Y4C.Controllers
             return RedirectToAction("Feedback");
         }
 
-        [HttpPost]
+
         public async Task<ActionResult> Archive(Guid id)
         {
             var feedback = await _dbContext.SurveyFeedback.FindAsync(id);
@@ -98,7 +98,7 @@ namespace SP_Y4C.Controllers
                 Rating = feedback.Rating,
                 Text = feedback.Text,
                 Url = feedback.Url,
-                UserArchivedBy = Guid.Parse(applicationUser.Id),
+                UserArchivedBy = applicationUser.UserName,
                 ArchivedAtUtc = DateTime.UtcNow,
             };
 

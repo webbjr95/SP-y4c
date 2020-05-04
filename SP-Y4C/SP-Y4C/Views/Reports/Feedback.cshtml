@@ -36,7 +36,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Archive", "Reports")'">Archive</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ArchiveAll", "Reports")'">Archive</button>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     "buttons": [
                         {
                             extend: 'excelHtml5',
-                            title: d
+                            title: 'Survey Feedback as of ' + d
                         },
                         {
                             extend: 'print',

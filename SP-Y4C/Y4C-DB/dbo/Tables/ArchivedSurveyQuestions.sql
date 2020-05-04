@@ -6,7 +6,7 @@
     [Text] VARCHAR(500) NOT NULL,
     [ArchivedAtUtc] DATETIMEOFFSET NOT NULL DEFAULT GETUTCDATE(),
     [ActiveStatus] INT NOT NULL, 
-    [UserArchivedBy] UNIQUEIDENTIFIER NOT NULL, 
+    [UserArchivedBy] VARCHAR(500) NOT NULL, 
 
     CONSTRAINT [PK_ArchivedSurveyQuestions_Id] PRIMARY KEY ([Id])
 )

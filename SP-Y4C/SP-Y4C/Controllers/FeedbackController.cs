@@ -21,7 +21,7 @@ namespace SP_Y4C.Controllers
         //httpContext-REquest-Headers-HeaderReferer
         public IActionResult Survey()
         {
-            //TOOD: Change the SquareSpace refer to be no-referrer-when-downgrade but will need to update our
+            //TODO: Change the SquareSpace refer to be no-referrer-when-downgrade but will need to update our
             // application to be hosted as a HTTPS site
             var refererUrl = Microsoft.Extensions.Primitives.StringValues.Empty;
             HttpContext.Request.Headers.TryGetValue("Referer", out refererUrl);

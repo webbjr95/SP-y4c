@@ -34,7 +34,7 @@ div #Feedback {
     border-radius: 5px; /* 5px rounded corners */
     margin-bottom: 12px;
     padding: 24px;
-    margin-top: 0;
+    margin-top: 12px;
     page-break-inside: avoid;
 }
 
@@ -55,11 +55,9 @@ div .HeaderContainer {
     border-radius: 5px;
     padding: 24px;
     margin-bottom: 12px;
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 18px;
+    font-family: NiveauGroteskBold;
     letter-spacing: 0em;
     line-height: 1.2em;
-    font-family: niveau-grotesk;
     font-weight: 700;
     font-style: normal;
     font-size: 26px;
@@ -126,4 +124,9 @@ form#Feedback input[type="radio"].neutral {
 form#Feedback input[type="radio"].bad {
     background: url("https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg") center;
     background-size: cover;
+}
+
+@font-face {
+    font-family: NiveauGroteskBold;
+    src: url('fonts/NiveauGroteskBold.otf') format('opentype');
 }

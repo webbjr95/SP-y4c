@@ -193,7 +193,7 @@ namespace SP_Y4C.Controllers
                     QuestionNumber = question.QuestionNumber,
                     TypeId = question.TypeId,
                     Text = question.Text,
-                    UserArchivedBy = Guid.Parse(applicationUser.Id),
+                    UserArchivedBy = applicationUser.UserName,
                     ArchivedAtUtc = DateTime.UtcNow,
                     ActiveStatus = QuestionActiveStatus.Archived
                 };

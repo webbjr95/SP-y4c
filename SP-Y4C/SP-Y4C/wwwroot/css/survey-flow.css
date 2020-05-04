@@ -32,9 +32,9 @@ ul.tree, .tree li {
     background: #999;
 }
 
-    .tree .hasChildren > .expanded a {
-        color: #fff;
-    }
+.tree .hasChildren > .expanded a {
+    color: #fff;
+}
 
 .icon:before {
     content: "+";
@@ -49,4 +49,18 @@ ul.tree, .tree li {
 
 .show-effect {
     display: block !important;
+}
+
+.legend-top ul li {
+    list-style: none;
+}
+
+.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-top: 5px;
+    margin-right: 5px;
+    border: 1px solid #999;
 }

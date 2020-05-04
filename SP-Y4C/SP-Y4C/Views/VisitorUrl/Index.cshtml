@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<UrlToVisitor>
 @{
-    ViewData["Title"] = "Engagement Survey Redirection URLs";
+    ViewData["Title"] = "Engagement Survey - Redirection URLs";
 }
 
 @{
@@ -74,11 +74,11 @@
                     "buttons": [
                         {
                             extend: 'excelHtml5',
-                            title: d
+                            title: 'Landing Pages as of ' + d
                         },
                         {
                             extend: 'print',
-                            title: 'Print of the Survey Reports as of ' + d
+                            title: 'Print of the Landing Pages as of ' + d
                         }
                     ],
                     "columns": [

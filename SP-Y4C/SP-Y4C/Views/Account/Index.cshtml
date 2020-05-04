@@ -25,8 +25,7 @@
                         <th><label asp-for="@Model.FirstOrDefault().Id"></label></th>
                         <th><label asp-for="@Model.FirstOrDefault().UserName"></label></th>
                         <th><label asp-for="@Model.FirstOrDefault().Email"></label></th>
-                        <th><label asp-for="@Model.FirstOrDefault().EmailConfirmed"></label></th>
-                        <th><label asp-for="@Model.FirstOrDefault().AccessFailedCount"></label></th>
+                        <th><label>Email Confirmed</label></th>
                         <th><label>Role</label></th>
                         <th><label>Actions</label></th>
                     </tr>
@@ -40,7 +39,6 @@
                             <td>@user.UserName</td>
                             <td>@user.Email</td>
                             <td>@user.EmailConfirmed</td>
-                            <td>@user.AccessFailedCount</td>
 
                             @{
                                 indexUser.Id = user.Id;
@@ -110,15 +108,15 @@
                     "buttons": [
                         {
                             extend: 'excelHtml5',
-                            title: d              //Devany you left off here
+                            title: 'All Accounts as of ' + d
                         },
                         {
-                            extend: 'print'
+                            extend: 'print',
+                            title: 'Print of All Accounts as of ' + d
                         }
                     ],
                     "columns": [
                         { visible: false },
-                        null,
                         null,
                         null,
                         null,

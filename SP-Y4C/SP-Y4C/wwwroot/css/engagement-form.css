@@ -45,11 +45,10 @@ div .HeaderContainer {
     border-radius: 5px;
     padding: 24px;
     margin-bottom: 12px;
-    font-family: Arial,Helvetica,sans-serif;
+    font-family: P22;
     font-size: 18px;
     letter-spacing: 0em;
     line-height: 1.2em;
-    font-family: niveau-grotesk;
     font-weight: 700;
     font-style: normal;
     font-size: 26px;
@@ -107,4 +106,10 @@ div #formText {
 
 h1 {
     text-align: center;
+}
+
+.ImageHeader img {
+    margin-top: 12px;
+    border-radius: 8px;
+    width: 100%;
 }

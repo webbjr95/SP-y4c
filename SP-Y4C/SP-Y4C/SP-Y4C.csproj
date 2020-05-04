@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\lib\buttons\dist\" />
     <Folder Include="wwwroot\lib\dataTables\dist\" />
   </ItemGroup>

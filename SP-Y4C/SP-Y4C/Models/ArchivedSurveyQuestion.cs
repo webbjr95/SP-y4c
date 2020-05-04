@@ -39,6 +39,6 @@ namespace SP_Y4C.Models
 
         [Required]
         [Display(Name = "User Archived By")]
-        public Guid UserArchivedBy { get; set; }
+        public string UserArchivedBy { get; set; }
     }
 }
