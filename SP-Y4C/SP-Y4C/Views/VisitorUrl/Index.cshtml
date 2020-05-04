@@ -5,11 +5,11 @@
 
 @{
     var currentUser = _userManager.GetUserAsync(User).Result;
-    var isAdminConfirmed = await _userManager.IsEmailConfirmedAsync(currentUser);
+    var isUserConfirmed = await _userManager.IsEmailConfirmedAsync(currentUser);
 }
 
 @{
-    if (isAdminConfirmed)
+    if (isUserConfirmed)
     {
         <body>
             <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
