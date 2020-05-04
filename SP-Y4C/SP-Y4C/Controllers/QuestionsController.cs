@@ -139,7 +139,7 @@ namespace SP_Y4C.Controllers
             existingQuestion.LastModifiedAtUtc = DateTime.UtcNow;
             existingQuestion.Category = question.Category;
             existingQuestion.Weight = question.Weight;
-            existingQuestion.ActiveStatus = question.ActiveStatus;
+            existingQuestion.ActiveStatus = QuestionActiveStatus.Active;
 
             _dbContext.SurveyQuestions.Update(existingQuestion);
             await _dbContext.SaveChangesAsync();
