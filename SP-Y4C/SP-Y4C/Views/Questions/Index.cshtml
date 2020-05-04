@@ -394,35 +394,10 @@
             //Needed to style the datatable buttons
             $(document).ready(function () {
                 $('button').addClass("btn btn-primary");
-
-                console.log(document.getElementsByClassName('paginate_button active'));
-
-                document.getElementById('example_previous').addEventListener("click", testPrev);
-                document.getElementById('example_next').addEventListener("click", testNext);
-                var table = $('#example').DataTable();
-                var currentIndex = 0;
-                function testPrev() {
-                    var info = table.page.info();
-                    currentIndex = info.page + 1;
-                    console.log(currentIndex);
-                    console.log(
-                        'Currently showing PREV page ' + (info.page + 1) + ' of ' + info.pages + ' pages.'
-                    );
-                    document.getElementById('example_previous').addEventListener("click", testPrev);
-                }
-                function testNext() {
-                    var info = table.page.info();
-                    currentIndex = info.page + 1;
-                    console.log(currentIndex);
-                    console.log(
-                        'Currently showing NEXT page ' + (info.page + 1) + ' of ' + info.pages + ' pages.'
-                    );
-                    document.getElementById('example_next').addEventListener("click", testNext);
-                }
             });
-        </script>
 
-        <script>
+
+
             $('.tree .icon').click(function () {
                 $(this).parent().toggleClass('expanded').
                     closest('li').find('ul:first').

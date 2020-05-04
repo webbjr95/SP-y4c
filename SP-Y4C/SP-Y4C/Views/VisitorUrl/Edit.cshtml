@@ -60,6 +60,13 @@
                 </form>
             </div>
         </div>
+
+        <script>
+            // Remove the "NotFound" value within the dropdown menu
+            $(document).ready(function () {
+                $("#UserType.form-control option[value='5']").remove();
+            });
+        </script>
     }
     else
     {
