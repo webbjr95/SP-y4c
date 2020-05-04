@@ -4,153 +4,160 @@
     var textOptionId = (int)QuestionType.Text;
 }
 
+@{
+    var currentUser = _userManager.GetUserAsync(User).Result;
+    var isUserConfirmed = await _userManager.IsEmailConfirmedAsync(currentUser);
+}
 
-<h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" method="post" id="edit-form">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="QuestionNumber" class="control-label"></label>
-                <input asp-for="QuestionNumber" class="form-control" />
-                <span asp-validation-for="QuestionNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TypeId" class="control-label"></label>
-                <select asp-for="TypeId" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
-                <span asp-validation-for="TypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
+@{
+    if (isUserConfirmed)
+    {
+        <h1 style="text-align: center;"><strong>@ViewData["Title"]</strong></h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit" method="post" id="edit-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="QuestionNumber" class="control-label"></label>
+                        <input asp-for="QuestionNumber" class="form-control" />
+                        <span asp-validation-for="QuestionNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TypeId" class="control-label"></label>
+                        <select asp-for="TypeId" asp-items="Html.GetEnumSelectList<QuestionType>()" class="form-control" onchange="handleQuestionTypeChange();"></select>
+                        <span asp-validation-for="TypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Text" class="control-label"></label>
+                        <input asp-for="Text" class="form-control" />
+                        <span asp-validation-for="Text" class="text-danger"></span>
+                    </div>
 
-            @{ var hidden = (Model.TypeId == QuestionType.Text); }
+                    @{ var hidden = (Model.TypeId == QuestionType.Text); }
 
-            @if (!hidden)
-            {
-                <div id="radio-options">
-                    <label asp-for="@Model.RadioOptions" class="control-label"></label>
-                    <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
-
-                    @for (int i = 0; i < Model.RadioOptions.Count; i++)
+                    @if (!hidden)
                     {
-                        var parentId = $"existing-choice-{i}";
+                        <div id="radio-options">
+                            <label asp-for="@Model.RadioOptions" class="control-label"></label>
+                            <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
 
-                        <div class="form-group radio-option-parent" id="@parentId">
-                            <label asp-for="@Model.RadioOptions[i]" class="control-label">Choice</label>
-                            <div class="input-group">
-                                <input asp-for="@Model.RadioOptions[i]" type="text" class="choices form-control" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" />
-                                <div class="input-group-btn">
-                                    <button type="button" id="btnRemoveChoice" class="btn btn-danger" onclick="removeChoice('@parentId')">-</button>
+                            @for (int i = 0; i < Model.RadioOptions.Count; i++)
+                            {
+                                var parentId = $"existing-choice-{i}";
+
+                                <div class="form-group radio-option-parent" id="@parentId">
+                                    <label asp-for="@Model.RadioOptions[i]" class="control-label">Choice</label>
+                                    <div class="input-group">
+                                        <input asp-for="@Model.RadioOptions[i]" type="text" class="choices form-control" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" />
+                                        <div class="input-group-btn">
+                                            <button type="button" id="btnRemoveChoice" class="btn btn-danger" onclick="removeChoice('@parentId')">-</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <input id="jake-easter-egg" value="reeses-cup" name="you-win" type="hidden" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="radio-options" style="display: none;">
+                            <label asp-for="@Model.RadioOptions" class="control-label"></label>
+                            <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
+                            <input id="jake-easter-egg" value="reeses-cup" name="you-win" type="hidden" />
+                        </div>
+                    }
+
+                    @{
+                        if (@Model.Weight == QuestionWeight.No)
+                        {
+                            <div class="form-group">
+                                <label asp-for="Weight" class="control-label"></label>
+                                <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control" disabled></select>
+                                <span asp-validation-for="Weight" class="text-danger"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label asp-for="Weight" class="control-label"></label>
+                                <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control"></select>
+                                <span asp-validation-for="Weight" class="text-danger"></span>
+                            </div>
+                        }
+                    }
+
+
+                    <div class="form-group">
+                        <label asp-for="Category" class="control-label"></label>
+                        <select asp-for="Category" asp-items="Html.GetEnumSelectList<QuestionCategory>()" class="form-control"></select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="button" onclick="location.href='@Url.Action("Index", "Questions")'">Cancel</button>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Save
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirm Save Event</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you would like to save the changes made?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <input type="button" value="Save" class="btn btn-primary" onclick="handleSubmit()" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    }
-                    <input id="jake-easter-egg" value="reeses-cup" name="you-win" type="hidden" />
-                </div>
-            }
-            else
-            {
-                <div id="radio-options" style="display: none;">
-                    <label asp-for="@Model.RadioOptions" class="control-label"></label>
-                    <button type="button" class="btn btn-primary btn-xs" id="btnAddChoice" onclick="addChoice()">+</button>
-                    <input id="jake-easter-egg" value="reeses-cup" name="you-win" type="hidden" />
-                </div>
-            }
-
-            @{
-                if (@Model.Weight == QuestionWeight.No)
-                {
-                    <div class="form-group">
-                        <label asp-for="Weight" class="control-label"></label>
-                        <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control" disabled></select>
-                        <span asp-validation-for="Weight" class="text-danger"></span>
-                    </div>
-                }
-                else
-                {
-                    <div class="form-group">
-                        <label asp-for="Weight" class="control-label"></label>
-                        <select asp-for="Weight" asp-items="Html.GetEnumSelectList<QuestionWeight>()" class="form-control"></select>
-                        <span asp-validation-for="Weight" class="text-danger"></span>
-                    </div>
-                }
-            }
 
 
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <select asp-for="Category" asp-items="Html.GetEnumSelectList<QuestionCategory>()" class="form-control"></select>
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-danger" type="button" onclick="location.href='@Url.Action("Index", "Questions")'">Cancel</button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#archiveModal">
+                            Archive
+                        </button>
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Save
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Confirm Save Event</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you would like to save the changes made?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <input type="button" value="Save" class="btn btn-primary" onclick="handleSubmit()" />
+                        <!-- Modal -->
+                        <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="archiveModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="archiveModalLabel">Confirm Archive Event</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to archive this question? Restoration after an archive is not supported.
+                                        You will need to create a new question in the event this one is needed in the future.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" id="archive-question-@Model.Id" onclick="location.href='@Url.Action("Archive", "Questions", new { id = Model.Id })'">Archive</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                </div>
-
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#archiveModal">
-                    Archive
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="archiveModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="archiveModalLabel">Confirm Archive Event</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to archive this question? Restoration after an archive is not supported.
-                                You will need to create a new question in the event this one is needed in the future.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="archive-question-@Model.Id" onclick="location.href='@Url.Action("Archive", "Questions", new { id = Model.Id })'">Archive</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-@section Scripts {
-    <script type="text/javascript">
+        @section Scripts {
+            <script type="text/javascript">
         var choiceCount = 0;
         var nextIndex = 0;
         var textId = @textOptionId;
@@ -286,58 +293,70 @@
                 element.style.display = "none";
             }
         }
-    </script>
+            </script>
 
 
-    <script>
-        function dragOver(ev) {
-            ev.preventDefault();
+            <script>
+                function dragOver(ev) {
+                    ev.preventDefault();
 
-            //Change target background color to highlight where the user is
-            ev.currentTarget.style.backgroundColor = "orange";
+                    //Change target background color to highlight where the user is
+                    ev.currentTarget.style.backgroundColor = "orange";
+                }
+
+                function dragLeave(ev) {
+                    //After leaving the target change background color back to nothing
+                    ev.currentTarget.style.backgroundColor = "";
+                }
+
+                function drag(ev) {
+                    //Capture the value of the input being dragged.
+                    ev.dataTransfer.clearData();
+                    ev.dataTransfer.setData("text", ev.target.id);
+
+
+                    //Create a border around the input where the drag started from
+                    ev.currentTarget.style.border = "5px dashed #4cff00";
+                }
+
+                function drop(ev) {
+                    ev.preventDefault();
+
+                    //Retrieves the value of the initial input drag and stores its text value
+                    var initialInputId = ev.dataTransfer.getData("text");
+                    var initialInputText = document.getElementById(initialInputId).value;
+                    //console.log("Initial input id " + initialInputId);
+                    //console.log("Initial input text " + initialInputText);
+
+                    //Stores the value of drop input
+                    var targetInputId = ev.currentTarget.id;
+                    var targetInputText = document.getElementById(targetInputId).value;
+                    //console.log("Target input id " + targetInputId);
+                    //console.log("Target input text " + targetInputText);
+
+                    //Update the values of the drag and dropped inputs
+                    document.getElementById(initialInputId).value = targetInputText;
+                    document.getElementById(targetInputId).value = initialInputText;
+                    //console.log("New initial input value " + document.getElementById(initialInputId).value);
+                    //console.log("New target input value " + document.getElementById(targetInputId).value);
+
+
+                    //Remove any styling for the drag and drop process.
+                    ev.currentTarget.style.backgroundColor = "";
+                    document.getElementById(initialInputId).style.border = "1px solid #ccc";
+                    ev.dataTransfer.clearData();
+                }
+            </script>
         }
-
-        function dragLeave(ev) {
-            //After leaving the target change background color back to nothing
-            ev.currentTarget.style.backgroundColor = "";
-        }
-
-        function drag(ev) {
-            //Capture the value of the input being dragged.
-            ev.dataTransfer.clearData();
-            ev.dataTransfer.setData("text", ev.target.id);
-
-
-            //Create a border around the input where the drag started from
-            ev.currentTarget.style.border = "5px dashed #4cff00";
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-
-            //Retrieves the value of the initial input drag and stores its text value
-            var initialInputId = ev.dataTransfer.getData("text");
-            var initialInputText = document.getElementById(initialInputId).value;
-            //console.log("Initial input id " + initialInputId);
-            //console.log("Initial input text " + initialInputText);
-
-            //Stores the value of drop input
-            var targetInputId = ev.currentTarget.id;
-            var targetInputText = document.getElementById(targetInputId).value;
-            //console.log("Target input id " + targetInputId);
-            //console.log("Target input text " + targetInputText);
-
-            //Update the values of the drag and dropped inputs
-            document.getElementById(initialInputId).value = targetInputText;
-            document.getElementById(targetInputId).value = initialInputText;
-            //console.log("New initial input value " + document.getElementById(initialInputId).value);
-            //console.log("New target input value " + document.getElementById(targetInputId).value);
-
-
-            //Remove any styling for the drag and drop process.
-            ev.currentTarget.style.backgroundColor = "";
-            document.getElementById(initialInputId).style.border = "1px solid #ccc";
-            ev.dataTransfer.clearData();
-        }
-    </script>
+    }
+    else
+    {
+        <body>
+            <div>
+                <h2>
+                    Please confirm your email address before accessing this feature.
+                </h2>
+            </div>
+        </body>
+    }
 }

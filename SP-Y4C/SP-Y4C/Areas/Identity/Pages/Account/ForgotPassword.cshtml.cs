@@ -61,7 +61,7 @@ namespace SP_Y4C.Areas.Identity.Pages.Account
                 var apiKey = Environment.GetEnvironmentVariable("MailOptions:SendGrid:ApiKey");
                 var client = new SendGridClient(apiKey);
                 var from = new EmailAddress("info@y4c.org", "Y4C Admin");
-                var subject = "Password Reset";
+                var subject = "Password Reset Confirmation";
                 var userEmail = await _userManager.GetEmailAsync(user);
                 var userName = await _userManager.GetUserNameAsync(user);
 
